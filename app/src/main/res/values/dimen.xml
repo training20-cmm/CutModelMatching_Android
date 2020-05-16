@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="xs_sp">4sp</dimen>
+    <dimen name="s_sp">8sp</dimen>
+    <dimen name="ss_sp">10sp</dimen>
+    <dimen name="sss_sp">12sp</dimen>
+    <dimen name="m_sp">16sp</dimen>
+    <dimen name="mm_sp">24sp</dimen>
+    <dimen name="l_sp">32sp</dimen>
+    <dimen name="ll_sp">48sp</dimen>
+    <dimen name="xl_sp">64sp</dimen>
+    <dimen name="xs_dp">4dp</dimen>
+    <dimen name="s_dp">8dp</dimen>
+    <dimen name="m_dp">16dp</dimen>
+    <dimen name="mm_dp">24dp</dimen>
+    <dimen name="l_dp">32dp</dimen>
+    <dimen name="ll_dp">48dp</dimen>
+    <dimen name="xl_dp">64dp</dimen>
+
+    <dimen name="hairdresser_activity_salon_matching_calendar_day_hairdresser_icon_layout_width">64dp</dimen>
+    <dimen name="hairdresser_activity_salon_matching_calendar_day_hairdresser_icon_layout_height">64dp</dimen>
+    <dimen name="hairdresser_activity_salon_matching_calendar_day_matching_layout_height">1152dp</dimen> <!-- 24 * hairdresser_activity_salon_matching_calendar_day_time_text_view_height -->
+    <dimen name="hairdresser_activity_salon_matching_calendar_day_time_text_view_height">48dp</dimen>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/labelTextView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_gravity="center_horizontal"
+    android:background="@color/colorPrimary"
+    android:padding="2dp"
+    android:textAlignment="center"
+    android:textSize="@dimen/ss_sp"
+    android:textColor="@color/colorOnPrimary" />

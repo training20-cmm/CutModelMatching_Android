@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#26c6da</color>
+    <color name="colorPrimaryDark">#80cbc4</color>
+    <color name="colorAccent">#f06292</color>
+
+    <color name="link">#0022cc</color>
+
+    <color name="textColorPrimary">#de000000</color>
+    <color name="textColorSecondary">#8a000000</color>
+    <color name="textColorDisabled">#61000000</color>
+    <color name="textColorHint">@color/textColorDisabled</color>
+    <color name="textColorIcons">@color/textColorDisabled</color>
+    <color name="textColorDividers">#1f000000</color>
+
+    <color name="colorOnPrimary">#FFFFFF</color>
+
+
+    <color name="rippleColorPrimary">#4226c6da</color>
+    <color name="rippleColorIcons">#19000000</color>
+
+    <color name="blackout">#de000000</color>
+</resources>

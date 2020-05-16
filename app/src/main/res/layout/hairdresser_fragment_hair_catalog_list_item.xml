@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        app:cardUseCompatPadding="true"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/hairCatalogImageView"
+                android:layout_width="match_parent"
+                android:layout_height="128dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/hair_catalog"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/titleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="TITLE"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="21sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/hairCatalogImageView" />
+
+            <TextView
+                android:id="@+id/dateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="2020/05/04"
+                android:textColor="@color/textColorSecondary"
+                android:textSize="15sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/titleTextView"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/tagsFlexBoxLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:flexWrap="wrap"
+                app:justifyContent="flex_start"
+                app:layout_constraintEnd_toEndOf="@+id/dateTextView"
+                app:layout_constraintStart_toStartOf="@+id/titleTextView"
+                app:layout_constraintTop_toBottomOf="@id/titleTextView">
+
+                <com.google.android.material.chip.Chip
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:text="メンズ"
+                    app:checkedIconEnabled="false"
+                    app:chipBackgroundColor="#9fc3e7"
+                    android:textColor="@color/colorOnPrimary"/>
+
+                <com.google.android.material.chip.Chip
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:text="爽やか"
+                    app:checkedIconEnabled="false"
+                    app:chipBackgroundColor="#82cabc"
+                    android:textColor="@color/colorOnPrimary"/>
+
+                <com.google.android.material.chip.Chip
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:text="マッシュ"
+                    app:checkedIconEnabled="false"
+                    app:chipBackgroundColor="#c7ad96"
+                    android:textColor="@color/colorOnPrimary"/>
+            </com.google.android.flexbox.FlexboxLayout>
+
+            <View
+                android:id="@+id/dividerView"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/textColorDividers"
+                app:layout_constraintStart_toStartOf="@id/titleTextView"
+                app:layout_constraintEnd_toEndOf="@id/dateTextView"
+                app:layout_constraintTop_toBottomOf="@id/tagsFlexBoxLayout"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="@id/dateTextView"
+                app:layout_constraintStart_toStartOf="@id/titleTextView"
+                app:layout_constraintTop_toBottomOf="@id/dividerView">
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/MaterialIconButton"
+                    app:icon="@drawable/ic_favorite_white_24dp"
+                    />
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/MaterialIconButton"
+                    app:icon="@drawable/ic_mode_comment_white_24dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/MaterialIconButton"
+                    app:icon="@drawable/ic_share_white_24dp" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>

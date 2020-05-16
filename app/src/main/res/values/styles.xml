@@ -1,0 +1,55 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="HairdresserActivitySalonMatchingCalendarViewScrollViewItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_height">@dimen/hairdresser_activity_salon_matching_calendar_day_time_text_view_height</item>
+    </style>
+
+    <style name="MaterialIconButton" parent="@style/Widget.MaterialComponents.Button.TextButton">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:padding">0dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">0dp</item>
+        <item name="iconSize">24dp</item>
+        <item name="iconTint">@color/textColorIcons</item>
+        <item name="rippleColor">@color/rippleColorIcons</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.IconButton</item>
+    </style>
+
+    <style name="ToolbarThemHairdresserHome" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:textColorPrimary">@color/colorPrimary</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+    </style>
+
+    <style name="ToolbarThemModelHome" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:textColorPrimary">@color/colorPrimary</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+    </style>
+
+    <style name="TextInputLayoutPrimary" parent="Widget.Design.TextInputLayout">
+        <item name="android:textColorHint">@color/textColorHint</item>
+        <item name="colorControlNormal">@color/textColorSecondary</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+        <item name="backgroundTint">@android:color/transparent</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.IconButton" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+</resources>

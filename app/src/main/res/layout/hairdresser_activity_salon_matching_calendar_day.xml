@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.HairdresserSalonMatchingCalendarDayActivity">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.484"
+            app:layout_constraintStart_toEndOf="@+id/timeScrollViewContainerLayout"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+            <HorizontalScrollView
+                android:id="@+id/hairdresserIconsScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/hairdresserIconsLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
+
+            <HorizontalScrollView
+                android:id="@+id/matchingHorizontalScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <ScrollView
+                    android:id="@+id/matchingVerticalScrollView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:id="@+id/matchingLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/hairdresser_activity_salon_matching_calendar_day_matching_layout_height"
+                            android:orientation="horizontal" />
+                    </LinearLayout>
+                </ScrollView>
+            </HorizontalScrollView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/timeScrollViewContainerLayout"
+            android:layout_width="64dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="64dp" />
+
+            <ScrollView
+                android:id="@+id/timeScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:scrollbars="none">
+                <LinearLayout
+                    android:id="@+id/timeLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        style="@style/HairdresserActivitySalonMatchingCalendarViewScrollViewItem"
+                        android:text="@string/am_0" />
+
+                    <TextView
+                        style="@style/HairdresserActivitySalonMatchingCalendarViewScrollViewItem"
+                        android:text="@string/am_1" />
+
+                    <TextView
+                        style="@style/HairdresserActivitySalonMatchingCalendarViewScrollViewItem"
+                        android:text="@string/am_2" />
+
+                    <TextView
+                        style="@style/HairdresserActivitySalonMatchingCalendarViewScrollViewItem"
+                        android:text="@string/am_3" />
+
+                    <TextView
+                        style="@style/HairdresserActivitySalonMatchingCalendarViewScrollViewItem"
+                        android:text="@string/am_4"/>
+
+                    <TextView
+                        style="@style/HairdresserActivitySalonMatchingCalendarViewScrollViewItem"
+                        android:text="@string/am_5"/>
+
+                    <TextView
+                        style="@style/HairdresserActivitySalonMatchingCalendarViewScrollViewItem"
+                        android:text="@string/am_6" />
+
+                    <TextView
+                        style="@style/HairdresserActivitySalonMatchingCalendarViewScrollViewItem"
+                        android:text="@string/am_7"/>
+
+                    <TextView
+                        style="@style/HairdresserActivitySalonMatchingCalendarViewScrollViewItem"
+                        android:text="@string/am_8"/>
+
+                    <TextView
+                        style="@style/HairdresserActivitySalonMatchingCalendarViewScrollViewItem"
+                        android:text="@string/am_9"/>
+
+                    <TextView
+                        style="@style/HairdresserActivitySalonMatchingCalendarViewScrollViewItem"
+                        android:text="@string/am_10"/>
+
+                    <TextView
+                        style="@style/HairdresserActivitySalonMatchingCalendarViewScrollViewItem"
+                        android:text="@string/am_11"/>
+
+                    <TextView
+                        style="@style/HairdresserActivitySalonMatchingCalendarViewScrollViewItem"
+                        android:text="@string/am_11"/>
+
+                    <TextView
+                        style="@style/HairdresserActivitySalonMatchingCalendarViewScrollViewItem"
+                        android:text="@string/pm_1" />
+
+                    <TextView
+                        style="@style/HairdresserActivitySalonMatchingCalendarViewScrollViewItem"
+                        android:text="@string/pm_2"/>
+
+                    <TextView
+                        style="@style/HairdresserActivitySalonMatchingCalendarViewScrollViewItem"
+                        android:text="@string/pm_3"/>
+
+                    <TextView
+                        style="@style/HairdresserActivitySalonMatchingCalendarViewScrollViewItem"
+                        android:text="@string/pm_4"/>
+
+                    <TextView
+                        style="@style/HairdresserActivitySalonMatchingCalendarViewScrollViewItem"
+                        android:text="@string/pm_5"/>
+
+                    <TextView
+                        style="@style/HairdresserActivitySalonMatchingCalendarViewScrollViewItem"
+                        android:text="@string/pm_6"/>
+
+                    <TextView
+                        style="@style/HairdresserActivitySalonMatchingCalendarViewScrollViewItem"
+                        android:text="@string/pm_7"/>
+
+                    <TextView
+                        style="@style/HairdresserActivitySalonMatchingCalendarViewScrollViewItem"
+                        android:text="@string/pm_8"/>
+
+                    <TextView
+                        style="@style/HairdresserActivitySalonMatchingCalendarViewScrollViewItem"
+                        android:text="@string/pm_9"/>
+
+                    <TextView
+                        style="@style/HairdresserActivitySalonMatchingCalendarViewScrollViewItem"
+                        android:text="@string/pm_10"/>
+
+                    <TextView
+                        style="@style/HairdresserActivitySalonMatchingCalendarViewScrollViewItem"
+                        android:text="@string/pm_11"/>
+                </LinearLayout>
+            </ScrollView>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_post_hair_catalog"
+        android:icon="@drawable/ic_content_cut_white_24dp"
+        android:title="@string/activity_hairdresser_home_mini_fab_button_label_post_hair_catalog" />
+    <item
+        android:id="@+id/action_post_blog"
+        android:icon="@drawable/ic_event_white_24dp"
+        android:title="@string/activity_hairdresser_home_mini_fab_button_label_post_blog"/>
+</menu>

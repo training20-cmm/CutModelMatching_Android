@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <data>
+        <variable name="form" type="training20.tcmobile.viewmodels.ModelRegistrationFormViewModel" />
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/headerImageView"
+                android:layout_width="match_parent"
+                android:layout_height="128dp"
+                android:contentDescription="@string/activity_model_registration_image_content_description_header"
+                android:scaleType="centerCrop"
+                android:src="@drawable/model_header"
+                android:transitionName="@string/transition_name_perspective_selection_fragment_header_image_view" />
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:navigationIcon="@drawable/close_24dp"/>
+        </FrameLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/l_dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/TextInputLayoutPrimary"
+                        tools:layout_editor_absoluteX="1dp"
+                        tools:layout_editor_absoluteY="477dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:hint="@string/activity_model_registration_hint_enter_user_name"
+                            android:text="@={form.name}"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/s_dp"
+                        android:theme="@style/TextInputLayoutPrimary"
+                        tools:layout_editor_absoluteX="1dp"
+                        tools:layout_editor_absoluteY="477dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:hint="@string/activity_model_registration_hint_enter_user_id"
+                            android:text="@={form.identifier}"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/s_dp"
+                        android:theme="@style/TextInputLayoutPrimary"
+                        tools:layout_editor_absoluteX="1dp"
+                        tools:layout_editor_absoluteY="477dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword"
+                            android:hint="@string/activity_model_registration_hint_enter_password"
+                            android:text="@={form.password}"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/s_dp"
+                        android:theme="@style/TextInputLayoutPrimary"
+                        tools:layout_editor_absoluteX="1dp"
+                        tools:layout_editor_absoluteY="477dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword"
+                            android:hint="@string/activity_model_registration_hint_enter_password_confirmation"
+                            android:text="@={form.passwordConfirmation}"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/transitionToLoginActivityButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/mm_dp"
+                        android:text="@string/activity_hairdresser_registration_have_an_account"
+                        android:textColor="@color/link"
+                        android:textSize="18sp"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/mm_dp"
+                        android:orientation="vertical"
+                        >
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/registrationButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:text="@string/activity_model_registration_register_as_model"
+                            android:textColor="@color/colorOnPrimary"
+                            android:textSize="18sp"
+                            app:backgroundTint="@color/colorAccent"/>
+                        <ProgressBar
+                            android:id="@+id/registrationSpinner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            android:indeterminateTintMode="src_atop"
+                            android:layout_gravity="center" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</layout>
