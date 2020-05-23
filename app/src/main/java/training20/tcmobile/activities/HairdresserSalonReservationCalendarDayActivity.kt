@@ -8,10 +8,10 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.android.synthetic.main.hairdresser_activity_salon_matching_calendar_day.*
+import kotlinx.android.synthetic.main.hairdresser_activity_salon_reservation_calendar_day.*
 import training20.tcmobile.R
 
-class HairdresserSalonMatchingCalendarDayActivity : AppCompatActivity() {
+class HairdresserSalonReservationCalendarDayActivity : AppCompatActivity() {
 
     private class Recruitment(val startHour: Int, val startMinute: Int, val endHour: Int, val endMinute: Int) {
     }
@@ -70,7 +70,7 @@ class HairdresserSalonMatchingCalendarDayActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.hairdresser_activity_salon_matching_calendar_day)
+        setContentView(R.layout.hairdresser_activity_salon_reservation_calendar_day)
         setupViews()
     }
 

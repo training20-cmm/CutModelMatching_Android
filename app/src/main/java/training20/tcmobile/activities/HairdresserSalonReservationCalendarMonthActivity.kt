@@ -1,24 +1,19 @@
 package training20.tcmobile.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TableRow
-import kotlinx.android.synthetic.main.hairdresser_activity_salon_matching_calendar.*
-import kotlinx.android.synthetic.main.hairdresser_fragment_salon_matching_calendar_table_cell.*
+import kotlinx.android.synthetic.main.hairdresser_activity_salon_reservation_month_calendar.*
 import kotlinx.android.synthetic.main.hairdresser_fragment_salon_matching_calendar_table_cell.view.*
-import kotlinx.android.synthetic.main.hairdresser_fragment_salon_matching_calendar_table_row.*
 import kotlinx.android.synthetic.main.hairdresser_fragment_salon_matching_calendar_table_row.view.*
-import kotlinx.android.synthetic.main.hairdresser_fragment_salon_matching_calendar_cell_label.view.*
 import training20.tcmobile.R
 import java.time.DayOfWeek
 import java.time.LocalDate
 import kotlin.random.Random
 
-class HairdresserSalonMatchingCalendarActivity : BaseActivity() {
+class HairdresserSalonReservationCalendarMonthActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.hairdresser_activity_salon_matching_calendar)
+        setContentView(R.layout.hairdresser_activity_salon_reservation_month_calendar)
         setupViews()
     }
 

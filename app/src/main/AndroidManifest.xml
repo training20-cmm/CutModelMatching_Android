@@ -13,14 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.HairdresserSalonMatchingCalendarDayActivity" />
+        <activity android:name=".activities.HairdresserSalonReservationCalendarDayActivity" />
 <!--        <activity android:name=".activities.HairdresserSalonMatchingCalendarActivity" />-->
         <activity android:name=".activities.HairdresserHomeActivity" />
         <activity android:name=".activities.HairdresserRegistrationFormActivity" />
         <activity android:name=".activities.ModelHomeActivity" />
 <!--        <activity android:name=".activities.ModelRegistrationFormActivity" />-->
 <!--        <activity android:name=".activities.HairdresserSalonMatchingCalendarDayActivity">-->
-        <activity android:name=".activities.HairdresserSalonMatchingCalendarActivity">
+        <activity android:name=".activities.HairdresserSalonReservationCalendarMonthActivity">
             <!-- <activity android:name=".activities.HairdresserHomeActivity"> -->
             <!-- <activity android:name=".activities.model.HomeActivity"> -->
 <!--        <activity android:name=".activities.PerspectiveSelectionActivity">-->
