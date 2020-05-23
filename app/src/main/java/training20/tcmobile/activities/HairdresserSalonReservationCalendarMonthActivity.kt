@@ -1,9 +1,9 @@
 package training20.tcmobile.activities
 
 import android.os.Bundle
-import kotlinx.android.synthetic.main.hairdresser_activity_salon_reservation_month_calendar.*
-import kotlinx.android.synthetic.main.hairdresser_fragment_salon_matching_calendar_table_cell.view.*
-import kotlinx.android.synthetic.main.hairdresser_fragment_salon_matching_calendar_table_row.view.*
+import kotlinx.android.synthetic.main.activity_hairdresser_salon_reservation_month_calendar.*
+import kotlinx.android.synthetic.main.fragment_hairdresser_salon_matching_calendar_table_cell.view.*
+import kotlinx.android.synthetic.main.fragment_hairdresser_salon_matching_calendar_table_row.view.*
 import training20.tcmobile.R
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -13,7 +13,7 @@ class HairdresserSalonReservationCalendarMonthActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.hairdresser_activity_salon_reservation_month_calendar)
+        setContentView(R.layout.activity_hairdresser_salon_reservation_month_calendar)
         setupViews()
     }
 

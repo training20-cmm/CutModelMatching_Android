@@ -32,7 +32,7 @@ class HairCatalogListFragment : Fragment() {
             parent: ViewGroup,
             viewType: Int
         ): HairCatalogListItemViewHolder {
-            val itemView = LayoutInflater.from(parent.context).inflate(R.layout.hairdresser_fragment_hair_catalog_list_item, parent, false)
+            val itemView = LayoutInflater.from(parent.context).inflate(R.layout.fragment_hairdresser_hair_catalog_list_item, parent, false)
             return HairCatalogListItemViewHolder(itemView)
         }
 
@@ -42,7 +42,7 @@ class HairCatalogListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val rootView = inflater.inflate(R.layout.hairdresser_fragment_hair_catalog_list, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_hairdresser_hair_catalog_list, container, false)
         setupViews(rootView)
         return rootView
     }

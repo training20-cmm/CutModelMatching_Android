@@ -10,47 +10,47 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:layout_marginEnd="1dp"
-        layout="@layout/hairdresser_fragment_salon_matching_calendar_table_cell" />
+        layout="@layout/fragment_hairdresser_salon_matching_calendar_table_cell" />
     <include
         android:id="@+id/cell2"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:layout_marginEnd="1dp"
-        layout="@layout/hairdresser_fragment_salon_matching_calendar_table_cell" />
+        layout="@layout/fragment_hairdresser_salon_matching_calendar_table_cell" />
     <include
         android:id="@+id/cell3"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:layout_marginEnd="1dp"
-        layout="@layout/hairdresser_fragment_salon_matching_calendar_table_cell" />
+        layout="@layout/fragment_hairdresser_salon_matching_calendar_table_cell" />
     <include
         android:id="@+id/cell4"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:layout_marginEnd="1dp"
-        layout="@layout/hairdresser_fragment_salon_matching_calendar_table_cell" />
+        layout="@layout/fragment_hairdresser_salon_matching_calendar_table_cell" />
     <include
         android:id="@+id/cell5"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:layout_marginEnd="1dp"
-        layout="@layout/hairdresser_fragment_salon_matching_calendar_table_cell" />
+        layout="@layout/fragment_hairdresser_salon_matching_calendar_table_cell" />
     <include
         android:id="@+id/cell6"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:layout_marginEnd="1dp"
-        layout="@layout/hairdresser_fragment_salon_matching_calendar_table_cell" />
+        layout="@layout/fragment_hairdresser_salon_matching_calendar_table_cell" />
     <include
         android:id="@+id/cell7"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:layout_marginEnd="1dp"
-        layout="@layout/hairdresser_fragment_salon_matching_calendar_table_cell" />
+        layout="@layout/fragment_hairdresser_salon_matching_calendar_table_cell" />
 </TableRow>

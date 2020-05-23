@@ -3,15 +3,14 @@ package training20.tcmobile.activities
 import android.os.Bundle
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
-import kotlinx.android.synthetic.main.model_activity_home.*
+import kotlinx.android.synthetic.main.activity_model_home.*
 import training20.tcmobile.R
-import training20.tcmobile.activities.BaseActivity
 
 class ModelHomeActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.model_activity_home)
+        setContentView(R.layout.activity_model_home)
         setupNavigationDrawer()
     }
 

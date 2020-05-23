@@ -6,11 +6,11 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import kotlinx.android.synthetic.main.model_activity_registration_form.*
+import kotlinx.android.synthetic.main.activity_model_registration_form.*
 import org.koin.android.ext.android.inject
 import training20.tcmobile.Perspective
 import training20.tcmobile.R
-import training20.tcmobile.databinding.HairdresserActivityRegistrationFormBinding
+import training20.tcmobile.databinding.ActivityHairdresserRegistrationFormBinding
 import training20.tcmobile.models.hairdresser.HairdresserIdentifier
 import training20.tcmobile.models.hairdresser.HairdresserName
 import training20.tcmobile.models.hairdresser.HairdresserRawPassword
@@ -61,7 +61,7 @@ class HairdresserRegistrationFormActivity : AppCompatActivity() {
     }
 
     private fun bindData() {
-        val binding = DataBindingUtil.setContentView<HairdresserActivityRegistrationFormBinding>(this, R.layout.hairdresser_activity_registration_form)
+        val binding = DataBindingUtil.setContentView<ActivityHairdresserRegistrationFormBinding>(this, R.layout.activity_hairdresser_registration_form)
         binding.form = formViewModel
     }
 
