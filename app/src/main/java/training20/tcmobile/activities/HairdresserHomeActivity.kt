@@ -9,12 +9,11 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetSequence
-import kotlinx.android.synthetic.main.hairdresser_activity_home.*
-import kotlinx.android.synthetic.main.hairdresser_activity_home.pager
-import kotlinx.android.synthetic.main.hairdresser_activity_home.tabLayout
+import kotlinx.android.synthetic.main.activity_hairdresser_home.*
+import kotlinx.android.synthetic.main.activity_hairdresser_home.pager
+import kotlinx.android.synthetic.main.activity_hairdresser_home.tabLayout
 import training20.tcmobile.R
-import training20.tcmobile.activities.BaseActivity
-import training20.tcmobile.fragments.hairdresser.HairCatalogListFragment
+import training20.tcmobile.fragments.HairdresserHairCatalogListFragment
 
 
 class HairdresserHomeActivity : BaseActivity() {
@@ -28,8 +27,8 @@ class HairdresserHomeActivity : BaseActivity() {
 
         override fun getItem(position: Int): Fragment {
             return when(position) {
-                0 -> HairCatalogListFragment()
-                else -> HairCatalogListFragment()
+                0 -> HairdresserHairCatalogListFragment()
+                else -> HairdresserHairCatalogListFragment()
             }
         }
 
@@ -43,7 +42,7 @@ class HairdresserHomeActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.hairdresser_activity_home)
+        setContentView(R.layout.activity_hairdresser_home)
         setupNavigationDrawer()
         setupViews()
         startFeatureDiscovery()

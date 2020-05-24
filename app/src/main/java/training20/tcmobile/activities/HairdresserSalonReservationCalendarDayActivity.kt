@@ -8,69 +8,69 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.android.synthetic.main.hairdresser_activity_salon_matching_calendar_day.*
+import kotlinx.android.synthetic.main.activity_hairdresser_salon_reservation_calendar_day.*
 import training20.tcmobile.R
 
-class HairdresserSalonMatchingCalendarDayActivity : AppCompatActivity() {
+class HairdresserSalonReservationCalendarDayActivity : AppCompatActivity() {
 
-    private class Recruitment(val startHour: Int, val startMinute: Int, val endHour: Int, val endMinute: Int) {
+    private class Menu(val startHour: Int, val startMinute: Int, val endHour: Int, val endMinute: Int) {
     }
 
-    private class Hairdresser(val recruitmentArray: Array<Recruitment>) {
+    private class Hairdresser(val menus: Array<Menu>) {
     }
 
     private val hairdressers = arrayOf(
         Hairdresser(
             arrayOf(
-                Recruitment(13, 0, 14, 0),
-                Recruitment(16, 0, 17, 0),
-                Recruitment(19, 0, 21, 0)
+                Menu(13, 0, 14, 0),
+                Menu(16, 0, 17, 0),
+                Menu(19, 0, 21, 0)
             )
         ),
         Hairdresser(
             arrayOf(
-                Recruitment(6, 0, 7, 0),
-                Recruitment(9, 0, 10, 0),
-                Recruitment(13, 0, 14, 0)
+                Menu(6, 0, 7, 0),
+                Menu(9, 0, 10, 0),
+                Menu(13, 0, 14, 0)
             )
         ),
         Hairdresser(
             arrayOf(
-                Recruitment(4, 0, 5, 0),
-                Recruitment(15, 0, 16, 0)
+                Menu(4, 0, 5, 0),
+                Menu(15, 0, 16, 0)
             )
         ),
         Hairdresser(
             arrayOf(
-                Recruitment(18, 0, 19, 0)
+                Menu(18, 0, 19, 0)
             )
         ),
         Hairdresser(
             arrayOf(
-                Recruitment(21, 0, 22, 0)
+                Menu(21, 0, 22, 0)
             )
         ),
         Hairdresser(
             arrayOf(
-                Recruitment(5, 0, 6, 0),
-                Recruitment(19, 0, 22, 0)
+                Menu(5, 0, 6, 0),
+                Menu(19, 0, 22, 0)
             )
         ),
         Hairdresser(
             arrayOf(
-                Recruitment(8, 0, 10, 0)
+                Menu(8, 0, 10, 0)
             )
         ),
         Hairdresser(
             arrayOf(
-                Recruitment(10, 0, 13, 0)
+                Menu(10, 0, 13, 0)
             )
         )
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.hairdresser_activity_salon_matching_calendar_day)
+        setContentView(R.layout.activity_hairdresser_salon_reservation_calendar_day)
         setupViews()
     }
 
@@ -109,10 +109,10 @@ class HairdresserSalonMatchingCalendarDayActivity : AppCompatActivity() {
     private fun setupMatchingScrollView() {
         hairdressers.forEach { hairdresser ->
             val layout = RelativeLayout(this)
-            hairdresser.recruitmentArray.forEach { recruitment ->
+            hairdresser.menus.forEach { menu ->
                 // TODO: 分数も考慮
-                val hours = recruitment.endHour - recruitment.startHour
-                val topMargin = recruitment.startHour * resources.getDimension(R.dimen.hairdresser_activity_salon_matching_calendar_day_time_text_view_height)
+                val hours = menu.endHour - menu.startHour
+                val topMargin = menu.startHour * resources.getDimension(R.dimen.hairdresser_activity_salon_matching_calendar_day_time_text_view_height)
                 val barView = View(this)
                 barView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary))
                 val layoutParams = RelativeLayout.LayoutParams(

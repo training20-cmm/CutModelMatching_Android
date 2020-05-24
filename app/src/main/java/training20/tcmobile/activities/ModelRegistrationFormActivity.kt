@@ -6,11 +6,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import kotlinx.android.synthetic.main.model_activity_registration_form.*
+import kotlinx.android.synthetic.main.activity_model_registration_form.*
 import org.koin.android.ext.android.inject
 import training20.tcmobile.Perspective
 import training20.tcmobile.R
-import training20.tcmobile.databinding.ModelActivityRegistrationFormBinding
+import training20.tcmobile.databinding.ActivityModelRegistrationFormBinding
 import training20.tcmobile.models.model.ModelIdentifier
 import training20.tcmobile.models.model.ModelName
 import training20.tcmobile.models.model.ModelRawPassword
@@ -45,7 +45,7 @@ class ModelRegistrationFormActivity : AppCompatActivity() {
     }
 
     private fun bindData() {
-        val binding = DataBindingUtil.setContentView<ModelActivityRegistrationFormBinding>(this, R.layout.model_activity_registration_form)
+        val binding = DataBindingUtil.setContentView<ActivityModelRegistrationFormBinding>(this, R.layout.activity_model_registration_form)
         binding.form = formViewModel
     }
 
@@ -59,7 +59,7 @@ class ModelRegistrationFormActivity : AppCompatActivity() {
         } else {
             AuthenticationTokenManager.putAccessToken(Perspective.MODEL, accessToken)
             AuthenticationTokenManager.putRefreshToken(Perspective.MODEL, refreshToken)
-            val intent = Intent(this, ModelHomeActivity::class.java)
+            val intent = Intent(this, ModelFoundationActivity::class.java)
             startActivity(intent)
         }
     }

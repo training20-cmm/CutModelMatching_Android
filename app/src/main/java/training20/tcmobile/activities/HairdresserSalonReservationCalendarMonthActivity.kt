@@ -1,24 +1,19 @@
 package training20.tcmobile.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TableRow
-import kotlinx.android.synthetic.main.hairdresser_activity_salon_matching_calendar.*
-import kotlinx.android.synthetic.main.hairdresser_fragment_salon_matching_calendar_table_cell.*
-import kotlinx.android.synthetic.main.hairdresser_fragment_salon_matching_calendar_table_cell.view.*
-import kotlinx.android.synthetic.main.hairdresser_fragment_salon_matching_calendar_table_row.*
-import kotlinx.android.synthetic.main.hairdresser_fragment_salon_matching_calendar_table_row.view.*
-import kotlinx.android.synthetic.main.hairdresser_fragment_salon_matching_calendar_cell_label.view.*
+import kotlinx.android.synthetic.main.activity_hairdresser_salon_reservation_calendar_month.*
+import kotlinx.android.synthetic.main.view_hairdresser_salon_matching_calendar_table_cell.view.*
+import kotlinx.android.synthetic.main.fragment_hairdresser_salon_matching_calendar_table_row.view.*
 import training20.tcmobile.R
 import java.time.DayOfWeek
 import java.time.LocalDate
 import kotlin.random.Random
 
-class HairdresserSalonMatchingCalendarActivity : BaseActivity() {
+class HairdresserSalonReservationCalendarMonthActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.hairdresser_activity_salon_matching_calendar)
+        setContentView(R.layout.activity_hairdresser_salon_reservation_calendar_month)
         setupViews()
     }
 
@@ -42,10 +37,10 @@ class HairdresserSalonMatchingCalendarActivity : BaseActivity() {
                 cell.dateText.text = localDate.dayOfMonth.toString()
                 localDate = localDate.plusDays(1)
                 if (Random.nextInt(30) % 4 == 0) {
-                    val numberOfRecruitment = Random.nextInt(48)
-                    val numberOfApplicants = (numberOfRecruitment * Random.nextFloat()).toInt()
-                    cell.applicantsTextView.text = "${numberOfApplicants}/${numberOfRecruitment}"
-                    cell.applicantsProgressBar.max = numberOfRecruitment
+                    val numberOfMenus = Random.nextInt(48)
+                    val numberOfApplicants = (numberOfMenus * Random.nextFloat()).toInt()
+                    cell.applicantsTextView.text = "${numberOfApplicants}/${numberOfMenus}"
+                    cell.applicantsProgressBar.max = numberOfMenus
                     cell.applicantsProgressBar.progress = numberOfApplicants
                 }
             }
