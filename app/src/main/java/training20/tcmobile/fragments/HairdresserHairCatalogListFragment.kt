@@ -1,4 +1,4 @@
-package training20.tcmobile.fragments.hairdresser
+package training20.tcmobile.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 import training20.tcmobile.R
 
-class HairCatalogListFragment : Fragment() {
+class HairdresserHairCatalogListFragment : Fragment() {
 
     private class HairCatalogListItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -32,8 +32,10 @@ class HairCatalogListFragment : Fragment() {
             parent: ViewGroup,
             viewType: Int
         ): HairCatalogListItemViewHolder {
-            val itemView = LayoutInflater.from(parent.context).inflate(R.layout.fragment_hairdresser_hair_catalog_list_item, parent, false)
-            return HairCatalogListItemViewHolder(itemView)
+            val itemView = LayoutInflater.from(parent.context).inflate(R.layout.view_hairdresser_hair_catalog_list_item, parent, false)
+            return HairCatalogListItemViewHolder(
+                itemView
+            )
         }
 
     }
@@ -50,7 +52,8 @@ class HairCatalogListFragment : Fragment() {
     private fun setupViews(rootView: View) {
         val recyclerView = rootView.findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(activity)
-        recyclerView.adapter = HairCatalogRecyclerViewAdapter()
+        recyclerView.adapter =
+            HairCatalogRecyclerViewAdapter()
     }
 
 }

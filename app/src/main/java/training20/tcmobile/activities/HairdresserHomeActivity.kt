@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_hairdresser_home.*
 import kotlinx.android.synthetic.main.activity_hairdresser_home.pager
 import kotlinx.android.synthetic.main.activity_hairdresser_home.tabLayout
 import training20.tcmobile.R
-import training20.tcmobile.fragments.hairdresser.HairCatalogListFragment
+import training20.tcmobile.fragments.HairdresserHairCatalogListFragment
 
 
 class HairdresserHomeActivity : BaseActivity() {
@@ -27,8 +27,8 @@ class HairdresserHomeActivity : BaseActivity() {
 
         override fun getItem(position: Int): Fragment {
             return when(position) {
-                0 -> HairCatalogListFragment()
-                else -> HairCatalogListFragment()
+                0 -> HairdresserHairCatalogListFragment()
+                else -> HairdresserHairCatalogListFragment()
             }
         }
 

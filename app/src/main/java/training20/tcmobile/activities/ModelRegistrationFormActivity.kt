@@ -59,7 +59,7 @@ class ModelRegistrationFormActivity : AppCompatActivity() {
         } else {
             AuthenticationTokenManager.putAccessToken(Perspective.MODEL, accessToken)
             AuthenticationTokenManager.putRefreshToken(Perspective.MODEL, refreshToken)
-            val intent = Intent(this, ModelHomeActivity::class.java)
+            val intent = Intent(this, ModelFoundationActivity::class.java)
             startActivity(intent)
         }
     }

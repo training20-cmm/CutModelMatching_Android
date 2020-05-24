@@ -1,8 +1,8 @@
 package training20.tcmobile.activities
 
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_hairdresser_salon_reservation_month_calendar.*
-import kotlinx.android.synthetic.main.fragment_hairdresser_salon_matching_calendar_table_cell.view.*
+import kotlinx.android.synthetic.main.activity_hairdresser_salon_reservation_calendar_month.*
+import kotlinx.android.synthetic.main.view_hairdresser_salon_matching_calendar_table_cell.view.*
 import kotlinx.android.synthetic.main.fragment_hairdresser_salon_matching_calendar_table_row.view.*
 import training20.tcmobile.R
 import java.time.DayOfWeek
@@ -13,7 +13,7 @@ class HairdresserSalonReservationCalendarMonthActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_hairdresser_salon_reservation_month_calendar)
+        setContentView(R.layout.activity_hairdresser_salon_reservation_calendar_month)
         setupViews()
     }
 
@@ -37,10 +37,10 @@ class HairdresserSalonReservationCalendarMonthActivity : BaseActivity() {
                 cell.dateText.text = localDate.dayOfMonth.toString()
                 localDate = localDate.plusDays(1)
                 if (Random.nextInt(30) % 4 == 0) {
-                    val numberOfRecruitment = Random.nextInt(48)
-                    val numberOfApplicants = (numberOfRecruitment * Random.nextFloat()).toInt()
-                    cell.applicantsTextView.text = "${numberOfApplicants}/${numberOfRecruitment}"
-                    cell.applicantsProgressBar.max = numberOfRecruitment
+                    val numberOfMenus = Random.nextInt(48)
+                    val numberOfApplicants = (numberOfMenus * Random.nextFloat()).toInt()
+                    cell.applicantsTextView.text = "${numberOfApplicants}/${numberOfMenus}"
+                    cell.applicantsProgressBar.max = numberOfMenus
                     cell.applicantsProgressBar.progress = numberOfApplicants
                 }
             }

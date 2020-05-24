@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#26c6da</color>
+    <color name="colorPrimary">#87bfe4</color>
     <color name="colorPrimaryDark">#80cbc4</color>
     <color name="colorAccent">#f06292</color>
 
@@ -17,7 +17,12 @@
 
 
     <color name="rippleColorPrimary">#4226c6da</color>
+    <color name="rippleColorAccent">#42f06292</color>
     <color name="rippleColorIcons">#19000000</color>
 
+    <color name="background">#F2F2F2</color>
+
     <color name="blackout">#de000000</color>
+
+    <color name="ratingStar">#FFD700</color>
 </resources>

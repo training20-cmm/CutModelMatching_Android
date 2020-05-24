@@ -43,6 +43,8 @@
     <string name="activity_model_registration_hint_enter_user_name">ユーザ名を入力してください</string>
     <string name="activity_model_registration_image_content_description_header">カットモデル</string>
     <string name="activity_model_registration_register_as_model">カットモデルとして登録</string>
+    <string name="activity_model_search_result_tab_item_title_hairdresser">スタイリスト</string>
+    <string name="activity_model_search_result_tab_item_title_menu">メニュー</string>
     <string name="activity_perspective_selection_tab_item_title_hairdresser">美容師の方</string>
     <string name="activity_perspective_selection_tab_item_title_model">カットモデルの方</string>
     <string name="fragment_perspective_selection_hairdresser_card_content_1">CMMには多数のカットモデルが登録しています。希望する髪型や施術内容、性別などを指定してカットモデルを募集してみましょう。CMMがカットモデル探しをお手伝いします。</string>
@@ -82,4 +84,8 @@
     <string name="pm_11">午後11時</string>
     <string name="pm_12">午後12時</string>
     <string name="transition_name_perspective_selection_fragment_header_image_view">headerImageView</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

@@ -3,7 +3,6 @@ package training20.tcmobile
 import android.app.Application
 import org.koin.android.ext.android.startKoin
 import org.koin.dsl.module.module
-import training20.tcmobile.models.hairdresser.Hairdresser
 import training20.tcmobile.repositories.HairdresserRepository
 import training20.tcmobile.repositories.HairdresserRepositoryHttp
 import training20.tcmobile.repositories.ModelRepository
