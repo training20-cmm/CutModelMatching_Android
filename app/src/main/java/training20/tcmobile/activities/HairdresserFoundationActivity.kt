@@ -1,7 +1,6 @@
 package training20.tcmobile.activities
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
@@ -9,12 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.activity_model_foundation.*
+import kotlinx.android.synthetic.main.activity_hairdresser_foundation.*
 import training20.tcmobile.R
+import training20.tcmobile.fragments.HairdresserHomeFragment
 import training20.tcmobile.fragments.ModelHomeFragment
-import training20.tcmobile.fragments.ModelSearchResultFragment
 
-class ModelFoundationActivity: BaseActivity() {
+class HairdresserFoundationActivity: BaseActivity() {
 
     private class FragmentViewPagerAdapter(
         val fragments: Array<Fragment>,
@@ -31,37 +30,39 @@ class ModelFoundationActivity: BaseActivity() {
 
     private inner class BottomNavigationViewOnNavigationItemSelectedListener: BottomNavigationView.OnNavigationItemSelectedListener {
         override fun onNavigationItemSelected(item: MenuItem): Boolean {
-            toolbarRelativeLayout.removeAllViews()
-            return when(item.itemId) {
-                R.id.navigationHome -> {
-                    fragmentViewPager.setCurrentItem(0, false)
-                    true
-                }
-                R.id.navigationSearch -> {
-                    toolbarRelativeLayout.addView(LayoutInflater.from(this@ModelFoundationActivity).inflate(R.layout.view_model_searchbar, drawerLayout, false))
-                    fragmentViewPager.setCurrentItem(1, false)
-                    true
-                }
-                R.id.navigationNotifications -> {
-                    fragmentViewPager.setCurrentItem(2, false)
-                    true
-                }
-                R.id.navigationMessages -> {
-                    fragmentViewPager.setCurrentItem(3, false)
-                    true
-                }
-                else -> false
-            }
+            return true
+//            toolbarRelativeLayout.removeAllViews()
+//            return when(item.itemId) {
+//                R.id.navigationHome -> {
+//                    fragmentViewPager.setCurrentItem(0, false)
+//                    true
+//                }
+//                R.id.navigationSearch -> {
+//                    toolbarRelativeLayout.addView(LayoutInflater.from(this@ModelFoundationActivity).inflate(R.layout.view_model_searchbar, drawerLayout, false))
+//                    fragmentViewPager.setCurrentItem(1, false)
+//                    true
+//                }
+//                R.id.navigationNotifications -> {
+//                    fragmentViewPager.setCurrentItem(2, false)
+//                    true
+//                }
+//                R.id.navigationMessages -> {
+//                    fragmentViewPager.setCurrentItem(3, false)
+//                    true
+//                }
+//                else -> false
+//            }
         }
 
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_model_foundation)
+        setContentView(R.layout.activity_hairdresser_foundation)
         setupNavigationDrawer()
         setupFragmentViewPager()
         setupViews()
+//        startFeatureDiscovery()
     }
 
     private fun setupNavigationDrawer() {
@@ -83,12 +84,13 @@ class ModelFoundationActivity: BaseActivity() {
     }
 
     private fun setupFragmentViewPager() {
-        val fragments = arrayOf(ModelHomeFragment(), ModelSearchResultFragment(), ModelSearchResultFragment(), ModelSearchResultFragment())
+        val fragments = arrayOf(HairdresserHomeFragment(), ModelHomeFragment(), HairdresserHomeFragment())
         fragmentViewPager.adapter = FragmentViewPagerAdapter(fragments, supportFragmentManager)
-        fragmentViewPager.offscreenPageLimit = 3
+        fragmentViewPager.offscreenPageLimit = 2
     }
 
     private fun setupViews() {
         bottomNavigationView.setOnNavigationItemSelectedListener(BottomNavigationViewOnNavigationItemSelectedListener())
     }
+
 }
