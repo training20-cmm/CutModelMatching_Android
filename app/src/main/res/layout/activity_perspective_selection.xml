@@ -6,9 +6,8 @@
     android:layout_height="match_parent"
     android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
     tools:context=".activities.PerspectiveSelectionActivity">
-
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/pager"
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <com.google.android.material.tabs.TabLayout

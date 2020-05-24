@@ -44,7 +44,7 @@ class PerspectiveSelectionActivity : AppCompatActivity() {
     }
 
     private fun setupViews() {
-        pager.adapter = TabAdapter(supportFragmentManager)
-        tabLayout.setupWithViewPager(pager)
+        viewPager.adapter = TabAdapter(supportFragmentManager)
+        tabLayout.setupWithViewPager(viewPager)
     }
 }
