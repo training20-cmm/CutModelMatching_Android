@@ -3,7 +3,7 @@ package training20.tcmobile.activities
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_hairdresser_salon_reservation_calendar_month.*
 import kotlinx.android.synthetic.main.view_hairdresser_salon_matching_calendar_table_cell.view.*
-import kotlinx.android.synthetic.main.fragment_hairdresser_salon_matching_calendar_table_row.view.*
+import kotlinx.android.synthetic.main.view_hairdresser_salon_matching_calendar_table_row.view.*
 import training20.tcmobile.R
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -31,7 +31,6 @@ class HairdresserSalonReservationCalendarMonthActivity : BaseActivity() {
         }
         val rows = arrayOf(row1, row2, row3, row4, row5, row6)
         rows.forEach { row ->
-
             val cells = arrayOf(row.cell1, row.cell2, row.cell3, row.cell4, row.cell5, row.cell6, row.cell7)
             cells.forEach { cell ->
                 cell.dateText.text = localDate.dayOfMonth.toString()
