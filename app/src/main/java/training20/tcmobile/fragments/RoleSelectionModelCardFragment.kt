@@ -9,19 +9,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import kotlinx.android.synthetic.main.fragment_perspective_selection_model_card.*
+import kotlinx.android.synthetic.main.fragment_role_selection_model_card.*
 
 import training20.tcmobile.R
 import training20.tcmobile.activities.ModelRegistrationFormActivity
 
-class PerspectiveSelectionModelCardFragment : Fragment() {
+class RoleSelectionModelCardFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(
-            R.layout.fragment_perspective_selection_model_card,
+            R.layout.fragment_role_selection_model_card,
             container,
             false
         )

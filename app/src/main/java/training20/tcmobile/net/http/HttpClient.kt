@@ -73,12 +73,13 @@ class HttpClient<T>(
 //    }
 
     fun send(
-        onSuccess: ((T) -> Unit)? = null,
-        onError: ((String, Int, ErrorResponse) -> Unit)? = null,
-        onFailure: ((IOException) -> Unit)? = null,
-        onComplete: (() -> Unit)? = null
+//        onSuccess: ((T) -> Unit)? = null,
+//        onError: ((String, Int, ErrorResponse) -> Unit)? = null,
+//        onFailure: ((IOException) -> Unit)? = null,
+//        onComplete: (() -> Unit)? = null
+        options: RequestOptions<T>?
     ) {
-        send(true, onSuccess, onError, onFailure, onComplete)
+        send(true, options)
     }
 
     private fun build() {
@@ -134,15 +135,16 @@ class HttpClient<T>(
     }
 
     private fun issueAccessToken(
-        onSuccess: ((T) -> Unit)?,
-        onError: ((String, Int, ErrorResponse) -> Unit)?,
-        onFailure: ((IOException) -> Unit)?,
-        onComplete: (() -> Unit)?
+//        onSuccess: ((T) -> Unit)?,
+//        onError: ((String, Int, ErrorResponse) -> Unit)?,
+//        onFailure: ((IOException) -> Unit)?,
+//        onComplete: (() -> Unit)?
+          options: RequestOptions<T>?
     ) {
         OkHttpClient().newCall(accessTokenIssuanceRequest!!).enqueue(object : Callback {
 
             override fun onFailure(call: Call, e: IOException) {
-                invokeOnFailure(onFailure, e, onComplete)
+                invokeOnFailure(options?.onFailure, e, options?.onComplete)
             }
 
             override fun onResponse(call: Call, response: Response) {
@@ -151,11 +153,11 @@ class HttpClient<T>(
                     val errorResponse =
                         jsonConverter.fromJson(responseBodyString, ErrorResponse::class.java)
                     invokeOnError(
-                        onError,
+                        options?.onError,
                         responseBodyString,
                         response.code(),
                         errorResponse,
-                        onComplete
+                        options?.onComplete
                     )
                     when (errorResponse.code) {
                         ErrorCode.EXPIRED_REFRESH_TOKEN.value -> NotificationCenter.notify(
@@ -185,7 +187,7 @@ class HttpClient<T>(
                         )
                     }
                     build()
-                    send(false, onSuccess, onError, onFailure, onComplete)
+                    send(false, options)
                 }
             }
         })
@@ -193,24 +195,26 @@ class HttpClient<T>(
 
     private fun send(
         issuingAccessToken: Boolean,
-        onSuccess: ((T) -> Unit)?,
-        onError: ((String, Int, ErrorResponse) -> Unit)?,
-        onFailure: ((IOException) -> Unit)?,
-        onComplete: (() -> Unit)?
+//        onSuccess: ((T) -> Unit)?,
+//        onError: ((String, Int, ErrorResponse) -> Unit)?,
+//        onFailure: ((IOException) -> Unit)?,
+//        onComplete: (() -> Unit)?
+        options: RequestOptions<T>?
     ) {
         val client = OkHttpClient()
         client.newCall(request).enqueue(object : Callback {
 
             override fun onFailure(call: Call, e: IOException) {
-                invokeOnFailure(onFailure, e, onComplete)
+                invokeOnFailure(options?.onFailure, e, options?.onComplete)
             }
 
             override fun onResponse(call: Call, response: Response) {
                 val responseBodyString = response.body()?.string() ?: ""
+                println(responseBodyString)
                 when {
                     response.code() < 400 -> {
                         val obj = jsonConverter.fromJson(responseBodyString, clazz)
-                        invokeOnSuccess(onSuccess, obj, onComplete)
+                        invokeOnSuccess(options?.onSuccess, obj, options?.onComplete)
                     }
                     else -> {
                         val errorResponse =
@@ -218,29 +222,24 @@ class HttpClient<T>(
                         when (errorResponse.code) {
                             ErrorCode.INVALID_ACCESS_TOKEN.value, ErrorCode.EXPIRED_ACCESS_TOKEN.value -> {
                                 if (issuingAccessToken) {
-                                    issueAccessToken(
-                                        onSuccess,
-                                        onError,
-                                        onFailure,
-                                        onComplete
-                                    )
+                                    issueAccessToken(options)
                                 } else {
                                     invokeOnError(
-                                        onError,
+                                        options?.onError,
                                         responseBodyString,
                                         response.code(),
                                         errorResponse,
-                                        onComplete
+                                        options?.onComplete
                                     )
                                 }
                             }
                             else -> {
                                 invokeOnError(
-                                    onError,
+                                    options?.onError,
                                     responseBodyString,
                                     response.code(),
                                     errorResponse,
-                                    onComplete
+                                    options?.onComplete
                                 )
                             }
                         }

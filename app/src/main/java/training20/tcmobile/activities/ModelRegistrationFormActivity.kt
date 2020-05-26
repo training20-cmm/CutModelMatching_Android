@@ -14,6 +14,7 @@ import training20.tcmobile.databinding.ActivityModelRegistrationFormBinding
 import training20.tcmobile.models.model.ModelIdentifier
 import training20.tcmobile.models.model.ModelName
 import training20.tcmobile.models.model.ModelRawPassword
+import training20.tcmobile.net.http.RequestOptions
 import training20.tcmobile.net.http.responses.ModelRegistrationResponse
 import training20.tcmobile.repositories.ModelRepository
 import training20.tcmobile.security.AuthenticationTokenManager
@@ -25,18 +26,22 @@ class ModelRegistrationFormActivity : AppCompatActivity() {
         override fun onClick(v: View?) {
             registrationButton.visibility = View.GONE
             registrationSpinner.visibility = View.VISIBLE
-            userRepository.register(
-                ModelName.create(formViewModel.name),
-                ModelIdentifier.create(formViewModel.identifier),
-                ModelRawPassword.create(formViewModel.password),
-                ModelRawPassword.create(formViewModel.passwordConfirmation),
-                this@ModelRegistrationFormActivity::onUserRegistrationSuccess
+            val requestOptions = RequestOptions<ModelRegistrationResponse>()
+            requestOptions.onSuccess = this@ModelRegistrationFormActivity::onModelRegistrationSuccess
+            val modelRepository = ModelRepository()
+            modelRepository.register(
+                formViewModel.identifier,
+                formViewModel.password,
+                formViewModel.passwordConfirmation,
+                formViewModel.name,
+                "女",
+                "2012-12-25",
+                requestOptions
             )
         }
     }
 
     private val formViewModel = ViewModelProvider.NewInstanceFactory().create(ModelRegistrationFormViewModel::class.java)
-    private val userRepository: ModelRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,11 +54,11 @@ class ModelRegistrationFormActivity : AppCompatActivity() {
         binding.form = formViewModel
     }
 
-    private fun onUserRegistrationSuccess(response: ModelRegistrationResponse) {
+    private fun onModelRegistrationSuccess(response: ModelRegistrationResponse) {
         registrationButton.visibility = View.VISIBLE
         registrationSpinner.visibility = View.GONE
-        val accessToken = response.modelAccessToken?.token
-        val refreshToken = response.modelRefreshToken?.token
+        val accessToken = response.accessToken?.token
+        val refreshToken = response.refreshToken?.token
         if (accessToken == null || refreshToken == null) {
             // TODO: Show error message
         } else {

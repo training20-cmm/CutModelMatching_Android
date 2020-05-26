@@ -2,9 +2,9 @@ package training20.tcmobile.net.http.responses
 
 import training20.tcmobile.DateTimeEntity
 
-class HairdresserAccessTokenResponse {
+class AccessTokenResponse {
     var id: Int? = null
-    var hairdresserId: Int? = null
+    var userId: Int? = null
     var token: String? = null
     var expiration: DateTimeEntity? = null
     var createdAt: DateTimeEntity? = null
