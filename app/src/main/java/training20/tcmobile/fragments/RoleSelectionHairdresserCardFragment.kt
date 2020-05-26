@@ -9,19 +9,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import kotlinx.android.synthetic.main.fragment_perspective_selection_hairdresser_card.*
+import kotlinx.android.synthetic.main.fragment_role_selection_hairdresser_card.*
 import training20.tcmobile.R
 import training20.tcmobile.activities.HairdresserRegistrationFormActivity
 
 
-class PerspectiveSelectionHairdresserCardFragment : Fragment() {
+class RoleSelectionHairdresserCardFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(
-            R.layout.fragment_perspective_selection_hairdresser_card,
+            R.layout.fragment_role_selection_hairdresser_card,
             container,
             false
         )

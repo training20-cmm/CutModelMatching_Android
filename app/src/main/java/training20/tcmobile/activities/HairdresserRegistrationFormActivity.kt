@@ -11,9 +11,7 @@ import org.koin.android.ext.android.inject
 import training20.tcmobile.Perspective
 import training20.tcmobile.R
 import training20.tcmobile.databinding.ActivityHairdresserRegistrationFormBinding
-import training20.tcmobile.models.hairdresser.HairdresserIdentifier
-import training20.tcmobile.models.hairdresser.HairdresserName
-import training20.tcmobile.models.hairdresser.HairdresserRawPassword
+import training20.tcmobile.net.http.RequestOptions
 import training20.tcmobile.net.http.responses.HairdresserRegistrationResponse
 import training20.tcmobile.repositories.HairdresserRepository
 import training20.tcmobile.security.AuthenticationTokenManager
@@ -25,19 +23,23 @@ class HairdresserRegistrationFormActivity : AppCompatActivity() {
         override fun onClick(v: View?) {
             registrationButton.visibility = View.GONE
             registrationSpinner.visibility = View.VISIBLE
+            val requestOptions = RequestOptions<HairdresserRegistrationResponse>()
+            requestOptions.onSuccess = this@HairdresserRegistrationFormActivity::onUserRegistrationSuccess
+            val hairdresserRepository = HairdresserRepository()
             hairdresserRepository.register(
-                HairdresserName.create(formViewModel.name),
-                HairdresserIdentifier.create(formViewModel.identifier),
-                HairdresserRawPassword.create(formViewModel.password),
-                HairdresserRawPassword.create(formViewModel.passwordConfirmation),
-                this@HairdresserRegistrationFormActivity::onUserRegistrationSuccess
+                formViewModel.identifier,
+                formViewModel.password,
+                formViewModel.passwordConfirmation,
+                formViewModel.name,
+                "男",
+                "2012-12-23",
+                requestOptions
             )
         }
     }
 
     private val formViewModel = ViewModelProvider.NewInstanceFactory().create(
         HairdresserRegistrationFormViewModel::class.java)
-    private val hairdresserRepository: HairdresserRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,14 +50,14 @@ class HairdresserRegistrationFormActivity : AppCompatActivity() {
     private fun onUserRegistrationSuccess(response: HairdresserRegistrationResponse) {
         registrationButton.visibility = View.VISIBLE
         registrationSpinner.visibility = View.GONE
-        val accessToken = response.hairdresserAccessToken?.token
-        val refreshToken = response.hairdresserRefreshToken?.token
+        val accessToken = response.accessToken?.token
+        val refreshToken = response.refreshToken?.token
         if (accessToken == null || refreshToken == null) {
             // TODO: Show error message
         } else {
             AuthenticationTokenManager.putAccessToken(Perspective.HAIRDRESSER, accessToken)
             AuthenticationTokenManager.putRefreshToken(Perspective.HAIRDRESSER, refreshToken)
-            val intent = Intent(this, HairdresserHomeActivity::class.java)
+            val intent = Intent(this, HairdresserFoundationActivity::class.java)
             startActivity(intent)
         }
     }

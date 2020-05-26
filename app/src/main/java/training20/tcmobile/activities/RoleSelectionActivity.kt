@@ -5,13 +5,13 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import kotlinx.android.synthetic.main.activity_perspective_selection.*
+import kotlinx.android.synthetic.main.activity_role_selection.*
 import training20.tcmobile.PerspectiveManager
 import training20.tcmobile.R
-import training20.tcmobile.fragments.PerspectiveSelectionHairdresserCardFragment
-import training20.tcmobile.fragments.PerspectiveSelectionModelCardFragment
+import training20.tcmobile.fragments.RoleSelectionHairdresserCardFragment
+import training20.tcmobile.fragments.RoleSelectionModelCardFragment
 
-class PerspectiveSelectionActivity : AppCompatActivity() {
+class RoleSelectionActivity : AppCompatActivity() {
 
     private inner class TabAdapter(fragmentManager: FragmentManager):
         FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)
@@ -22,8 +22,8 @@ class PerspectiveSelectionActivity : AppCompatActivity() {
 
         override fun getItem(position: Int): Fragment {
             return when(position) {
-                0 -> PerspectiveSelectionModelCardFragment()
-                else -> PerspectiveSelectionHairdresserCardFragment()
+                0 -> RoleSelectionModelCardFragment()
+                else -> RoleSelectionHairdresserCardFragment()
             }
         }
 
@@ -38,7 +38,7 @@ class PerspectiveSelectionActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_perspective_selection)
+        setContentView(R.layout.activity_role_selection)
         setupViews()
         PerspectiveManager.setPerspective(null)
     }
