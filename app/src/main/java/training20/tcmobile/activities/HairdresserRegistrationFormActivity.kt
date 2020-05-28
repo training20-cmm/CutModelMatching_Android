@@ -12,6 +12,7 @@ import training20.tcmobile.Perspective
 import training20.tcmobile.R
 import training20.tcmobile.databinding.ActivityHairdresserRegistrationFormBinding
 import training20.tcmobile.net.http.RequestOptions
+import training20.tcmobile.net.http.ResponseHandler
 import training20.tcmobile.net.http.responses.HairdresserRegistrationResponse
 import training20.tcmobile.repositories.HairdresserRepository
 import training20.tcmobile.security.AuthenticationTokenManager
@@ -23,8 +24,8 @@ class HairdresserRegistrationFormActivity : AppCompatActivity() {
         override fun onClick(v: View?) {
             registrationButton.visibility = View.GONE
             registrationSpinner.visibility = View.VISIBLE
-            val requestOptions = RequestOptions<HairdresserRegistrationResponse>()
-            requestOptions.onSuccess = this@HairdresserRegistrationFormActivity::onUserRegistrationSuccess
+            val responseHandler = ResponseHandler<HairdresserRegistrationResponse>()
+            responseHandler.onSuccess = this@HairdresserRegistrationFormActivity::onUserRegistrationSuccess
             val hairdresserRepository = HairdresserRepository()
             hairdresserRepository.register(
                 formViewModel.identifier,
@@ -33,7 +34,7 @@ class HairdresserRegistrationFormActivity : AppCompatActivity() {
                 formViewModel.name,
                 "男",
                 "2012-12-23",
-                requestOptions
+                responseHandler = responseHandler
             )
         }
     }

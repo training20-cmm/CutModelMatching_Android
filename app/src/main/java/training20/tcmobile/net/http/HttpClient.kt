@@ -21,6 +21,7 @@ class HttpClient<T>(
     private val clazz: Class<T>,
     private val method: HttpMethod,
     private val path: String,
+    private val options: RequestOptions? = null,
     private vararg val queries: Pair<String, String>
 ) {
 
@@ -72,23 +73,26 @@ class HttpClient<T>(
 //        return this
 //    }
 
-    fun send(
-//        onSuccess: ((T) -> Unit)? = null,
-//        onError: ((String, Int, ErrorResponse) -> Unit)? = null,
-//        onFailure: ((IOException) -> Unit)? = null,
-//        onComplete: (() -> Unit)? = null
-        options: RequestOptions<T>?
-    ) {
-        send(true, options)
+    fun send(responseHandler: ResponseHandler<T>? = null) {
+        send(true, responseHandler)
     }
 
     private fun build() {
-        val builder = if (perspective == null) Request.Builder() else {
-            val accessToken =
-                AuthenticationTokenManager.getOrLoadAccessToken(perspective!!) ?: ""
-            Request.Builder().header(HttpHeader.AUTHORIZATION.value, accessToken)
+//        val builder = if (perspective == null) Request.Builder() else {
+//            val accessToken =
+//                AuthenticationTokenManager.getOrLoadAccessToken(perspective!!) ?: ""
+//            Request.Builder().header(HttpHeader.AUTHORIZATION.value, accessToken)
+//        }
+        val accessToken =
+            AuthenticationTokenManager.getOrLoadAccessToken(Perspective.MODEL) ?: ""
+        val builder = Request.Builder().header(HttpHeader.AUTHORIZATION.value, accessToken)
+        var urlQueryString = Query().apply { queries.forEach { append(it.first, it.second) } }.make()
+        options?.embed?.let { embed ->
+            if (!urlQueryString.isEmpty()) {
+                urlQueryString += "&"
+            }
+            urlQueryString += "embed=${embed}"
         }
-        val urlQueryString = Query().apply { queries.forEach { append(it.first, it.second) } }.make()
         val url = "$baseUrl/$path"
         request = when (method) {
             HttpMethod.POST -> {
@@ -134,17 +138,11 @@ class HttpClient<T>(
         }
     }
 
-    private fun issueAccessToken(
-//        onSuccess: ((T) -> Unit)?,
-//        onError: ((String, Int, ErrorResponse) -> Unit)?,
-//        onFailure: ((IOException) -> Unit)?,
-//        onComplete: (() -> Unit)?
-          options: RequestOptions<T>?
-    ) {
+    private fun issueAccessToken(responseHandler: ResponseHandler<T>?) {
         OkHttpClient().newCall(accessTokenIssuanceRequest!!).enqueue(object : Callback {
 
             override fun onFailure(call: Call, e: IOException) {
-                invokeOnFailure(options?.onFailure, e, options?.onComplete)
+                invokeOnFailure(responseHandler?.onFailure, e, responseHandler?.onComplete)
             }
 
             override fun onResponse(call: Call, response: Response) {
@@ -153,11 +151,11 @@ class HttpClient<T>(
                     val errorResponse =
                         jsonConverter.fromJson(responseBodyString, ErrorResponse::class.java)
                     invokeOnError(
-                        options?.onError,
+                        responseHandler?.onError,
                         responseBodyString,
                         response.code(),
                         errorResponse,
-                        options?.onComplete
+                        responseHandler?.onComplete
                     )
                     when (errorResponse.code) {
                         ErrorCode.EXPIRED_REFRESH_TOKEN.value -> NotificationCenter.notify(
@@ -187,7 +185,7 @@ class HttpClient<T>(
                         )
                     }
                     build()
-                    send(false, options)
+                    send(false, responseHandler)
                 }
             }
         })
@@ -195,17 +193,13 @@ class HttpClient<T>(
 
     private fun send(
         issuingAccessToken: Boolean,
-//        onSuccess: ((T) -> Unit)?,
-//        onError: ((String, Int, ErrorResponse) -> Unit)?,
-//        onFailure: ((IOException) -> Unit)?,
-//        onComplete: (() -> Unit)?
-        options: RequestOptions<T>?
+        responseHandler: ResponseHandler<T>?
     ) {
         val client = OkHttpClient()
         client.newCall(request).enqueue(object : Callback {
 
             override fun onFailure(call: Call, e: IOException) {
-                invokeOnFailure(options?.onFailure, e, options?.onComplete)
+                invokeOnFailure(responseHandler?.onFailure, e, responseHandler?.onComplete)
             }
 
             override fun onResponse(call: Call, response: Response) {
@@ -214,7 +208,7 @@ class HttpClient<T>(
                 when {
                     response.code() < 400 -> {
                         val obj = jsonConverter.fromJson(responseBodyString, clazz)
-                        invokeOnSuccess(options?.onSuccess, obj, options?.onComplete)
+                        invokeOnSuccess(responseHandler?.onSuccess, obj, responseHandler?.onComplete)
                     }
                     else -> {
                         val errorResponse =
@@ -222,24 +216,24 @@ class HttpClient<T>(
                         when (errorResponse.code) {
                             ErrorCode.INVALID_ACCESS_TOKEN.value, ErrorCode.EXPIRED_ACCESS_TOKEN.value -> {
                                 if (issuingAccessToken) {
-                                    issueAccessToken(options)
+                                    issueAccessToken(responseHandler)
                                 } else {
                                     invokeOnError(
-                                        options?.onError,
+                                        responseHandler?.onError,
                                         responseBodyString,
                                         response.code(),
                                         errorResponse,
-                                        options?.onComplete
+                                        responseHandler?.onComplete
                                     )
                                 }
                             }
                             else -> {
                                 invokeOnError(
-                                    options?.onError,
+                                    responseHandler?.onError,
                                     responseBodyString,
                                     response.code(),
                                     errorResponse,
-                                    options?.onComplete
+                                    responseHandler?.onComplete
                                 )
                             }
                         }

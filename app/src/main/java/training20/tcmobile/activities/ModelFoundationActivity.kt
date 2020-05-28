@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_model_foundation.*
 import training20.tcmobile.R
+import training20.tcmobile.fragments.ChatHistoryFragment
 import training20.tcmobile.fragments.ModelHomeFragment
 import training20.tcmobile.fragments.ModelSearchResultFragment
 
@@ -83,7 +84,7 @@ class ModelFoundationActivity: BaseActivity() {
     }
 
     private fun setupFragmentViewPager() {
-        val fragments = arrayOf(ModelHomeFragment(), ModelSearchResultFragment(), ModelSearchResultFragment(), ModelSearchResultFragment())
+        val fragments = arrayOf(ModelHomeFragment(), ModelSearchResultFragment(), ModelSearchResultFragment(), ChatHistoryFragment.newInstance())
         fragmentViewPager.adapter = FragmentViewPagerAdapter(fragments, supportFragmentManager)
         fragmentViewPager.offscreenPageLimit = 3
     }

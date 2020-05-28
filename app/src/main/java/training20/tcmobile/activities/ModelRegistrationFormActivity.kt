@@ -15,6 +15,7 @@ import training20.tcmobile.models.model.ModelIdentifier
 import training20.tcmobile.models.model.ModelName
 import training20.tcmobile.models.model.ModelRawPassword
 import training20.tcmobile.net.http.RequestOptions
+import training20.tcmobile.net.http.ResponseHandler
 import training20.tcmobile.net.http.responses.ModelRegistrationResponse
 import training20.tcmobile.repositories.ModelRepository
 import training20.tcmobile.security.AuthenticationTokenManager
@@ -26,8 +27,8 @@ class ModelRegistrationFormActivity : AppCompatActivity() {
         override fun onClick(v: View?) {
             registrationButton.visibility = View.GONE
             registrationSpinner.visibility = View.VISIBLE
-            val requestOptions = RequestOptions<ModelRegistrationResponse>()
-            requestOptions.onSuccess = this@ModelRegistrationFormActivity::onModelRegistrationSuccess
+            val responseHandler = ResponseHandler<ModelRegistrationResponse>()
+            responseHandler.onSuccess = this@ModelRegistrationFormActivity::onModelRegistrationSuccess
             val modelRepository = ModelRepository()
             modelRepository.register(
                 formViewModel.identifier,
@@ -36,7 +37,7 @@ class ModelRegistrationFormActivity : AppCompatActivity() {
                 formViewModel.name,
                 "女",
                 "2012-12-25",
-                requestOptions
+                responseHandler = responseHandler
             )
         }
     }
