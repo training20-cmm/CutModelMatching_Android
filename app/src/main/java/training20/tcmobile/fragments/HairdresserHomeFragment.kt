@@ -5,8 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import kotlinx.android.synthetic.main.activity_hairdresser_foundation.*
+import kotlinx.android.synthetic.main.fragment_hairdresser_home.*
 import kotlinx.android.synthetic.main.fragment_hairdresser_home.view.*
 import training20.tcmobile.R
 
@@ -44,7 +49,30 @@ class HairdresserHomeFragment : Fragment() {
             view.viewPager.adapter = TabAdapter(fragmentManager)
             view.tabLayout.setupWithViewPager(view.viewPager)
         }
+        setupNavigationDrawer(view)
         return view
+    }
+
+    private fun setupNavigationDrawer(view: View) {
+        val appCompatActivity  = activity as? AppCompatActivity
+        appCompatActivity?.let {
+            appCompatActivity.setSupportActionBar(view.toolbar)
+            appCompatActivity.actionBar?.setHomeButtonEnabled(true)
+            appCompatActivity.actionBar?.setDisplayHomeAsUpEnabled(false)
+            val drawerLayout = appCompatActivity.drawerLayout
+            val toggle = ActionBarDrawerToggle(appCompatActivity, drawerLayout, view.toolbar, R.string.menu_open, R.string.menu_close)
+            toggle.isDrawerIndicatorEnabled = false
+            toggle.setHomeAsUpIndicator(R.drawable.menu_32dp)
+            toggle.setToolbarNavigationClickListener {
+                if (drawerLayout.isDrawerVisible(GravityCompat.START)) {
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                } else {
+                    drawerLayout.openDrawer(GravityCompat.START)
+                }
+            }
+            drawerLayout.addDrawerListener(toggle)
+            toggle.syncState()
+        }
     }
 
 //    private fun startFeatureDiscovery() {

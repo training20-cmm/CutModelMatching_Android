@@ -11,7 +11,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_hairdresser_salon_reservation_calendar_day.*
 import training20.tcmobile.R
 
-class HairdresserSalonReservationCalendarDayActivity : AppCompatActivity() {
+class HairdresserSalonReservationCalendarDayActivity : BaseActivity() {
 
     private class Menu(val startHour: Int, val startMinute: Int, val endHour: Int, val endMinute: Int) {
     }

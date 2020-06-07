@@ -1,6 +1,6 @@
 package training20.tcmobile
 
-enum class Perspective {
+enum class Role {
     MODEL,
     HAIRDRESSER
 }
