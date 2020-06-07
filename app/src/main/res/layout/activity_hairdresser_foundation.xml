@@ -2,6 +2,7 @@
 <androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,108 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
+        <training20.tcmobile.views.BottomNavigationViewPager
+            android:id="@+id/fragmentViewPager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
-            <training20.tcmobile.views.BottomNavigationViewPager
-                android:id="@+id/fragmentViewPager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-            <com.google.android.material.appbar.AppBarLayout
-                android:id="@+id/appBarLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-                <com.google.android.material.appbar.CollapsingToolbarLayout
-                    android:id="@+id/collapsingToolbarLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                    app:contentScrim="@color/colorPrimary"
-                    app:title=" ">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_collapseMode="parallax">
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <ImageView
-                                android:id="@+id/headerImageView"
-                                android:layout_width="0dp"
-                                android:layout_height="128dp"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/header_image"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <Space
-                                android:id="@+id/negativeMargin"
-                                android:layout_width="64dp"
-                                android:layout_height="48dp"
-                                android:layout_marginStart="32dp"
-                                app:layout_constraintStart_toStartOf="@id/headerImageView"
-                                app:layout_constraintTop_toBottomOf="@id/headerImageView" />
-
-                            <de.hdodenhof.circleimageview.CircleImageView
-                                android:id="@+id/profileCircleImageView"
-                                android:layout_width="64dp"
-                                android:layout_height="64dp"
-                                android:src="@drawable/user_icon"
-                                app:civ_border_color="#fff"
-                                app:civ_border_width="2dp"
-                                app:layout_constraintBottom_toBottomOf="@id/negativeMargin"
-                                app:layout_constraintEnd_toEndOf="@id/negativeMargin" />
-
-                            <TextView
-                                android:id="@+id/textView3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="USER NAME"
-                                android:textColor="@color/textColorPrimary"
-                                app:layout_constraintStart_toStartOf="@+id/negativeMargin"
-                                app:layout_constraintTop_toBottomOf="@+id/negativeMargin" />
-
-                            <com.google.android.material.button.MaterialButton
-                                android:id="@+id/editProfileButton"
-                                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="32dp"
-                                android:text="@string/activity_hairdresser_home_edit_profile"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/headerImageView"
-                                app:strokeColor="@color/colorPrimary" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginEnd="32dp"
-                                android:text="プロフィール。プロフィール。プロフィール。プロフィール。プロフィール。プロフィール。プロフィール。プロフィール。プロフィール。プロフィール。プロフィール。プロフィール。プロフィール。"
-                                android:textColor="@color/textColorSecondary"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="@+id/profileCircleImageView"
-                                app:layout_constraintTop_toBottomOf="@+id/textView3" />
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-                    </LinearLayout>
-                    <androidx.appcompat.widget.Toolbar
-                        android:id="@+id/toolbar"
-                        android:layout_width="match_parent"
-                        android:layout_height="?attr/actionBarSize"
-                        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                        app:layout_collapseMode="pin"/>
-                </com.google.android.material.appbar.CollapsingToolbarLayout>
-            </com.google.android.material.appbar.AppBarLayout>
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+            android:layout_weight="1"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
         <View
             android:id="@+id/bottomNavigationTopBorderView"
             android:layout_width="match_parent"

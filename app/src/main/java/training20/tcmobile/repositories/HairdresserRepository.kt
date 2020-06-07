@@ -6,6 +6,8 @@ import training20.tcmobile.models.hairdresser.HairdresserRawPassword
 import training20.tcmobile.net.http.HttpClient
 import training20.tcmobile.net.http.HttpMethod
 import training20.tcmobile.net.http.RequestOptions
+import training20.tcmobile.net.http.ResponseHandler
+import training20.tcmobile.net.http.responses.ChatRoomHistoryHairdresserResponse
 import training20.tcmobile.net.http.responses.ErrorResponse
 import training20.tcmobile.net.http.responses.HairdresserRegistrationResponse
 import java.io.IOException
@@ -19,7 +21,10 @@ class HairdresserRepository {
         name: String,
         gender: String,
         birthday: String,
-        options: RequestOptions<HairdresserRegistrationResponse>? = null
+        onSuccess: ((HairdresserRegistrationResponse) -> Unit)? = null,
+        onError: ((String, Int, ErrorResponse) -> Unit)? = null,
+        onFailure: ((IOException) -> Unit)? = null,
+        onComplete: (() -> Unit)? = null
     ) {
         val queries = arrayOf(
             Pair("identifier", identifier),
@@ -30,6 +35,6 @@ class HairdresserRepository {
             Pair("birthday", birthday)
         )
         HttpClient(HairdresserRegistrationResponse::class.java, HttpMethod.POST, "hairdressers/register", *queries)
-            .send(options)
+            .send(onSuccess, onError, onFailure, onComplete)
     }
 }

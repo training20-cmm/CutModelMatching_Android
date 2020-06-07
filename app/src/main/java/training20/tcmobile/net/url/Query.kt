@@ -2,8 +2,8 @@ package training20.tcmobile.net.url
 
 class Query {
 
-    private var keys = arrayListOf("")
-    private var values = arrayListOf("")
+    private var keys: ArrayList<String> = arrayListOf()
+    private var values: ArrayList<String> = arrayListOf()
 
     fun append(key: String, value: String) {
         keys.add(key)

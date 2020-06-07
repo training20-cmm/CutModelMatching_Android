@@ -5,8 +5,8 @@ import android.os.Looper
 import com.google.gson.Gson
 import okhttp3.*
 import training20.tcmobile.ErrorCode
-import training20.tcmobile.Perspective
-import training20.tcmobile.PerspectiveManager
+import training20.tcmobile.Role
+import training20.tcmobile.RoleManager
 import training20.tcmobile.net.http.responses.AccessTokenIssuanceResponse
 import training20.tcmobile.net.url.Query
 import training20.tcmobile.notification.Notification
@@ -21,6 +21,7 @@ class HttpClient<T>(
     private val clazz: Class<T>,
     private val method: HttpMethod,
     private val path: String,
+    /*private val options: RequestOptions? = null,*/
     private vararg val queries: Pair<String, String>
 ) {
 
@@ -29,29 +30,25 @@ class HttpClient<T>(
         const val baseUrl = "$serverOrigin/api"
     }
 
-//    private var method: HttpMethod? = null
-//    private var path: String? = null
-//    private var perspective: Perspective? = null
-//    private var queries: Array<out Pair<String, String>>? = null
     private var accessTokenIssuanceRequest: Request? = null
-    private var perspective = PerspectiveManager.current()
+    private var role = RoleManager.current()
     private lateinit var request: Request
-    // TODO: DI
+
     private val jsonConverter = Gson()
 
     init {
-        perspective?.let { perspective
+        role?.let { role
             val accessTokenIssuanceRequestMediaType =
                 MediaType.parse("application/x-www-form-urlencoded")
             val refreshToken =
-                AuthenticationTokenManager.getOrLoadRefreshToken(perspective!!) ?: ""
+                AuthenticationTokenManager.getOrLoadRefreshToken(role!!) ?: ""
             val query = Query()
             query.append("refreshToken", refreshToken)
             val accessTokenIssuanceRequestBody =
                 RequestBody.create(accessTokenIssuanceRequestMediaType, query.make())
-            val url = when(perspective) {
-                Perspective.HAIRDRESSER -> "$baseUrl/hairdresser_access_tokens"
-                Perspective.MODEL -> "$baseUrl/model_access_tokens"
+            val url = when(role) {
+                Role.HAIRDRESSER -> "$baseUrl/hairdresser_access_tokens"
+                Role.MODEL -> "$baseUrl/model_access_tokens"
                 else -> ""
             }
             accessTokenIssuanceRequest =
@@ -60,35 +57,28 @@ class HttpClient<T>(
         build()
     }
 
-//    fun build(
-//        method: HttpMethod,
-//        path: String,
-//        vararg queries: Pair<String, String>
-//    ): HttpClient<T> {
-//        this.method = method
-//        this.path = path
-//        this.queries = queries
-//        build()
-//        return this
-//    }
-
     fun send(
-//        onSuccess: ((T) -> Unit)? = null,
-//        onError: ((String, Int, ErrorResponse) -> Unit)? = null,
-//        onFailure: ((IOException) -> Unit)? = null,
-//        onComplete: (() -> Unit)? = null
-        options: RequestOptions<T>?
+        onSuccess: ((T) -> Unit)? = null,
+        onError: ((String, Int, ErrorResponse) -> Unit)? = null,
+        onFailure: ((IOException) -> Unit)? = null,
+        onComplete: (() -> Unit)? = null
     ) {
-        send(true, options)
+        send(true, onSuccess, onError, onFailure, onComplete)
     }
 
     private fun build() {
-        val builder = if (perspective == null) Request.Builder() else {
-            val accessToken =
-                AuthenticationTokenManager.getOrLoadAccessToken(perspective!!) ?: ""
-            Request.Builder().header(HttpHeader.AUTHORIZATION.value, accessToken)
+        var builder = Request.Builder()
+        role?.let { role ->
+            val accessToken = AuthenticationTokenManager.getOrLoadAccessToken(role) ?: ""
+            builder = Request.Builder().header(HttpHeader.AUTHORIZATION.value, accessToken)
         }
         val urlQueryString = Query().apply { queries.forEach { append(it.first, it.second) } }.make()
+//        options?.embed?.let { embed ->
+//            if (!urlQueryString.isEmpty()) {
+//                urlQueryString += "&"
+//            }
+//            urlQueryString += "embed=${embed}"
+//        }
         val url = "$baseUrl/$path"
         request = when (method) {
             HttpMethod.POST -> {
@@ -135,16 +125,15 @@ class HttpClient<T>(
     }
 
     private fun issueAccessToken(
-//        onSuccess: ((T) -> Unit)?,
-//        onError: ((String, Int, ErrorResponse) -> Unit)?,
-//        onFailure: ((IOException) -> Unit)?,
-//        onComplete: (() -> Unit)?
-          options: RequestOptions<T>?
+        onSuccess: ((T) -> Unit)? = null,
+        onError: ((String, Int, ErrorResponse) -> Unit)? = null,
+        onFailure: ((IOException) -> Unit)? = null,
+        onComplete: (() -> Unit)? = null
     ) {
         OkHttpClient().newCall(accessTokenIssuanceRequest!!).enqueue(object : Callback {
 
             override fun onFailure(call: Call, e: IOException) {
-                invokeOnFailure(options?.onFailure, e, options?.onComplete)
+                invokeOnFailure(onFailure, e, onComplete)
             }
 
             override fun onResponse(call: Call, response: Response) {
@@ -153,11 +142,11 @@ class HttpClient<T>(
                     val errorResponse =
                         jsonConverter.fromJson(responseBodyString, ErrorResponse::class.java)
                     invokeOnError(
-                        options?.onError,
+                        onError,
                         responseBodyString,
                         response.code(),
                         errorResponse,
-                        options?.onComplete
+                        onComplete
                     )
                     when (errorResponse.code) {
                         ErrorCode.EXPIRED_REFRESH_TOKEN.value -> NotificationCenter.notify(
@@ -176,18 +165,18 @@ class HttpClient<T>(
                     )
                     accessTokenIssuanceResponse.accessToken?.token?.let {
                         AuthenticationTokenManager.putAccessToken(
-                            perspective!!,
+                            role!!,
                             it
                         )
                     }
                     accessTokenIssuanceResponse.refreshToken?.token?.let {
                         AuthenticationTokenManager.putRefreshToken(
-                            perspective!!,
+                            role!!,
                             it
                         )
                     }
                     build()
-                    send(false, options)
+                    send(false, onSuccess, onError, onFailure, onComplete)
                 }
             }
         })
@@ -195,26 +184,24 @@ class HttpClient<T>(
 
     private fun send(
         issuingAccessToken: Boolean,
-//        onSuccess: ((T) -> Unit)?,
-//        onError: ((String, Int, ErrorResponse) -> Unit)?,
-//        onFailure: ((IOException) -> Unit)?,
-//        onComplete: (() -> Unit)?
-        options: RequestOptions<T>?
+        onSuccess: ((T) -> Unit)? = null,
+        onError: ((String, Int, ErrorResponse) -> Unit)? = null,
+        onFailure: ((IOException) -> Unit)? = null,
+        onComplete: (() -> Unit)? = null
     ) {
         val client = OkHttpClient()
         client.newCall(request).enqueue(object : Callback {
 
             override fun onFailure(call: Call, e: IOException) {
-                invokeOnFailure(options?.onFailure, e, options?.onComplete)
+                invokeOnFailure(onFailure, e, onComplete)
             }
 
             override fun onResponse(call: Call, response: Response) {
                 val responseBodyString = response.body()?.string() ?: ""
-                println(responseBodyString)
                 when {
                     response.code() < 400 -> {
                         val obj = jsonConverter.fromJson(responseBodyString, clazz)
-                        invokeOnSuccess(options?.onSuccess, obj, options?.onComplete)
+                        invokeOnSuccess(onSuccess, obj, onComplete)
                     }
                     else -> {
                         val errorResponse =
@@ -222,24 +209,24 @@ class HttpClient<T>(
                         when (errorResponse.code) {
                             ErrorCode.INVALID_ACCESS_TOKEN.value, ErrorCode.EXPIRED_ACCESS_TOKEN.value -> {
                                 if (issuingAccessToken) {
-                                    issueAccessToken(options)
+                                    issueAccessToken(onSuccess, onError, onFailure, onComplete)
                                 } else {
                                     invokeOnError(
-                                        options?.onError,
+                                        onError,
                                         responseBodyString,
                                         response.code(),
                                         errorResponse,
-                                        options?.onComplete
+                                        onComplete
                                     )
                                 }
                             }
                             else -> {
                                 invokeOnError(
-                                    options?.onError,
+                                    onError,
                                     responseBodyString,
                                     response.code(),
                                     errorResponse,
-                                    options?.onComplete
+                                    onComplete
                                 )
                             }
                         }

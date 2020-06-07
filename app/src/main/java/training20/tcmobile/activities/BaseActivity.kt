@@ -3,8 +3,8 @@ package training20.tcmobile.activities
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import training20.tcmobile.Perspective
-import training20.tcmobile.PerspectiveManager
+import training20.tcmobile.Role
+import training20.tcmobile.RoleManager
 import training20.tcmobile.notification.Notification
 import training20.tcmobile.notification.NotificationCenter
 import training20.tcmobile.notification.NotificationType
@@ -24,14 +24,14 @@ open class BaseActivity: AppCompatActivity() {
     }
 
     private fun handleNotification(notification: Notification) {
-        when (PerspectiveManager.current()) {
-            Perspective.HAIRDRESSER -> startActivity(
+        when (RoleManager.current()) {
+            Role.HAIRDRESSER -> startActivity(
                 Intent(
                     this,
                     HairdresserRegistrationFormActivity::class.java
                 )
             )
-            Perspective.MODEL -> startActivity(
+            Role.MODEL -> startActivity(
                 Intent(
                     this,
                     ModelRegistrationFormActivity::class.java

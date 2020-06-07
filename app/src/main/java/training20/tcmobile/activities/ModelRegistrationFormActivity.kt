@@ -7,14 +7,9 @@ import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_model_registration_form.*
-import org.koin.android.ext.android.inject
-import training20.tcmobile.Perspective
+import training20.tcmobile.Role
 import training20.tcmobile.R
 import training20.tcmobile.databinding.ActivityModelRegistrationFormBinding
-import training20.tcmobile.models.model.ModelIdentifier
-import training20.tcmobile.models.model.ModelName
-import training20.tcmobile.models.model.ModelRawPassword
-import training20.tcmobile.net.http.RequestOptions
 import training20.tcmobile.net.http.responses.ModelRegistrationResponse
 import training20.tcmobile.repositories.ModelRepository
 import training20.tcmobile.security.AuthenticationTokenManager
@@ -26,8 +21,8 @@ class ModelRegistrationFormActivity : AppCompatActivity() {
         override fun onClick(v: View?) {
             registrationButton.visibility = View.GONE
             registrationSpinner.visibility = View.VISIBLE
-            val requestOptions = RequestOptions<ModelRegistrationResponse>()
-            requestOptions.onSuccess = this@ModelRegistrationFormActivity::onModelRegistrationSuccess
+//            val responseHandler = ResponseHandler<ModelRegistrationResponse>()
+//            responseHandler.onSuccess = this@ModelRegistrationFormActivity::onModelRegistrationSuccess
             val modelRepository = ModelRepository()
             modelRepository.register(
                 formViewModel.identifier,
@@ -36,7 +31,7 @@ class ModelRegistrationFormActivity : AppCompatActivity() {
                 formViewModel.name,
                 "女",
                 "2012-12-25",
-                requestOptions
+                this@ModelRegistrationFormActivity::onModelRegistrationSuccess
             )
         }
     }
@@ -62,8 +57,8 @@ class ModelRegistrationFormActivity : AppCompatActivity() {
         if (accessToken == null || refreshToken == null) {
             // TODO: Show error message
         } else {
-            AuthenticationTokenManager.putAccessToken(Perspective.MODEL, accessToken)
-            AuthenticationTokenManager.putRefreshToken(Perspective.MODEL, refreshToken)
+            AuthenticationTokenManager.putAccessToken(Role.MODEL, accessToken)
+            AuthenticationTokenManager.putRefreshToken(Role.MODEL, refreshToken)
             val intent = Intent(this, ModelFoundationActivity::class.java)
             startActivity(intent)
         }

@@ -7,7 +7,7 @@
         <item
             android:title="@string/activity_hairdresser_home_navigation_drawer_menu_reservations" />
     </group>
-    <group android:id="@+id/perspectiveNavigation">
+    <group android:id="@+id/roleNavigation">
         <item android:title="@string/activity_hairdresser_home_navigation_drawer_menu_logout" />
     </group>
 </menu>

@@ -7,11 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_model_registration_form.*
-import org.koin.android.ext.android.inject
-import training20.tcmobile.Perspective
+import training20.tcmobile.Role
 import training20.tcmobile.R
 import training20.tcmobile.databinding.ActivityHairdresserRegistrationFormBinding
-import training20.tcmobile.net.http.RequestOptions
 import training20.tcmobile.net.http.responses.HairdresserRegistrationResponse
 import training20.tcmobile.repositories.HairdresserRepository
 import training20.tcmobile.security.AuthenticationTokenManager
@@ -23,8 +21,8 @@ class HairdresserRegistrationFormActivity : AppCompatActivity() {
         override fun onClick(v: View?) {
             registrationButton.visibility = View.GONE
             registrationSpinner.visibility = View.VISIBLE
-            val requestOptions = RequestOptions<HairdresserRegistrationResponse>()
-            requestOptions.onSuccess = this@HairdresserRegistrationFormActivity::onUserRegistrationSuccess
+//            val responseHandler = ResponseHandler<HairdresserRegistrationResponse>()
+//            responseHandler.onSuccess = this@HairdresserRegistrationFormActivity::onUserRegistrationSuccess
             val hairdresserRepository = HairdresserRepository()
             hairdresserRepository.register(
                 formViewModel.identifier,
@@ -33,7 +31,8 @@ class HairdresserRegistrationFormActivity : AppCompatActivity() {
                 formViewModel.name,
                 "男",
                 "2012-12-23",
-                requestOptions
+//                responseHandler = responseHandler
+                this@HairdresserRegistrationFormActivity::onUserRegistrationSuccess
             )
         }
     }
@@ -55,8 +54,8 @@ class HairdresserRegistrationFormActivity : AppCompatActivity() {
         if (accessToken == null || refreshToken == null) {
             // TODO: Show error message
         } else {
-            AuthenticationTokenManager.putAccessToken(Perspective.HAIRDRESSER, accessToken)
-            AuthenticationTokenManager.putRefreshToken(Perspective.HAIRDRESSER, refreshToken)
+            AuthenticationTokenManager.putAccessToken(Role.HAIRDRESSER, accessToken)
+            AuthenticationTokenManager.putRefreshToken(Role.HAIRDRESSER, refreshToken)
             val intent = Intent(this, HairdresserFoundationActivity::class.java)
             startActivity(intent)
         }

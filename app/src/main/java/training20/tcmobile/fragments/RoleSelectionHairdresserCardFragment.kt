@@ -34,7 +34,7 @@ class RoleSelectionHairdresserCardFragment : Fragment() {
         registrationButton.setOnClickListener {
             val options = ActivityOptions.makeSceneTransitionAnimation(
                 activity,
-                Pair.create(hairdresserHeaderImageView, getString(R.string.transition_name_perspective_selection_fragment_header_image_view))
+                Pair.create(hairdresserHeaderImageView, getString(R.string.transition_name_role_selection_fragment_header_image_view))
             )
             val intent = Intent(activity, HairdresserRegistrationFormActivity::class.java)
             startActivity(intent, options.toBundle())
