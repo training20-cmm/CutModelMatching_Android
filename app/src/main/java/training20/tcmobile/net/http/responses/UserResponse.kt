@@ -1,12 +1,9 @@
 package training20.tcmobile.net.http.responses
 
-import training20.tcmobile.DateTimeEntity
+open class UserResponse {
 
-class UserResponse {
-
-    var hairdresser: HairdresserResponse? = null
-    var model: ModelResponse? = null
-
-    var createdAt: DateTimeEntity? = null
-    var updatedAt: DateTimeEntity? = null
+    var identifier: String? = null
+    var email: String? = null
+    val createdAt: String? = null
+    val updatedAt: String? = null
 }

@@ -11,9 +11,9 @@ import training20.tcmobile.Role
 import training20.tcmobile.R
 import training20.tcmobile.databinding.ActivityModelRegistrationFormBinding
 import training20.tcmobile.net.http.responses.ModelRegistrationResponse
-import training20.tcmobile.repositories.ModelRepository
+import training20.tcmobile.mvvm.repositories.ModelRepositoryHttp
 import training20.tcmobile.security.AuthenticationTokenManager
-import training20.tcmobile.viewmodels.ModelRegistrationFormViewModel
+import training20.tcmobile.mvvm.viewmodels.ModelRegistrationFormViewModel
 
 class ModelRegistrationFormActivity : AppCompatActivity() {
 
@@ -23,7 +23,7 @@ class ModelRegistrationFormActivity : AppCompatActivity() {
             registrationSpinner.visibility = View.VISIBLE
 //            val responseHandler = ResponseHandler<ModelRegistrationResponse>()
 //            responseHandler.onSuccess = this@ModelRegistrationFormActivity::onModelRegistrationSuccess
-            val modelRepository = ModelRepository()
+            val modelRepository = ModelRepositoryHttp()
             modelRepository.register(
                 formViewModel.identifier,
                 formViewModel.password,
@@ -59,7 +59,7 @@ class ModelRegistrationFormActivity : AppCompatActivity() {
         } else {
             AuthenticationTokenManager.putAccessToken(Role.MODEL, accessToken)
             AuthenticationTokenManager.putRefreshToken(Role.MODEL, refreshToken)
-            val intent = Intent(this, ModelFoundationActivity::class.java)
+            val intent = Intent(this, ModelMainActivity::class.java)
             startActivity(intent)
         }
     }

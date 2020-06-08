@@ -11,9 +11,9 @@ import training20.tcmobile.Role
 import training20.tcmobile.R
 import training20.tcmobile.databinding.ActivityHairdresserRegistrationFormBinding
 import training20.tcmobile.net.http.responses.HairdresserRegistrationResponse
-import training20.tcmobile.repositories.HairdresserRepository
+import training20.tcmobile.mvvm.repositories.HairdresserRepositoryHttp
 import training20.tcmobile.security.AuthenticationTokenManager
-import training20.tcmobile.viewmodels.HairdresserRegistrationFormViewModel
+import training20.tcmobile.mvvm.viewmodels.HairdresserRegistrationFormViewModel
 
 class HairdresserRegistrationFormActivity : AppCompatActivity() {
 
@@ -23,7 +23,7 @@ class HairdresserRegistrationFormActivity : AppCompatActivity() {
             registrationSpinner.visibility = View.VISIBLE
 //            val responseHandler = ResponseHandler<HairdresserRegistrationResponse>()
 //            responseHandler.onSuccess = this@HairdresserRegistrationFormActivity::onUserRegistrationSuccess
-            val hairdresserRepository = HairdresserRepository()
+            val hairdresserRepository = HairdresserRepositoryHttp()
             hairdresserRepository.register(
                 formViewModel.identifier,
                 formViewModel.password,
@@ -56,7 +56,7 @@ class HairdresserRegistrationFormActivity : AppCompatActivity() {
         } else {
             AuthenticationTokenManager.putAccessToken(Role.HAIRDRESSER, accessToken)
             AuthenticationTokenManager.putRefreshToken(Role.HAIRDRESSER, refreshToken)
-            val intent = Intent(this, HairdresserFoundationActivity::class.java)
+            val intent = Intent(this, HairdresserMainActivity::class.java)
             startActivity(intent)
         }
     }

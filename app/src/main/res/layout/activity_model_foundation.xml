@@ -46,7 +46,7 @@
                 </com.google.android.material.appbar.CollapsingToolbarLayout>
             </com.google.android.material.appbar.AppBarLayout>
 
-            <training20.tcmobile.views.BottomNavigationViewPager
+            <training20.tcmobile.mvvm.views.BottomNavigationViewPager
                 android:id="@+id/fragmentViewPager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
