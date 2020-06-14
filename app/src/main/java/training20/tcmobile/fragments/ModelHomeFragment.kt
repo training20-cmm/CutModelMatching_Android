@@ -9,6 +9,12 @@ import training20.tcmobile.R
 
 class ModelHomeFragment: Fragment() {
 
+    companion object {
+        fun newInstance(): ModelHomeFragment {
+            return ModelHomeFragment()
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

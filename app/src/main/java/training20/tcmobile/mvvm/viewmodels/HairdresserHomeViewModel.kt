@@ -11,23 +11,11 @@ import training20.tcmobile.mvvm.repositories.HairdresserHomeRepositoryContract
 class HairdresserHomeViewModel(
     val eventDispatcher: EventDispatcher<HairdresserHomeActions>,
     private val repository: HairdresserHomeRepositoryContract
-): ViewModel(), FabSpeedDial.MenuListener {
+): ViewModel() {
 
     fun start() {
         if (!repository.isFeatureDiscoveryAlreadyShown) {
             eventDispatcher.dispatchEvent { startFeatureDiscovery() }
         }
-    }
-
-    override fun onPrepareMenu(p0: NavigationMenu?): Boolean {
-        return true
-    }
-
-    override fun onMenuItemSelected(menuItem: MenuItem?): Boolean {
-        eventDispatcher.dispatchEvent { showHairstylePosting() }
-        return true
-    }
-
-    override fun onMenuClosed() {
     }
 }

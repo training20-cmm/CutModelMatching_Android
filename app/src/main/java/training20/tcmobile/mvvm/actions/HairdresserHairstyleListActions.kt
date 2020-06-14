@@ -1,4 +1,4 @@
 package training20.tcmobile.mvvm.actions
 
-interface HairdresserHairstyleListActions {
+interface HairdresserHairstyleListActions: Action {
 }

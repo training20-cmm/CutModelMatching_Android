@@ -33,6 +33,12 @@ class ModelSearchResultFragment: Fragment() {
 
     }
 
+    companion object {
+        fun newInstance(): ModelSearchResultFragment {
+            return ModelSearchResultFragment()
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

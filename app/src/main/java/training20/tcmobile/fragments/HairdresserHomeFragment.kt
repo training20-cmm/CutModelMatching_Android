@@ -1,28 +1,20 @@
 package training20.tcmobile.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.internal.NavigationMenu
-import io.github.yavski.fabspeeddial.FabSpeedDial
-import kotlinx.android.synthetic.main.fragment_hairdresser_home.*
 import kotlinx.android.synthetic.main.fragment_hairdresser_home.view.*
 import kotlinx.android.synthetic.main.fragment_hairdresser_home.view.drawerLayout
 import org.koin.android.ext.android.inject
 import training20.tcmobile.R
 import training20.tcmobile.databinding.FragmentHairdresserHomeBinding
 import training20.tcmobile.mvvm.actions.HairdresserHomeActions
+import training20.tcmobile.mvvm.event.EventDispatcher
 import training20.tcmobile.mvvm.viewmodels.HairdresserHomeViewModel
-import training20.tcmobile.ui.viewpager.HairdresserHomeFragmentPagerAdapter
+import training20.tcmobile.ui.fabspeeddial.HairdresserHomeFabSpeedDialMenuListener
+import training20.tcmobile.ui.viewpager.adapter.HairdresserHomeViewPagerAdapter
 
 class HairdresserHomeFragment :
     NavigationDrawerFragment<FragmentHairdresserHomeBinding, HairdresserHomeViewModel>(),
@@ -31,12 +23,17 @@ class HairdresserHomeFragment :
 
     override val viewModel: HairdresserHomeViewModel by inject()
 
+    private val eventDispatcher: EventDispatcher<HairdresserHomeActions> by inject()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = super.onCreateView(inflater, container, savedInstanceState) ?: return null
-        view.viewPager.adapter = HairdresserHomeFragmentPagerAdapter(childFragmentManager)
+        view.viewPager.adapter =
+            HairdresserHomeViewPagerAdapter(
+                childFragmentManager
+            )
         view.tabLayout.setupWithViewPager(view.viewPager)
         setupNavigationDrawer(view.toolbar, view.drawerLayout)
         setupFabSpeedDial(view)
@@ -67,8 +64,12 @@ class HairdresserHomeFragment :
     override fun startFeatureDiscovery() {
     }
 
+    private fun setupEventDispatcher() {
+        eventDispatcher.bind(viewLifecycleOwner, this)
+    }
+
     private fun setupFabSpeedDial(view: View) {
-        view.fabSpeedDial.setMenuListener(viewModel)
+        view.fabSpeedDial.setMenuListener(HairdresserHomeFabSpeedDialMenuListener(eventDispatcher))
     }
 
 //    private fun startFeatureDiscovery() {

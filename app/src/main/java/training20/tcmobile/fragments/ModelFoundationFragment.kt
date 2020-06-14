@@ -7,32 +7,31 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_hairdresser_foundation.*
 import kotlinx.android.synthetic.main.fragment_hairdresser_foundation.view.*
-import kotlinx.android.synthetic.main.fragment_hairdresser_foundation.view.fragmentViewPager
 import org.koin.android.ext.android.inject
 import training20.tcmobile.R
-import training20.tcmobile.databinding.FragmentHairdresserFoundationBinding
+import training20.tcmobile.databinding.FragmentModelFoundationBinding
 import training20.tcmobile.mvvm.MvvmFragment
-import training20.tcmobile.mvvm.actions.HairdresserFoundationActions
-import training20.tcmobile.mvvm.event.EventDispatcher
-import training20.tcmobile.mvvm.viewmodels.HairdresserFoundationViewModel
+import training20.tcmobile.mvvm.actions.ModelFoundationActions
+import training20.tcmobile.mvvm.viewmodels.ModelFoundationViewModel
 import training20.tcmobile.ui.recyclerview.adapters.HairdresserFoundationRecyclerViewAdapter
 
-class HairdresserFoundationFragment:
-    MvvmFragment<FragmentHairdresserFoundationBinding, HairdresserFoundationViewModel>(),
-    HairdresserFoundationActions
+class ModelFoundationFragment:
+    MvvmFragment<FragmentModelFoundationBinding, ModelFoundationViewModel>(),
+    ModelFoundationActions
 {
 
     companion object {
         private const val HOME_ID = 0
-        private const val NOTIFICATIONS_ID = 1
-        private const val CHAT_HISTORY_ID = 2
+        private const val SEARCH_RESULT_ID = 1
+        private const val NOTIFICATIONS_ID = 2
+        private const val CHAT_HISTORY_ID = 3
 
-        fun newInstance(): HairdresserFoundationFragment {
-            return HairdresserFoundationFragment()
+        fun newInstance(): ModelFoundationFragment {
+            return ModelFoundationFragment()
         }
     }
 
-    override val viewModel: HairdresserFoundationViewModel by inject()
+    override val viewModel: ModelFoundationViewModel by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,14 +46,14 @@ class HairdresserFoundationFragment:
     override fun createDataBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
-    ): FragmentHairdresserFoundationBinding = FragmentHairdresserFoundationBinding.inflate(inflater, container, false)
+    ): FragmentModelFoundationBinding = FragmentModelFoundationBinding.inflate(inflater, container, false)
 
-    override fun setupViewModel(viewModel: HairdresserFoundationViewModel) {
+    override fun setupViewModel(viewModel: ModelFoundationViewModel) {
         viewModel.eventDispatcher.bind(viewLifecycleOwner, this)
     }
 
     override fun setupDataBinding(
-        dataBinding: FragmentHairdresserFoundationBinding,
+        dataBinding: FragmentModelFoundationBinding,
         savedInstanceState: Bundle?
     ) {
         dataBinding.viewModel = viewModel
@@ -62,6 +61,10 @@ class HairdresserFoundationFragment:
 
     override fun showHome() {
         fragmentViewPager.setCurrentItem(HOME_ID, false)
+    }
+
+    override fun showSearchResult() {
+        fragmentViewPager.setCurrentItem(SEARCH_RESULT_ID, false)
     }
 
     override fun showNotifications() {
@@ -73,7 +76,12 @@ class HairdresserFoundationFragment:
     }
 
     private fun setupFragmentViewPager(view: View) {
-        val fragments = arrayOf(HairdresserHomeFragment(), ModelHomeFragment(), HairdresserChatHistoryFragment.newInstance())
+        val fragments = arrayOf(
+            ModelHomeFragment.newInstance(),
+            ModelSearchResultFragment.newInstance(),
+            ModelNotificationsFragment.newInstance(),
+            ModelChatHistoryFragment.newInstance()
+        )
         val fragmentViewPager = view.fragmentViewPager
         fragmentViewPager.adapter = HairdresserFoundationRecyclerViewAdapter(fragments,  childFragmentManager)
         fragmentViewPager.offscreenPageLimit = 2
@@ -88,6 +96,10 @@ class HairdresserFoundationFragment:
         when (item.itemId) {
             R.id.navigationHome -> {
                 showHome()
+                return true
+            }
+            R.id.navigationSearch -> {
+                showSearchResult()
                 return true
             }
             R.id.navigationNotifications -> {

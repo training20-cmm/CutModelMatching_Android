@@ -1,14 +1,12 @@
 package training20.tcmobile.fragments
 
-import android.os.Bundle
-import androidx.activity.OnBackPressedCallback
 import androidx.databinding.ViewDataBinding
 import androidx.navigation.fragment.findNavController
 import training20.tcmobile.mvvm.MvvmFragment
-import training20.tcmobile.mvvm.actions.BackNavigation
+import training20.tcmobile.mvvm.actions.BackAction
 import training20.tcmobile.mvvm.viewmodels.BackableViewModel
 
-abstract class BackableFragment<A: BackNavigation, V: ViewDataBinding, VM: BackableViewModel<A>> : MvvmFragment<V, VM>(), BackNavigation
+abstract class BackableFragment<A: BackAction, V: ViewDataBinding, VM: BackableViewModel<A>> : MvvmFragment<V, VM>(), BackAction
 {
 
 //    override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,6 +1,6 @@
 package training20.tcmobile.mvvm.actions
 
-interface HairdresserChatHistoryActions {
+interface HairdresserChatHistoryActions: Action {
 
     fun onChatRoomsChanged()
 }
