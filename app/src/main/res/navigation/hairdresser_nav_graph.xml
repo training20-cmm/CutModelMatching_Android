@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/hairdresser_nav_graph"
+    app:startDestination="@id/hairdresserFoundationFragment">
+    <fragment
+        android:id="@+id/hairdresserFoundationFragment"
+        android:name="training20.tcmobile.fragments.HairdresserFoundationFragment"
+        android:label="HairdresserFoundationFragment">
+        <action
+            android:id="@+id/action_hairdresserFoundationFragment_to_hairdresserHairstylePostingFragment"
+            app:destination="@id/hairdresserHairstylePostingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/hairdresserHairstylePostingFragment"
+        android:name="training20.tcmobile.fragments.HairdresserHairstylePostingFragment"
+        android:label="HairdresserHairstylePosting"/>
+</navigation>

@@ -109,7 +109,7 @@
             app:layout_constraintTop_toTopOf="@id/locationImageView"
             app:layout_constraintBottom_toBottomOf="@id/locationImageView"
             app:layout_constraintEnd_toEndOf="@id/menuTitleTextView"/>
-        <training20.tcmobile.views.TagsView
+        <training20.tcmobile.mvvm.views.TagsView
             android:id="@+id/treatmentTagsView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -130,7 +130,7 @@
             app:layout_constraintEnd_toEndOf="@id/menuTitleTextView"
             app:layout_constraintTop_toBottomOf="@id/treatmentTagsView"
             />
-        <training20.tcmobile.views.TagsView
+        <training20.tcmobile.mvvm.views.TagsView
             android:id="@+id/menuTagsView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

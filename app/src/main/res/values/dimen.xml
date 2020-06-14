@@ -17,6 +17,8 @@
     <dimen name="ll_dp">48dp</dimen>
     <dimen name="xl_dp">64dp</dimen>
 
+    <dimen name="bottom_navigation_height">48dp</dimen>
+
     <dimen name="hairdresser_activity_salon_matching_calendar_day_hairdresser_icon_layout_width">64dp</dimen>
     <dimen name="hairdresser_activity_salon_matching_calendar_day_hairdresser_icon_layout_height">64dp</dimen>
     <dimen name="hairdresser_activity_salon_matching_calendar_day_matching_layout_height">1152dp</dimen> <!-- 24 * hairdresser_activity_salon_matching_calendar_day_time_text_view_height -->

@@ -16,7 +16,7 @@
         android:title=""/>
 
     <item
-        android:id="@+id/navigationMessages"
+        android:id="@+id/navigationChatHistory"
         android:icon="@drawable/ic_mail_white_24dp"
         android:title=""/>
 </menu>

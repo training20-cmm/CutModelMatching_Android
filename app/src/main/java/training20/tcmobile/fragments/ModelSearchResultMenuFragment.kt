@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.view_model_search_result_menu_card.view.*
 
 import training20.tcmobile.R
 import training20.tcmobile.Tag
-import training20.tcmobile.views.TagsView
+import training20.tcmobile.mvvm.views.TagsView
 
 class ModelSearchResultMenuFragment : Fragment() {
 

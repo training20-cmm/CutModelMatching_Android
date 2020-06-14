@@ -198,6 +198,7 @@ class HttpClient<T>(
 
             override fun onResponse(call: Call, response: Response) {
                 val responseBodyString = response.body()?.string() ?: ""
+                println(responseBodyString)
                 when {
                     response.code() < 400 -> {
                         val obj = jsonConverter.fromJson(responseBodyString, clazz)

@@ -1,55 +1,55 @@
 package training20.tcmobile.activities
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.AttributeSet
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_model_registration_form.*
+import kotlinx.android.synthetic.main.activity_model_registration_form.view.*
+import org.koin.android.ext.android.inject
 import training20.tcmobile.Role
 import training20.tcmobile.R
+import training20.tcmobile.RoleManager
 import training20.tcmobile.databinding.ActivityModelRegistrationFormBinding
+import training20.tcmobile.mvvm.MvvmActivity
+import training20.tcmobile.mvvm.actions.ModelRegistrationFormActions
 import training20.tcmobile.net.http.responses.ModelRegistrationResponse
-import training20.tcmobile.repositories.ModelRepository
+import training20.tcmobile.mvvm.repositories.ModelRepositoryHttp
 import training20.tcmobile.security.AuthenticationTokenManager
-import training20.tcmobile.viewmodels.ModelRegistrationFormViewModel
+import training20.tcmobile.mvvm.viewmodels.ModelRegistrationFormViewModel
 
-class ModelRegistrationFormActivity : AppCompatActivity() {
+class ModelRegistrationFormActivity :
+    MvvmActivity<ActivityModelRegistrationFormBinding, ModelRegistrationFormViewModel>(),
+    ModelRegistrationFormActions
+{
 
-    private inner class RegistrationButtonClickListener: View.OnClickListener {
-        override fun onClick(v: View?) {
-            registrationButton.visibility = View.GONE
-            registrationSpinner.visibility = View.VISIBLE
-//            val responseHandler = ResponseHandler<ModelRegistrationResponse>()
-//            responseHandler.onSuccess = this@ModelRegistrationFormActivity::onModelRegistrationSuccess
-            val modelRepository = ModelRepository()
-            modelRepository.register(
-                formViewModel.identifier,
-                formViewModel.password,
-                formViewModel.passwordConfirmation,
-                formViewModel.name,
-                "女",
-                "2012-12-25",
-                this@ModelRegistrationFormActivity::onModelRegistrationSuccess
-            )
-        }
-    }
-
-    private val formViewModel = ViewModelProvider.NewInstanceFactory().create(ModelRegistrationFormViewModel::class.java)
+    override val viewModel: ModelRegistrationFormViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bindData()
-        setupViews()
+        setupToolbar()
+        setupRegistrationButton()
     }
 
-    private fun bindData() {
-        val binding = DataBindingUtil.setContentView<ActivityModelRegistrationFormBinding>(this, R.layout.activity_model_registration_form)
-        binding.form = formViewModel
+    override fun createDataBinding(): ActivityModelRegistrationFormBinding = DataBindingUtil.setContentView<ActivityModelRegistrationFormBinding>(
+        this, R.layout.activity_model_registration_form)
+
+    override fun setupViewModel(viewModel: ModelRegistrationFormViewModel) {
+        viewModel.eventDispatcher.bind(this, this)
     }
 
-    private fun onModelRegistrationSuccess(response: ModelRegistrationResponse) {
+    override fun setupDataBinding(
+        dataBinding: ActivityModelRegistrationFormBinding,
+        savedInstanceState: Bundle?
+    ) {
+        dataBinding.form = viewModel
+    }
+
+    override fun onModelRegistrationSuccess(response: ModelRegistrationResponse) {
         registrationButton.visibility = View.VISIBLE
         registrationSpinner.visibility = View.GONE
         val accessToken = response.accessToken?.token
@@ -59,17 +59,27 @@ class ModelRegistrationFormActivity : AppCompatActivity() {
         } else {
             AuthenticationTokenManager.putAccessToken(Role.MODEL, accessToken)
             AuthenticationTokenManager.putRefreshToken(Role.MODEL, refreshToken)
-            val intent = Intent(this, ModelFoundationActivity::class.java)
+            RoleManager.setRole(Role.MODEL)
+            val intent = Intent(this, ModelMainActivity::class.java)
             startActivity(intent)
         }
     }
 
-    private fun setupViews() {
+    private fun setupToolbar() {
         setSupportActionBar(toolbar)
         toolbar.setNavigationOnClickListener {
             finishAfterTransition()
         }
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        registrationButton.setOnClickListener(RegistrationButtonClickListener())
+    }
+
+    private fun setupRegistrationButton() {
+        registrationButton.setOnClickListener(this::onRegistrationButtonClicked)
+    }
+
+    private fun onRegistrationButtonClicked(v: View) {
+        registrationButton.visibility = View.GONE
+        registrationSpinner.visibility = View.VISIBLE
+        viewModel.registerModel()
     }
 }

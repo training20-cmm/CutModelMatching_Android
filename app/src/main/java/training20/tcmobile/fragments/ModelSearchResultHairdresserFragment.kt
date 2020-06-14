@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_model_search_result_hairdresser.v
 import kotlinx.android.synthetic.main.view_model_search_result_hairdresser_card.view.*
 
 import training20.tcmobile.R
-import training20.tcmobile.views.ModelSearchResultHairdresserMenuCardView
+import training20.tcmobile.mvvm.views.ModelSearchResultHairdresserMenuCardView
 
 class ModelSearchResultHairdresserFragment : Fragment() {
 

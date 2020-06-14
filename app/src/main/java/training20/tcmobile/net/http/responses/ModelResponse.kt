@@ -1,14 +1,10 @@
 package training20.tcmobile.net.http.responses
 
-import training20.tcmobile.DateTimeEntity
+class ModelResponse: UserResponse() {
 
-class ModelResponse {
-
-//    var id: Int? = null
-    var identifier: String? = null
+//    val id: Int? = null
     var name: String? = null
-//    var email: String? = null
-//    var createdAt: DateTimeEntity? = null
-//    var updatedAt: DateTimeEntity? = null
+//    var bioText: String? = null
+//    var birthday: String? = null
 
 }

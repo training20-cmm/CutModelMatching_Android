@@ -1,78 +1,75 @@
 package training20.tcmobile.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
-import kotlinx.android.synthetic.main.activity_hairdresser_foundation.*
-import kotlinx.android.synthetic.main.fragment_hairdresser_home.*
+import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_hairdresser_home.view.*
+import kotlinx.android.synthetic.main.fragment_hairdresser_home.view.drawerLayout
+import org.koin.android.ext.android.inject
 import training20.tcmobile.R
+import training20.tcmobile.databinding.FragmentHairdresserHomeBinding
+import training20.tcmobile.mvvm.actions.HairdresserHomeActions
+import training20.tcmobile.mvvm.event.EventDispatcher
+import training20.tcmobile.mvvm.viewmodels.HairdresserHomeViewModel
+import training20.tcmobile.ui.fabspeeddial.HairdresserHomeFabSpeedDialMenuListener
+import training20.tcmobile.ui.viewpager.adapter.HairdresserHomeViewPagerAdapter
 
-class HairdresserHomeFragment : Fragment() {
+class HairdresserHomeFragment :
+    NavigationDrawerFragment<FragmentHairdresserHomeBinding, HairdresserHomeViewModel>(),
+    HairdresserHomeActions
+{
 
+    override val viewModel: HairdresserHomeViewModel by inject()
 
-    private inner class TabAdapter(fragmentManager: FragmentManager):
-        FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)
-    {
-        override fun getCount(): Int {
-            return 2
-        }
-
-        override fun getItem(position: Int): Fragment {
-            return when(position) {
-                0 -> HairdresserHairCatalogListFragment()
-                else -> HairdresserHairCatalogListFragment()
-            }
-        }
-
-        override fun getPageTitle(position: Int): CharSequence? {
-            return when(position) {
-                0 -> getString(R.string.activity_hairdresser_home_tab_item_title_hair_catalog)
-                else -> getString(R.string.activity_hairdresser_home_tab_item_title_blog)
-            }
-        }
-    }
+    private val eventDispatcher: EventDispatcher<HairdresserHomeActions> by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_hairdresser_home, container, false)
-        fragmentManager?.let { fragmentManager ->
-            view.viewPager.adapter = TabAdapter(fragmentManager)
-            view.tabLayout.setupWithViewPager(view.viewPager)
-        }
-        setupNavigationDrawer(view)
+        val view = super.onCreateView(inflater, container, savedInstanceState) ?: return null
+        view.viewPager.adapter =
+            HairdresserHomeViewPagerAdapter(
+                childFragmentManager
+            )
+        view.tabLayout.setupWithViewPager(view.viewPager)
+        setupNavigationDrawer(view.toolbar, view.drawerLayout)
+        setupFabSpeedDial(view)
         return view
     }
 
-    private fun setupNavigationDrawer(view: View) {
-        val appCompatActivity  = activity as? AppCompatActivity
-        appCompatActivity?.let {
-            appCompatActivity.setSupportActionBar(view.toolbar)
-            appCompatActivity.actionBar?.setHomeButtonEnabled(true)
-            appCompatActivity.actionBar?.setDisplayHomeAsUpEnabled(false)
-            val drawerLayout = appCompatActivity.drawerLayout
-            val toggle = ActionBarDrawerToggle(appCompatActivity, drawerLayout, view.toolbar, R.string.menu_open, R.string.menu_close)
-            toggle.isDrawerIndicatorEnabled = false
-            toggle.setHomeAsUpIndicator(R.drawable.menu_32dp)
-            toggle.setToolbarNavigationClickListener {
-                if (drawerLayout.isDrawerVisible(GravityCompat.START)) {
-                    drawerLayout.closeDrawer(GravityCompat.START)
-                } else {
-                    drawerLayout.openDrawer(GravityCompat.START)
-                }
-            }
-            drawerLayout.addDrawerListener(toggle)
-            toggle.syncState()
-        }
+    override fun createDataBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentHairdresserHomeBinding = FragmentHairdresserHomeBinding.inflate(inflater, container, false)
+
+    override fun setupViewModel(viewModel: HairdresserHomeViewModel) {
+        viewModel.eventDispatcher.bind(viewLifecycleOwner, this)
+        viewModel.start()
+    }
+
+    override fun setupDataBinding(
+        dataBinding: FragmentHairdresserHomeBinding,
+        savedInstanceState: Bundle?
+    ) {
+        dataBinding.viewModel = viewModel
+    }
+
+    override fun showHairstylePosting() {
+        findNavController().navigate(R.id.action_hairdresserFoundationFragment_to_hairdresserHairstylePostingFragment)
+    }
+
+    override fun startFeatureDiscovery() {
+    }
+
+    private fun setupEventDispatcher() {
+        eventDispatcher.bind(viewLifecycleOwner, this)
+    }
+
+    private fun setupFabSpeedDial(view: View) {
+        view.fabSpeedDial.setMenuListener(HairdresserHomeFabSpeedDialMenuListener(eventDispatcher))
     }
 
 //    private fun startFeatureDiscovery() {
