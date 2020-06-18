@@ -4,6 +4,7 @@ import android.os.Handler
 import android.os.Looper
 import com.google.gson.Gson
 import okhttp3.*
+import training20.tcmobile.BuildConfig
 import training20.tcmobile.ErrorCode
 import training20.tcmobile.Role
 import training20.tcmobile.RoleManager
@@ -15,7 +16,7 @@ import training20.tcmobile.notification.NotificationType
 import training20.tcmobile.net.http.responses.ErrorResponse
 import training20.tcmobile.security.AuthenticationTokenManager
 import java.io.IOException
-
+import java.util.concurrent.TimeUnit
 
 
 class HttpClient<T>(
@@ -131,7 +132,7 @@ class HttpClient<T>(
         onFailure: ((IOException) -> Unit)? = null,
         onComplete: (() -> Unit)? = null
     ) {
-        OkHttpClient().newCall(accessTokenIssuanceRequest!!).enqueue(object : Callback {
+        createOkHttpClient().newCall(accessTokenIssuanceRequest!!).enqueue(object : Callback {
 
             override fun onFailure(call: Call, e: IOException) {
                 invokeOnFailure(onFailure, e, onComplete)
@@ -190,8 +191,7 @@ class HttpClient<T>(
         onFailure: ((IOException) -> Unit)? = null,
         onComplete: (() -> Unit)? = null
     ) {
-        val client = OkHttpClient()
-        client.newCall(request).enqueue(object : Callback {
+        createOkHttpClient().newCall(request).enqueue(object : Callback {
 
             override fun onFailure(call: Call, e: IOException) {
                 invokeOnFailure(onFailure, e, onComplete)
@@ -236,6 +236,17 @@ class HttpClient<T>(
                 }
             }
         })
+    }
+
+    private fun createOkHttpClient(): OkHttpClient {
+        return if (BuildConfig.DEBUG) {
+            OkHttpClient.Builder()
+                .connectTimeout(0, TimeUnit.SECONDS)
+                .writeTimeout(0, TimeUnit.SECONDS)
+                .readTimeout(0, TimeUnit.SECONDS).build()
+        } else {
+            OkHttpClient()
+        }
     }
 
 }
