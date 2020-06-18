@@ -18,7 +18,7 @@ class ApplicationCMM: Application() {
         ApplicationContext.onCreateApplication(applicationContext)
 
         //
-        Debugger.debug(Role.HAIRDRESSER, "tNclJwnXL8WFA5iefUPGKoVSYv5UuYh9JVFPLyavWiJCqPfMtZdJp5iJZk70")
+        Debugger.debug(Role.HAIRDRESSER, "4KDp3rawqWdpuqzoWnGX9gFF9x5WBh0mV8S8hy9BWtj0nr396hJQjbdG6LLK")
         //
         val eventDispatcherModule = module {
             factory { EventDispatcher<HairdresserChatHistoryActions>() }
@@ -36,11 +36,18 @@ class ApplicationCMM: Application() {
             viewModel { HairdresserChatHistoryViewModel(get(), get()) }
             viewModel { HairdresserHairstyleListViewModel(get()) }
             viewModel { HairdresserHairstylePostingViewModel(get()) }
+            viewModel { HairdresserMenuPostingViewModel(get()) }
+            viewModel { HairdresserSalonViewModel(get()) }
+            viewModel { HairdresserSalonUnregisteredViewModel(get()) }
+            viewModel { HairdresserSalonRegistrationViewModel(get()) }
+            viewModel { HairdresserChatRoomViewModel(get()) }
             viewModel { ModelRegistrationFormViewModel(get(), get()) }
             viewModel { ModelFoundationViewModel(get()) }
             viewModel { ModelHomeViewModel(get()) }
             viewModel { ModelChatHistoryViewModel(get()) }
             viewModel { ModelNotificationsViewModel(get()) }
+            viewModel { ModelMenuSearchViewModel(get()) }
+            viewModel { ModelMenuViewModel(get()) }
         }
         startKoin {
             androidContext(this@ApplicationCMM)

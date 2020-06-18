@@ -17,6 +17,7 @@ import training20.tcmobile.security.AuthenticationTokenManager
 import java.io.IOException
 
 
+
 class HttpClient<T>(
     private val clazz: Class<T>,
     private val method: HttpMethod,
