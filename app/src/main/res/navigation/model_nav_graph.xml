@@ -8,7 +8,29 @@
         android:name="training20.tcmobile.fragments.ModelFoundationFragment"
         android:label="HairdresserFoundationFragment">
         <action
-            android:id="@+id/action_hairdresserFoundationFragment_to_hairdresserHairstylePostingFragment"
-            app:destination="@id/hairdresserHairstylePostingFragment" />
+            android:id="@+id/action_modelFoundationFragment_to_modelMenuSearchFragment"
+            app:destination="@id/modelMenuSearchFragment" />
+        <action
+            android:id="@+id/action_modelFoundationFragment_to_modelMenuFragment"
+            app:destination="@id/modelMenuFragment" />
+        <action
+            android:id="@+id/action_modelFoundationFragment_to_modelChatRoomFragment"
+            app:destination="@id/modelChatRoomFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/modelMenuSearchFragment"
+        android:name="training20.tcmobile.fragments.ModelMenuSearchFragment"
+        android:label="ModelMenuSearchFragment" />
+    <fragment
+        android:id="@+id/modelMenuFragment"
+        android:name="training20.tcmobile.fragments.ModelMenuFragment"
+        android:label="ModelMenuFragment" >
+        <action
+            android:id="@+id/action_modelMenuFragment_to_modelChatRoomFragment"
+            app:destination="@id/modelChatRoomFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/modelChatRoomFragment"
+        android:name="training20.tcmobile.fragments.ModelChatRoomFragment"
+        android:label="ModelChatRoomFragment" />
 </navigation>
