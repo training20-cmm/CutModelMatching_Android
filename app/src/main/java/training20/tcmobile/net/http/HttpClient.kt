@@ -23,7 +23,7 @@ class HttpClient<T>(
     private val clazz: Class<T>,
     private val method: HttpMethod,
     private val path: String,
-    /*private val options: RequestOptions? = null,*/
+    private val options: RequestOptions? = null,
     private vararg val queries: Pair<String, String>
 ) {
 
@@ -74,13 +74,13 @@ class HttpClient<T>(
             val accessToken = AuthenticationTokenManager.getOrLoadAccessToken(role) ?: ""
             builder = Request.Builder().header(HttpHeader.AUTHORIZATION.value, accessToken)
         }
-        val urlQueryString = Query().apply { queries.forEach { append(it.first, it.second) } }.make()
-//        options?.embed?.let { embed ->
-//            if (!urlQueryString.isEmpty()) {
-//                urlQueryString += "&"
-//            }
-//            urlQueryString += "embed=${embed}"
-//        }
+        var urlQueryString = Query().apply { queries.forEach { append(it.first, it.second) } }.make()
+        options?.embed?.let { embed ->
+            if (!urlQueryString.isEmpty()) {
+                urlQueryString += "&"
+            }
+            urlQueryString += "embed=${embed}"
+        }
         val url = "$baseUrl/$path"
         request = when (method) {
             HttpMethod.POST -> {
