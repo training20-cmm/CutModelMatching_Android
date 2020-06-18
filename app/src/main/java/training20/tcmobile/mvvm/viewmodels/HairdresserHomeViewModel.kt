@@ -13,9 +13,4 @@ class HairdresserHomeViewModel(
     private val repository: HairdresserHomeRepositoryContract
 ): ViewModel() {
 
-    fun start() {
-        if (!repository.isFeatureDiscoveryAlreadyShown) {
-            eventDispatcher.dispatchEvent { startFeatureDiscovery() }
-        }
-    }
 }

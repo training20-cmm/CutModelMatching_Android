@@ -2,18 +2,22 @@ package training20.tcmobile.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.internal.NavigationMenu
+import io.github.yavski.fabspeeddial.FabSpeedDial
+import kotlinx.android.synthetic.main.fragment_hairdresser_home.*
 import kotlinx.android.synthetic.main.fragment_hairdresser_home.view.*
 import kotlinx.android.synthetic.main.fragment_hairdresser_home.view.drawerLayout
+import kotlinx.android.synthetic.main.fragment_hairdresser_home.view.fabSpeedDial
 import org.koin.android.ext.android.inject
 import training20.tcmobile.R
 import training20.tcmobile.databinding.FragmentHairdresserHomeBinding
 import training20.tcmobile.mvvm.actions.HairdresserHomeActions
 import training20.tcmobile.mvvm.event.EventDispatcher
 import training20.tcmobile.mvvm.viewmodels.HairdresserHomeViewModel
-import training20.tcmobile.ui.fabspeeddial.HairdresserHomeFabSpeedDialMenuListener
 import training20.tcmobile.ui.viewpager.adapter.HairdresserHomeViewPagerAdapter
 
 class HairdresserHomeFragment :
@@ -21,9 +25,22 @@ class HairdresserHomeFragment :
     HairdresserHomeActions
 {
 
-    override val viewModel: HairdresserHomeViewModel by inject()
+    private inner class FabSpeedDialMenuListener: FabSpeedDial.MenuListener {
 
-    private val eventDispatcher: EventDispatcher<HairdresserHomeActions> by inject()
+        override fun onPrepareMenu(p0: NavigationMenu?): Boolean {
+            return true
+        }
+
+        override fun onMenuItemSelected(menuItem: MenuItem?): Boolean {
+            showHairstylePosting()
+            return true
+        }
+
+        override fun onMenuClosed() {
+        }
+    }
+
+    override val viewModel: HairdresserHomeViewModel by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,7 +64,6 @@ class HairdresserHomeFragment :
 
     override fun setupViewModel(viewModel: HairdresserHomeViewModel) {
         viewModel.eventDispatcher.bind(viewLifecycleOwner, this)
-        viewModel.start()
     }
 
     override fun setupDataBinding(
@@ -61,15 +77,8 @@ class HairdresserHomeFragment :
         findNavController().navigate(R.id.action_hairdresserFoundationFragment_to_hairdresserHairstylePostingFragment)
     }
 
-    override fun startFeatureDiscovery() {
-    }
-
-    private fun setupEventDispatcher() {
-        eventDispatcher.bind(viewLifecycleOwner, this)
-    }
-
     private fun setupFabSpeedDial(view: View) {
-        view.fabSpeedDial.setMenuListener(HairdresserHomeFabSpeedDialMenuListener(eventDispatcher))
+        view.fabSpeedDial.setMenuListener(FabSpeedDialMenuListener())
     }
 
 //    private fun startFeatureDiscovery() {
