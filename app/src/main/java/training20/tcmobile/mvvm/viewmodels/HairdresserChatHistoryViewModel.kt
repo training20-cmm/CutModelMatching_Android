@@ -28,7 +28,7 @@ class HairdresserChatHistoryViewModel(
 
     private fun onHistoryHairdresserSuccess(chatRooms: Array<ChatRoomHistoryHairdresserResponse>) {
         _chatRooms.value = chatRooms.mapNotNull {
-            applyNotNull(it.model, it.chatMessage) { modelResponse, chatMessageResponse ->
+            applyNotNull(it.model, it.id, it.chatMessage) { modelResponse, id, chatMessageResponse ->
                 applyNotNull(
                     modelResponse.name,
                     chatMessageResponse.content,
@@ -36,7 +36,7 @@ class HairdresserChatHistoryViewModel(
                 ) { name, content, createdAt ->
                     val model = Model(name = name)
                     val chatMessage = ChatMessage(content = content, createdAt= createdAt)
-                    HairdresserChatRoom(model, mutableListOf(chatMessage))
+                    HairdresserChatRoom(model, id, mutableListOf(chatMessage))
                 }
             }
         }

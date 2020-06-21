@@ -13,13 +13,17 @@ import training20.tcmobile.mvvm.viewmodels.*
 
 class ApplicationCMM: Application() {
 
+    companion object {
+        const val wsServerOrigin = "ws://192.168.3.2:8090?userId=1"
+    }
+
     override fun onCreate() {
         super.onCreate()
         ApplicationContext.onCreateApplication(applicationContext)
 
         //
         if (BuildConfig.DEBUG) {
-            Debugger.debug(Role.HAIRDRESSER, "uShHjzAz60uPmdQZxEUxGj0s0MGSOk7aLrTuYf75LyA2Y8s7SMbVsFRFoT8F")
+            Debugger.debug(Role.HAIRDRESSER, "NeYtChrE5ThwWv4WSLK4i2IGorn5u4MudgGADWzPXbAt8tgvINuZSLOBqLex")
         }
         //
         val eventDispatcherModule = module {
@@ -47,11 +51,11 @@ class ApplicationCMM: Application() {
             viewModel { ModelRegistrationFormViewModel(get(), get()) }
             viewModel { ModelFoundationViewModel(get()) }
             viewModel { ModelHomeViewModel(get()) }
-            viewModel { ModelChatHistoryViewModel(get()) }
+            viewModel { ModelChatHistoryViewModel(get(), get()) }
             viewModel { ModelNotificationsViewModel(get()) }
             viewModel { ModelMenuSearchViewModel(get()) }
             viewModel { ModelMenuViewModel(get()) }
-            viewModel { ModelChatRoomViewModel(get()) }
+            viewModel { ModelChatRoomViewModel(get(), get()) }
         }
         startKoin {
             androidContext(this@ApplicationCMM)
