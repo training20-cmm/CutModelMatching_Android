@@ -14,9 +14,13 @@ import org.koin.android.ext.android.inject
 import training20.tcmobile.Role
 import training20.tcmobile.R
 import training20.tcmobile.RoleManager
+import training20.tcmobile.auth.AuthManager
 import training20.tcmobile.databinding.ActivityModelRegistrationFormBinding
 import training20.tcmobile.mvvm.MvvmActivity
 import training20.tcmobile.mvvm.actions.ModelRegistrationFormActions
+import training20.tcmobile.mvvm.models.AccessToken
+import training20.tcmobile.mvvm.models.Model
+import training20.tcmobile.mvvm.models.RefreshToken
 import training20.tcmobile.net.http.responses.ModelRegistrationResponse
 import training20.tcmobile.mvvm.repositories.ModelRepositoryHttp
 import training20.tcmobile.security.AuthenticationTokenManager
@@ -28,6 +32,8 @@ class ModelRegistrationFormActivity :
 {
 
     override val viewModel: ModelRegistrationFormViewModel by inject()
+
+    private val authManager: AuthManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,17 +55,13 @@ class ModelRegistrationFormActivity :
         dataBinding.form = viewModel
     }
 
-    override fun onModelRegistrationSuccess(response: ModelRegistrationResponse) {
+    override fun onModelRegistrationSuccess(model: Model?, accessToken: AccessToken?, refreshToken: RefreshToken?) {
         registrationButton.visibility = View.VISIBLE
         registrationSpinner.visibility = View.GONE
-        val accessToken = response.accessToken?.token
-        val refreshToken = response.refreshToken?.token
-        if (accessToken == null || refreshToken == null) {
+        if (model == null || accessToken == null || refreshToken == null) {
             // TODO: Show error message
         } else {
-            AuthenticationTokenManager.putAccessToken(Role.MODEL, accessToken)
-            AuthenticationTokenManager.putRefreshToken(Role.MODEL, refreshToken)
-            RoleManager.setRole(Role.MODEL)
+            authManager.login(model, accessToken.token, refreshToken.token)
             val intent = Intent(this, ModelMainActivity::class.java)
             startActivity(intent)
         }
