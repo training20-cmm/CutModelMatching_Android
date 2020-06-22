@@ -28,7 +28,7 @@ class ModelRepositoryHttp: ModelRepositoryContract {
             Pair("gender", gender),
             Pair("birthday", birthday)
         )
-        HttpClient(ModelRegistrationResponse::class.java, HttpMethod.POST, "models/register", *queries)
+        HttpClient(ModelRegistrationResponse::class.java, HttpMethod.POST, "models/register", null, *queries)
             .send(onSuccess, onError, onFailure, onComplete)
     }
 }

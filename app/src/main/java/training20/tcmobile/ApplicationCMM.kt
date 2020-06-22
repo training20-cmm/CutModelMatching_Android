@@ -19,7 +19,7 @@ class ApplicationCMM: Application() {
 
         //
         if (BuildConfig.DEBUG) {
-            Debugger.debug(Role.HAIRDRESSER, "4KDp3rawqWdpuqzoWnGX9gFF9x5WBh0mV8S8hy9BWtj0nr396hJQjbdG6LLK")
+            Debugger.debug(Role.HAIRDRESSER, "uShHjzAz60uPmdQZxEUxGj0s0MGSOk7aLrTuYf75LyA2Y8s7SMbVsFRFoT8F")
         }
         //
         val eventDispatcherModule = module {
@@ -30,6 +30,7 @@ class ApplicationCMM: Application() {
             factory { HairdresserRepositoryHttp() as HairdresserRepositoryContract }
             factory { ModelRepositoryHttp() as ModelRepositoryContract }
             factory { HairdresserHomeRepository() as HairdresserHomeRepositoryContract }
+            factory { SalonRepositoryHttp() as SalonRepositoryContract }
         }
         val viewModelModule = module {
             viewModel { HairdresserRegistrationFormViewModel(get(), get()) }
@@ -39,7 +40,7 @@ class ApplicationCMM: Application() {
             viewModel { HairdresserHairstyleListViewModel(get()) }
             viewModel { HairdresserHairstylePostingViewModel(get()) }
             viewModel { HairdresserMenuPostingViewModel(get()) }
-            viewModel { HairdresserSalonViewModel(get()) }
+            viewModel { HairdresserSalonViewModel(get(), get()) }
             viewModel { HairdresserSalonUnregisteredViewModel(get()) }
             viewModel { HairdresserSalonRegistrationViewModel(get()) }
             viewModel { HairdresserChatRoomViewModel(get()) }
