@@ -69,7 +69,7 @@ class ApplicationCMM: Application() {
         }
 
         if (BuildConfig.DEBUG) {
-            Debugger.debug(Role.HAIRDRESSER, "dChVwDBlr40uk1hKrgJ6tOwFre5Qd9edVDxiRWXziFWA8H3iOF5M5xnIUFVi")
+            Debugger.debug(Role.HAIRDRESSER, "NeYtChrE5ThwWv4WSLK4i2IGorn5u4MudgGADWzPXbAt8tgvINuZSLOBqLex")
         }
     }
 }

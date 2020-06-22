@@ -1,5 +1,6 @@
 package training20.tcmobile
 
+import io.realm.Realm
 import training20.tcmobile.auth.AuthManagerRealm
 import training20.tcmobile.mvvm.models.Model
 import training20.tcmobile.mvvm.repositories.ModelRepositoryHttp
