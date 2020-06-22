@@ -55,7 +55,7 @@ class ApplicationCMM: Application() {
             viewModel { ModelNotificationsViewModel(get()) }
             viewModel { ModelMenuSearchViewModel(get()) }
             viewModel { ModelMenuViewModel(get()) }
-            viewModel { ModelChatRoomViewModel(get(), get()) }
+            viewModel { ModelChatRoomViewModel(get(), get(), get()) }
         }
         startKoin {
             androidContext(this@ApplicationCMM)
