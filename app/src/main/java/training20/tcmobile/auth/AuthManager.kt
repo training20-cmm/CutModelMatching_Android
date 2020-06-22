@@ -19,5 +19,7 @@ abstract class AuthManager {
         }
     }
 
+    abstract fun currentModel(): Model?
+
     protected abstract fun save(model: Model)
 }

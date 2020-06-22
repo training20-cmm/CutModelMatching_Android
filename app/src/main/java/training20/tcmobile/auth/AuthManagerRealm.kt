@@ -11,4 +11,8 @@ class AuthManagerRealm: AuthManager() {
             realm.copyToRealm(model)
         }
     }
+
+    override fun currentModel(): Model? {
+        return Realm.getDefaultInstance().where(Model::class.java).findFirst()
+    }
 }

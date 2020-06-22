@@ -5,7 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import org.java_websocket.client.WebSocketClient
 import org.java_websocket.handshake.ServerHandshake
+import org.json.JSONObject
 import training20.tcmobile.ApplicationCMM
+import training20.tcmobile.auth.AuthManager
 import training20.tcmobile.mvvm.actions.ModelChatRoomActions
 import training20.tcmobile.mvvm.event.EventDispatcher
 import training20.tcmobile.mvvm.models.ChatMessage
@@ -55,7 +57,8 @@ import java.net.URI
 
 class ModelChatRoomViewModel(
     eventDispatcher: EventDispatcher<ModelChatRoomActions>,
-    private val chatRoomRepository: ChatRoomRepositoryContract
+    private val chatRoomRepository: ChatRoomRepositoryContract,
+    private val authManager: AuthManager
 ) : BackableViewModel<ModelChatRoomActions>(eventDispatcher) {
 
     private inner class WSClient: WebSocketClient(URI(ApplicationCMM.wsServerOrigin)) {
@@ -63,6 +66,7 @@ class ModelChatRoomViewModel(
         }
 
         override fun onClose(code: Int, reason: String?, remote: Boolean) {
+            println(code)
         }
 
         override fun onMessage(message: String?) {
@@ -72,6 +76,7 @@ class ModelChatRoomViewModel(
         }
 
         override fun onError(ex: Exception?) {
+            println(ex)
         }
     }
 

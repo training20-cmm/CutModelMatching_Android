@@ -36,5 +36,9 @@
         <argument
             android:name="chatRoomId"
             app:argType="integer" />
+        <argument
+            android:name="hairdresser"
+            app:argType="training20.tcmobile.mvvm.models.Hairdresser"
+            />
     </fragment>
 </navigation>
