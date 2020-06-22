@@ -1,3 +1,4 @@
+package training20.tcmobile.util
 inline fun <T0, U> applyNotNull(p0: T0?, f: (p0: T0) -> U): U? {
     if (p0 != null) return f(p0)
     return null
