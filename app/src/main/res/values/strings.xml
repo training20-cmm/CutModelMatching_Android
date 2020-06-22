@@ -55,6 +55,7 @@
     <string name="fragment_hairdresser_salon_payment">支払方法</string>
     <string name="fragment_hairdresser_salon_business_hours">営業時間</string>
     <string name="fragment_hairdresser_salon_map">地図</string>
+    <string name="fragment_model_chat_room_send">送信</string>
     <string name="fragment_model_menu_reservation_button">予約</string>
     <string name="fragment_model_menu_reservation_title">予約確認</string>
     <string name="fragment_model_menu_time">日時</string>
