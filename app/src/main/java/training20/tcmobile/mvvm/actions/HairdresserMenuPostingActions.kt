@@ -1,3 +1,5 @@
 package training20.tcmobile.mvvm.actions
 
-interface HairdresserMenuPostingActions: BackAction
+interface HairdresserMenuPostingActions: BackAction{
+    fun onTreatmentChanged()
+}

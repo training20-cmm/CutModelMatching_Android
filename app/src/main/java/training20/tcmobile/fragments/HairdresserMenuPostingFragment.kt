@@ -27,14 +27,9 @@ class HairdresserMenuPostingFragment :
         savedInstanceState: Bundle?
     ): View? {
         // 最初に画面表示するためのものを書いていこう
-        val binding = FragmentHairdresserMenuPostingBinding.inflate(inflater, container, false)
         return inflater.inflate(R.layout.fragment_hairdresser_menu_posting, container, false)
     }
 
-    // チェックボックスをだす表示を作りたい
-    private fun createCheckbox() {
-
-    }
 
     //　写真選択&表示するよ
     private fun selectPhoto() {
@@ -83,5 +78,10 @@ class HairdresserMenuPostingFragment :
         savedInstanceState: Bundle?
     ) {
         dataBinding.viewModel = viewModel
+    }
+
+    //　ViewModelから情報を取得したお知らせをもらう
+    override fun onTreatmentChanged() {
+
     }
 }
