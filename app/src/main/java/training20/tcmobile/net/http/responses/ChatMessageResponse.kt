@@ -6,6 +6,7 @@ class ChatMessageResponse {
     var content: String? = null
     var imagePath: String? = null
     var chatRoomId: Int? = null
+    var userId: Int? = null
     var createdAt: String? = null
     var updatedAt: String? = null
 }

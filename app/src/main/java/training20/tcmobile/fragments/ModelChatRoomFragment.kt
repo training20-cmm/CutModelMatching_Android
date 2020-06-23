@@ -27,6 +27,7 @@ import training20.tcmobile.mvvm.models.ChatMessage
 import training20.tcmobile.mvvm.models.Model
 import training20.tcmobile.mvvm.models.User
 import training20.tcmobile.mvvm.viewmodels.ModelChatRoomViewModel
+import training20.tcmobile.util.ensureNotNull
 import java.net.URI
 
 class ModelChatRoomFragment :
@@ -35,7 +36,8 @@ class ModelChatRoomFragment :
 {
 
     private class RecyclerViewHolder(item: View): RecyclerView.ViewHolder(item) {
-        val messageTextView = item.messageTextView
+        val incomingMessageTextView = item.incomingMessageTextView
+        val outgoingMessageTextView = item.outgoingMessageTextView
     }
 
     private class RecyclerViewAdapter(
@@ -52,7 +54,17 @@ class ModelChatRoomFragment :
         }
 
         override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
-            holder.messageTextView.text = viewModel.chatMessages.value?.get(position)?.content
+            viewModel.chatMessages.value?.get(position)?.let { chatMessage ->
+                if (chatMessage.isIncoming) {
+                    holder.incomingMessageTextView.text = chatMessage.content
+                    holder.incomingMessageTextView.visibility = View.VISIBLE
+                    holder.outgoingMessageTextView.visibility = View.GONE
+                } else {
+                    holder.outgoingMessageTextView.text = chatMessage.content
+                    holder.outgoingMessageTextView.visibility = View.VISIBLE
+                    holder.incomingMessageTextView.visibility = View.GONE
+                }
+            }
         }
 
     }
@@ -60,13 +72,11 @@ class ModelChatRoomFragment :
     private inner class SendButtonClickListener: View.OnClickListener {
 
         override fun onClick(v: View?) {
-            val jsonObject = JSONObject()
-            jsonObject.put("text", messageEditText.text.toString())
-            jsonObject.put("myUserId", authManager.currentModel()?.userId)
-            jsonObject.put("partnerUserId", args.hairdresser.userId)
-            println(jsonObject.toString())
-            viewModel.sendMessage(jsonObject.toString())
-            messageEditText.setText("")
+            ensureNotNull(model?.userId, args.hairdresser.userId) { myUserId, partnerUserId ->
+                val message = messageEditText.text.toString()
+                viewModel.sendMessage(message, myUserId, partnerUserId)
+                messageEditText.setText("")
+            }
         }
     }
 
@@ -75,6 +85,7 @@ class ModelChatRoomFragment :
     private val authManager: AuthManager by inject()
     private val args: ModelChatRoomFragmentArgs by navArgs()
     private val recyclerViewAdapter = RecyclerViewAdapter(viewModel)
+    private val model = authManager.currentModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -106,8 +117,14 @@ class ModelChatRoomFragment :
         dataBinding.viewModel = viewModel
     }
 
-    override fun onChatMessagesChanged() {
+    override fun onMessagesChanged() {
         recyclerViewAdapter.notifyDataSetChanged()
+        view?.chatRoomRecyclerView?.smoothScrollToPosition(recyclerViewAdapter.itemCount)
+    }
+
+    override fun onMessageSent(message: String) {
+        recyclerViewAdapter.notifyDataSetChanged()
+        view?.chatRoomRecyclerView?.smoothScrollToPosition(recyclerViewAdapter.itemCount)
     }
 
     override fun onMessageReceived(message: String?) {

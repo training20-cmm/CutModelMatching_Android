@@ -3,6 +3,7 @@ package training20.tcmobile.mvvm.viewmodels
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import kotlinx.android.synthetic.main.fragment_model_chat_room.*
 import org.java_websocket.client.WebSocketClient
 import org.java_websocket.handshake.ServerHandshake
 import org.json.JSONObject
@@ -13,47 +14,9 @@ import training20.tcmobile.mvvm.event.EventDispatcher
 import training20.tcmobile.mvvm.models.ChatMessage
 import training20.tcmobile.mvvm.repositories.ChatRoomRepositoryContract
 import training20.tcmobile.net.http.responses.ChatMessageResponse
+import training20.tcmobile.util.applyNotNull
+import training20.tcmobile.util.ensureNotNull
 import java.net.URI
-//
-//private inner class MyWebSocketClient(uri: URI) : WebSocketClient(uri) {
-//
-//
-////        private val contentView: TextView by lazy {
-////            activity.findViewById<TextView>(R.id.messageList)
-////        }
-//
-//    private val breakLine = System.lineSeparator()
-//
-//
-//    override fun onOpen(handshakedata: ServerHandshake?) {
-//        Log.i(javaClass.simpleName, "WSサーバに接続しました。")
-//        Log.i(javaClass.simpleName, "スレッド：「${Thread.currentThread().name}」で実行中")
-//
-//    }
-//
-//    override fun onClose(code: Int, reason: String?, remote: Boolean) {
-//        Log.i(javaClass.simpleName, "WSサーバから切断しました。reason:${reason}")
-//        Log.i(javaClass.simpleName, "スレッド：「${Thread.currentThread().name}」で実行中")
-//    }
-//
-//    override fun onMessage(message: String?) {
-//        Log.i(javaClass.simpleName, "メッセージを受け取りました。")
-//        Log.i(javaClass.simpleName, "スレッド：「${Thread.currentThread().name}」で実行中")
-//        runOnUiThread {
-////                contentView.append("$message")
-////                contentView.append("$breakLine")
-//            recyclerViewAdapter?.addMessage(message!!)
-//            Log.i(javaClass.simpleName, "メッセージをTextViewに追記しました。")
-//            Log.i(javaClass.simpleName, "スレッド：「${Thread.currentThread().name}」で実行中")
-//
-//        }
-//    }
-//
-//    override fun onError(ex: Exception?) {
-//        Log.i(javaClass.simpleName, "エラーが発生しました。", ex)
-//        Log.i(javaClass.simpleName, "スレッド：「${Thread.currentThread().name}」で実行中")
-//    }
-//}
 
 class ModelChatRoomViewModel(
     eventDispatcher: EventDispatcher<ModelChatRoomActions>,
@@ -63,7 +26,6 @@ class ModelChatRoomViewModel(
 
     private inner class WSClient: WebSocketClient(URI(ApplicationCMM.wsServerOrigin)) {
         override fun onOpen(handshakedata: ServerHandshake?) {
-            val model = authManager.currentModel()
             model?.let {
                 val jsonObject = JSONObject()
                 jsonObject.put("myUserId", model.userId)
@@ -78,7 +40,8 @@ class ModelChatRoomViewModel(
 
         override fun onMessage(message: String?) {
             message?.let {
-                appendChatMessage(message)
+                _chatMessages.value?.add(ChatMessage(content = message, isIncoming = true))
+                eventDispatcher.dispatchEvent { onMessageReceived(message) }
             }
         }
 
@@ -91,6 +54,7 @@ class ModelChatRoomViewModel(
         get() = _chatMessages
     private val _chatMessages = MutableLiveData<MutableList<ChatMessage>>()
     private val webSocketClient = WSClient()
+    private val model = authManager.currentModel()
     private var partnerUserId: Int? = null
 
     fun start(chatRoomId: Int, partnerUserId: Int) {
@@ -102,22 +66,27 @@ class ModelChatRoomViewModel(
         webSocketClient.connect()
     }
 
-    fun sendMessage(message: String) {
-        appendChatMessage(message)
-        webSocketClient.send(message)
-    }
-
-    private fun appendChatMessage(message: String) {
-        _chatMessages.value?.add(ChatMessage(content = message))
-        eventDispatcher.dispatchEvent { onMessageReceived(message) }
+    fun sendMessage(message: String, myUserId: Int, partnerUserId: Int) {
+        val jsonObject = JSONObject()
+        jsonObject.put("text", message)
+        jsonObject.put("myUserId", myUserId)
+        jsonObject.put("partnerUserId", partnerUserId)
+        _chatMessages.value?.add(ChatMessage(content = message, isIncoming = false))
+        eventDispatcher.dispatchEvent { onMessageSent(message) }
+        webSocketClient.send(jsonObject.toString())
     }
 
     private fun onMessageSuccess(response: Array<ChatMessageResponse>) {
-        _chatMessages.value = response.map {
-            ChatMessage(
-                content = it.content
-            )
-        }.toMutableList()
-        eventDispatcher.dispatchEvent { onChatMessagesChanged() }
+        model?.let {
+            _chatMessages.value = response.mapNotNull {
+                applyNotNull(it.content, it.userId) { content, userId ->
+                    ChatMessage(
+                        content = it.content,
+                        isIncoming = model.userId != userId
+                    )
+                }
+            }.toMutableList()
+            eventDispatcher.dispatchEvent { onMessagesChanged() }
+        }
     }
 }

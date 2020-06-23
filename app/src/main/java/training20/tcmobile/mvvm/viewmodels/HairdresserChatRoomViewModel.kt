@@ -12,6 +12,7 @@ import training20.tcmobile.mvvm.event.EventDispatcher
 import training20.tcmobile.mvvm.models.ChatMessage
 import training20.tcmobile.mvvm.repositories.ChatRoomRepositoryContract
 import training20.tcmobile.net.http.responses.ChatMessageResponse
+import training20.tcmobile.util.applyNotNull
 import java.net.URI
 
 class HairdresserChatRoomViewModel(
@@ -37,7 +38,8 @@ class HairdresserChatRoomViewModel(
 
         override fun onMessage(message: String?) {
             message?.let {
-                appendChatMessage(message)
+                _chatMessages.value?.add(ChatMessage(content = message, isIncoming = true))
+                eventDispatcher.dispatchEvent { onMessageReceived(message) }
             }
         }
 
@@ -51,6 +53,7 @@ class HairdresserChatRoomViewModel(
     private val _chatMessages = MutableLiveData<MutableList<ChatMessage>>()
     private val webSocketClient = WSClient()
     private var partnerUserId: Int? = null
+    private val hairdresser = authManager.currentHairdresser()
 
     fun start(chatRoomId: Int, partnerUserId: Int) {
         this.partnerUserId = partnerUserId
@@ -61,22 +64,28 @@ class HairdresserChatRoomViewModel(
         webSocketClient.connect()
     }
 
-    fun sendMessage(message: String) {
-        appendChatMessage(message)
-        webSocketClient.send(message)
-    }
-
-    private fun appendChatMessage(message: String) {
-        _chatMessages.value?.add(ChatMessage(content = message))
-        eventDispatcher.dispatchEvent { onMessageReceived(message) }
+    fun sendMessage(message: String, myUserId: Int, partnerUserId: Int) {
+        val jsonObject = JSONObject()
+        jsonObject.put("text", message)
+        jsonObject.put("myUserId", myUserId)
+        jsonObject.put("partnerUserId", partnerUserId)
+        _chatMessages.value?.add(ChatMessage(content = message, isIncoming = false))
+        eventDispatcher.dispatchEvent { onMessageSent(message) }
+        webSocketClient.send(jsonObject.toString())
     }
 
     private fun onMessageSuccess(response: Array<ChatMessageResponse>) {
-        _chatMessages.value = response.map {
-            ChatMessage(
-                content = it.content
-            )
-        }.toMutableList()
-        eventDispatcher.dispatchEvent { onChatMessagesChanged() }
+        hairdresser?.let {
+            _chatMessages.value = response.mapNotNull {
+                applyNotNull(it.content, it.userId) { content, userId ->
+                    ChatMessage(
+                        content = it.content,
+                        userId = it.userId,
+                        isIncoming = hairdresser.userId != userId
+                    )
+                }
+            }.toMutableList()
+            eventDispatcher.dispatchEvent { onMessagesChanged() }
+        }
     }
 }

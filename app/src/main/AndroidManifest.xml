@@ -19,8 +19,8 @@
 <!--        <activity android:name=".activities.ModelMainActivity" />-->
         <activity android:name=".activities.ModelRegistrationFormActivity" />
 <!--        <activity android:name=".activities.RoleSelectionActivity">-->
-<!--        <activity android:name=".activities.ModelMainActivity">-->
-        <activity android:name=".activities.HairdresserMainActivity" >
+        <activity android:name=".activities.ModelMainActivity">
+<!--        <activity android:name=".activities.HairdresserMainActivity" >-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
