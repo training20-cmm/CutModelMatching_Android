@@ -1,13 +1,17 @@
 package training20.tcmobile.mvvm.models
 
-class Hairdresser(val id: Int? = null,
-            var name: String? = null,
-            var bioText: String? = null,
-            var birthday: String? = null,
-            identifier: String? = null,
-            email: String? = null,
-            createdAt: String? = null,
-            updatedAt: String? = null
-): User(identifier, email, createdAt, updatedAt)
+import io.realm.RealmObject
+
+open class Hairdresser(
+    var id: Int? = null,
+    var identifier: String? = null,
+    var name: String? = null,
+    var email: String? = null,
+    var bioText: String? = null,
+    var birthday: String? = null,
+    var createdAt: String? = null,
+    var updatedAt: String? = null
+): RealmObject()
 {
+    fun constructor(){}
 }

@@ -1,13 +1,18 @@
 package training20.tcmobile
 
 import android.app.Application
+import io.realm.Realm
+import io.realm.RealmConfiguration
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
+import training20.tcmobile.auth.AuthManager
+import training20.tcmobile.auth.AuthManagerRealm
 import training20.tcmobile.mvvm.actions.HairdresserChatHistoryActions
 import training20.tcmobile.mvvm.actions.HairdresserHomeActions
 import training20.tcmobile.mvvm.event.EventDispatcher
+import training20.tcmobile.mvvm.models.Model
 import training20.tcmobile.mvvm.repositories.*
 import training20.tcmobile.mvvm.viewmodels.*
 
@@ -17,12 +22,16 @@ class ApplicationCMM: Application() {
         super.onCreate()
         ApplicationContext.onCreateApplication(applicationContext)
 
-        //
-        if (BuildConfig.DEBUG) {
-            //Debugger.debug(Role.HAIRDRESSER, "uShHjzAz60uPmdQZxEUxGj0s0MGSOk7aLrTuYf75LyA2Y8s7SMbVsFRFoT8F")
-            Debugger.debug(Role.HAIRDRESSER, "UEo2H5oXU9QeyDkzt1azb8w5F08Pdc50WD4aCCOYSM3XSFUDLegQP6L36YxZ")
+        Realm.init(this)
+        val realmConfiguration = RealmConfiguration.Builder().deleteRealmIfMigrationNeeded().build()
+        Realm.setDefaultConfiguration(realmConfiguration)
+        Realm.getDefaultInstance().executeTransaction {
+            Realm.getDefaultInstance().deleteAll()
         }
-        //
+        val authManagerModule = module {
+            factory { AuthManagerRealm() as AuthManager }
+        }
+
         val eventDispatcherModule = module {
             factory { EventDispatcher<HairdresserChatHistoryActions>() }
         }
@@ -31,6 +40,7 @@ class ApplicationCMM: Application() {
             factory { HairdresserRepositoryHttp() as HairdresserRepositoryContract }
             factory { ModelRepositoryHttp() as ModelRepositoryContract }
             factory { HairdresserHomeRepository() as HairdresserHomeRepositoryContract }
+            factory { SalonRepositoryHttp() as SalonRepositoryContract }
         }
         val viewModelModule = module {
             viewModel { HairdresserRegistrationFormViewModel(get(), get()) }
@@ -40,7 +50,7 @@ class ApplicationCMM: Application() {
             viewModel { HairdresserHairstyleListViewModel(get()) }
             viewModel { HairdresserHairstylePostingViewModel(get()) }
             viewModel { HairdresserMenuPostingViewModel(get()) }
-            viewModel { HairdresserSalonViewModel(get()) }
+            viewModel { HairdresserSalonViewModel(get(), get()) }
             viewModel { HairdresserSalonUnregisteredViewModel(get()) }
             viewModel { HairdresserSalonRegistrationViewModel(get()) }
             viewModel { HairdresserChatRoomViewModel(get()) }
@@ -55,7 +65,11 @@ class ApplicationCMM: Application() {
         }
         startKoin {
             androidContext(this@ApplicationCMM)
-            modules(listOf(eventDispatcherModule, repositoryModule, viewModelModule))
+            modules(listOf(authManagerModule, eventDispatcherModule, repositoryModule, viewModelModule))
+        }
+
+        if (BuildConfig.DEBUG) {
+            Debugger.debug(Role.HAIRDRESSER, "NeYtChrE5ThwWv4WSLK4i2IGorn5u4MudgGADWzPXbAt8tgvINuZSLOBqLex")
         }
     }
 }
