@@ -10,6 +10,7 @@ import android.widget.Button
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import io.realm.Realm
 import kotlinx.android.synthetic.main.fragment_model_chat_room.*
 import kotlinx.android.synthetic.main.fragment_model_chat_room.view.*
@@ -36,6 +37,7 @@ class ModelChatRoomFragment :
 {
 
     private class RecyclerViewHolder(item: View): RecyclerView.ViewHolder(item) {
+        val iconImageView = item.iconImageView
         val incomingMessageTextView = item.incomingMessageTextView
         val outgoingMessageTextView = item.outgoingMessageTextView
     }
@@ -56,10 +58,13 @@ class ModelChatRoomFragment :
         override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
             viewModel.chatMessages.value?.get(position)?.let { chatMessage ->
                 if (chatMessage.isIncoming) {
+                    Picasso.get().load("https://1.bp.blogspot.com/-kwMHBpDRC98/WMfCOCDhmCI/AAAAAAABClk/0YhKPlx69H8akEluJniMmVV-RoJCRtPvACLcB/s800/onsei_ninshiki_smartphone.png").into(holder.iconImageView)
+                    holder.iconImageView.visibility = View.VISIBLE
                     holder.incomingMessageTextView.text = chatMessage.content
                     holder.incomingMessageTextView.visibility = View.VISIBLE
                     holder.outgoingMessageTextView.visibility = View.GONE
                 } else {
+                    holder.iconImageView.visibility = View.GONE
                     holder.outgoingMessageTextView.text = chatMessage.content
                     holder.outgoingMessageTextView.visibility = View.VISIBLE
                     holder.incomingMessageTextView.visibility = View.GONE
