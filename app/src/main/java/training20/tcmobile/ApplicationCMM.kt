@@ -19,7 +19,7 @@ class ApplicationCMM: Application() {
 
         //
         if (BuildConfig.DEBUG) {
-            Debugger.debug(Role.HAIRDRESSER, "4KDp3rawqWdpuqzoWnGX9gFF9x5WBh0mV8S8hy9BWtj0nr396hJQjbdG6LLK")
+            Debugger.debug(Role.HAIRDRESSER, " Cjpch1BQiIg0ZdW8OV39KC3pSdxZ6cDSs3JmeApLEXuCZfvdGFrxXSPfIqRG")
         }
         //
         val eventDispatcherModule = module {

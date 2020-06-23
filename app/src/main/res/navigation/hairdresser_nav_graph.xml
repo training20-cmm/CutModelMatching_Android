@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/hairdresser_nav_graph"
-    app:startDestination="@id/hairdresserFoundationFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/hairdresser_nav_graph"
+    app:startDestination="@id/hairdresserMenuPostingFragment">
     <fragment
         android:id="@+id/hairdresserFoundationFragment"
         android:name="training20.tcmobile.fragments.HairdresserFoundationFragment"
@@ -22,7 +23,7 @@
     <fragment
         android:id="@+id/hairdresserHairstylePostingFragment"
         android:name="training20.tcmobile.fragments.HairdresserHairstylePostingFragment"
-        android:label="HairdresserHairstylePosting"/>
+        android:label="HairdresserHairstylePosting" />
     <fragment
         android:id="@+id/hairdresserMenuPostingFragment"
         android:name="training20.tcmobile.fragments.HairdresserMenuPostingFragment"
@@ -34,7 +35,7 @@
     <fragment
         android:id="@+id/hairdresserSalonUnregisteredFragment"
         android:name="training20.tcmobile.fragments.HairdresserSalonUnregisteredFragment"
-        android:label="HairdresserSalonUnregisteredFragment" >
+        android:label="HairdresserSalonUnregisteredFragment">
         <action
             android:id="@+id/action_hairdresserSalonUnregisteredFragment_to_hairdresserSalonRegistrationFragment"
             app:destination="@id/hairdresserSalonRegistrationFragment" />
@@ -42,7 +43,7 @@
     <fragment
         android:id="@+id/hairdresserSalonRegistrationFragment"
         android:name="training20.tcmobile.fragments.HairdresserSalonRegistrationFragment"
-        android:label="HairdresserSalonRegistrationFragment" >
+        android:label="HairdresserSalonRegistrationFragment">
         <action
             android:id="@+id/action_hairdresserSalonRegistrationFragment_to_hairdresserSalonFragment"
             app:destination="@id/hairdresserSalonFragment" />
