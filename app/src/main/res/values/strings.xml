@@ -87,5 +87,19 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fragment_hairdresser_salon_registration_photo">イメージ写真</string>
+    <string name="fragment_hairdresser_salon_registration_salonname">サロン名</string>
+    <string name="fragment_hairdresser_salon_registration_hint_enter_salonname">サロン名</string>
+    <string name="fragment_hairdresser_salon_registration_hint_enter_salonmemo">サロン紹介</string>
+    <string name="fragment_hairdresser_salon_registration_hint_enter_postalcode">郵便番号</string>
+    <string name="fragment_hairdresser_salon_registration_hint_enter_address">住所</string>
+    <string name="fragment_hairdresser_salon_registration_hint_enter_residence">建物名・部屋番号</string>
+    <string name="fragment_hairdresser_salon_registration_hint_enter_seatsnumber">席数</string>
+    <string name="fragment_hairdresser_salon_registration_payment">支払方法</string>
+    <string name="fragment_hairdresser_salon_registration_button_cash">現金</string>
+    <string name="fragment_hairdresser_salon_registration_button_creditcard">クレジットカード</string>
+    <string name="fragment_hairdresser_salon_registration_time">営業時間</string>
+    <string name="fragment_hairdresser_salon_registration_button_registration">登録</string>
+    <string name="fragment_hairdresser_salon_registration_weekday">平日</string>
 
 </resources>
