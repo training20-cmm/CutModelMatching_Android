@@ -63,6 +63,13 @@ class ModelChatRoomViewModel(
 
     private inner class WSClient: WebSocketClient(URI(ApplicationCMM.wsServerOrigin)) {
         override fun onOpen(handshakedata: ServerHandshake?) {
+            val model = authManager.currentModel()
+            model?.let {
+                val jsonObject = JSONObject()
+                jsonObject.put("myUserId", model.userId)
+                jsonObject.put("partnerUserId", partnerUserId)
+                webSocketClient.send(jsonObject.toString())
+            }
         }
 
         override fun onClose(code: Int, reason: String?, remote: Boolean) {
@@ -82,12 +89,12 @@ class ModelChatRoomViewModel(
 
     val chatMessages: LiveData<MutableList<ChatMessage>>
         get() = _chatMessages
-
     private val _chatMessages = MutableLiveData<MutableList<ChatMessage>>()
-
     private val webSocketClient = WSClient()
+    private var partnerUserId: Int? = null
 
-    fun start(chatRoomId: Int) {
+    fun start(chatRoomId: Int, partnerUserId: Int) {
+        this.partnerUserId = partnerUserId
         chatRoomRepository.messages(
             chatRoomId,
             this::onMessageSuccess

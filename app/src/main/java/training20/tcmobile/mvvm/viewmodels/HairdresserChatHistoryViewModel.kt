@@ -31,10 +31,11 @@ class HairdresserChatHistoryViewModel(
             applyNotNull(it.model, it.id, it.chatMessage) { modelResponse, id, chatMessageResponse ->
                 applyNotNull(
                     modelResponse.name,
+                    modelResponse.userId,
                     chatMessageResponse.content,
                     chatMessageResponse.createdAt
-                ) { name, content, createdAt ->
-                    val model = Model(name = name)
+                ) { name, userId, content, createdAt ->
+                    val model = Model(name = name, userId = userId)
                     val chatMessage = ChatMessage(content = content, createdAt= createdAt)
                     HairdresserChatRoom(model, id, mutableListOf(chatMessage))
                 }

@@ -61,9 +61,9 @@ class ModelChatRoomFragment :
 
         override fun onClick(v: View?) {
             val jsonObject = JSONObject()
-            jsonObject.put("to", args.hairdresser.userId)
             jsonObject.put("text", messageEditText.text.toString())
-            jsonObject.put("userId", authManager.currentModel()?.userId)
+            jsonObject.put("myUserId", authManager.currentModel()?.userId)
+            jsonObject.put("partnerUserId", args.hairdresser.userId)
             println(jsonObject.toString())
             viewModel.sendMessage(jsonObject.toString())
             messageEditText.setText("")
@@ -94,7 +94,9 @@ class ModelChatRoomFragment :
 
     override fun setupViewModel(viewModel: ModelChatRoomViewModel) {
         viewModel.eventDispatcher.bind(viewLifecycleOwner, this)
-        viewModel.start(args.chatRoomId)
+        args.hairdresser.userId?.let { userId ->
+            viewModel.start(args.chatRoomId, userId)
+        }
     }
 
     override fun setupDataBinding(
