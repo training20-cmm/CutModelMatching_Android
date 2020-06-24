@@ -16,6 +16,8 @@ import kotlinx.android.synthetic.main.fragment_model_chat_room.*
 import kotlinx.android.synthetic.main.fragment_model_chat_room.view.*
 import kotlinx.android.synthetic.main.fragment_model_chat_room.view.messageEditText
 import kotlinx.android.synthetic.main.view_model_chat_room_list_item.view.*
+import kotlinx.android.synthetic.main.view_model_chat_room_list_item.view.incomingMessageTextView
+import kotlinx.android.synthetic.main.view_model_chat_room_list_item.view.outgoingMessageTextView
 import org.java_websocket.client.WebSocketClient
 import org.java_websocket.handshake.ServerHandshake
 import org.json.JSONObject
@@ -39,10 +41,12 @@ class ModelChatRoomFragment :
     private class RecyclerViewHolder(item: View): RecyclerView.ViewHolder(item) {
         val iconImageView = item.iconImageView
         val incomingMessageTextView = item.incomingMessageTextView
+        val incomingMessageDateTimeTextView = item.incomingMessageDateTimeTextView
         val outgoingMessageTextView = item.outgoingMessageTextView
+        val outgoingMessageDateTimeTextView = item.outgoingMessageDateTimeTextView
     }
 
-    private class RecyclerViewAdapter(
+    private inner class RecyclerViewAdapter(
         private val viewModel: ModelChatRoomViewModel
     ): RecyclerView.Adapter<RecyclerViewHolder>() {
 
@@ -58,16 +62,26 @@ class ModelChatRoomFragment :
         override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
             viewModel.chatMessages.value?.get(position)?.let { chatMessage ->
                 if (chatMessage.isIncoming) {
-                    Picasso.get().load("https://1.bp.blogspot.com/-kwMHBpDRC98/WMfCOCDhmCI/AAAAAAABClk/0YhKPlx69H8akEluJniMmVV-RoJCRtPvACLcB/s800/onsei_ninshiki_smartphone.png").into(holder.iconImageView)
+                    // TODO: パスを一か所に定義
+                    //Picasso.get().load("https://1.bp.blogspot.com/-kwMHBpDRC98/WMfCOCDhmCI/AAAAAAABClk/0YhKPlx69H8akEluJniMmVV-RoJCRtPvACLcB/s800/onsei_ninshiki_smartphone.png").into(holder.iconImageView)
+                    Picasso.get()
+                        .load("http://192.168.8.190:8080" + args.hairdresser.profileImagePath)
+                        .into(holder.iconImageView)
                     holder.iconImageView.visibility = View.VISIBLE
                     holder.incomingMessageTextView.text = chatMessage.content
                     holder.incomingMessageTextView.visibility = View.VISIBLE
+                    holder.incomingMessageDateTimeTextView.text = chatMessage.createdAt
+                    holder.incomingMessageDateTimeTextView.visibility = View.VISIBLE
                     holder.outgoingMessageTextView.visibility = View.GONE
+                    holder.outgoingMessageDateTimeTextView.visibility = View.GONE
                 } else {
                     holder.iconImageView.visibility = View.GONE
                     holder.outgoingMessageTextView.text = chatMessage.content
                     holder.outgoingMessageTextView.visibility = View.VISIBLE
+                    holder.outgoingMessageDateTimeTextView.text = chatMessage.createdAt
+                    holder.outgoingMessageDateTimeTextView.visibility = View.VISIBLE
                     holder.incomingMessageTextView.visibility = View.GONE
+                    holder.incomingMessageDateTimeTextView.visibility = View.GONE
                 }
             }
         }
@@ -127,13 +141,9 @@ class ModelChatRoomFragment :
         view?.chatRoomRecyclerView?.smoothScrollToPosition(recyclerViewAdapter.itemCount)
     }
 
-    override fun onMessageSent(message: String) {
+    override fun onMessageReceived(message: String?, isIncoming: Boolean) {
         recyclerViewAdapter.notifyDataSetChanged()
         view?.chatRoomRecyclerView?.smoothScrollToPosition(recyclerViewAdapter.itemCount)
-    }
-
-    override fun onMessageReceived(message: String?) {
-        recyclerViewAdapter.notifyDataSetChanged()
     }
 
 

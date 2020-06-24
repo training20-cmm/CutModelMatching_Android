@@ -1,5 +1,7 @@
 package training20.tcmobile.mvvm.viewmodels
 
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -17,6 +19,7 @@ import training20.tcmobile.net.http.responses.ChatMessageResponse
 import training20.tcmobile.util.applyNotNull
 import training20.tcmobile.util.ensureNotNull
 import java.net.URI
+import java.util.concurrent.Executor
 
 class ModelChatRoomViewModel(
     eventDispatcher: EventDispatcher<ModelChatRoomActions>,
@@ -26,6 +29,7 @@ class ModelChatRoomViewModel(
 
     private inner class WSClient: WebSocketClient(URI(ApplicationCMM.wsServerOrigin)) {
         override fun onOpen(handshakedata: ServerHandshake?) {
+            val model = authManager.currentModel()
             model?.let {
                 val jsonObject = JSONObject()
                 jsonObject.put("myUserId", model.userId)
@@ -39,9 +43,19 @@ class ModelChatRoomViewModel(
         }
 
         override fun onMessage(message: String?) {
-            message?.let {
-                _chatMessages.value?.add(ChatMessage(content = message, isIncoming = true))
-                eventDispatcher.dispatchEvent { onMessageReceived(message) }
+            val model = authManager.currentModel()
+            ensureNotNull(model, message) { model, message ->
+                val jsonObject = JSONObject(message)
+                val content = jsonObject.get("text") as? String
+                val createdAt = jsonObject.get("createdAt") as? String
+                val userId = jsonObject.get("myUserId") as? Int
+                val isIncoming =  model.userId != userId
+                _chatMessages.value?.add(ChatMessage(
+                    content = content,
+                    createdAt = createdAt,
+                    isIncoming = isIncoming
+                ))
+                eventDispatcher.dispatchEvent { onMessageReceived(message, isIncoming) }
             }
         }
 
@@ -55,13 +69,15 @@ class ModelChatRoomViewModel(
     private val _chatMessages = MutableLiveData<MutableList<ChatMessage>>()
     private val webSocketClient = WSClient()
     private val model = authManager.currentModel()
+    private var chatRoomId: Int? = null
     private var partnerUserId: Int? = null
 
     fun start(chatRoomId: Int, partnerUserId: Int) {
+        this.chatRoomId = chatRoomId
         this.partnerUserId = partnerUserId
         chatRoomRepository.messages(
             chatRoomId,
-            this::onMessageSuccess
+            this::onMessagesSuccess
         )
         webSocketClient.connect()
     }
@@ -69,19 +85,19 @@ class ModelChatRoomViewModel(
     fun sendMessage(message: String, myUserId: Int, partnerUserId: Int) {
         val jsonObject = JSONObject()
         jsonObject.put("text", message)
+        jsonObject.put("chatRoomId", chatRoomId)
         jsonObject.put("myUserId", myUserId)
         jsonObject.put("partnerUserId", partnerUserId)
-        _chatMessages.value?.add(ChatMessage(content = message, isIncoming = false))
-        eventDispatcher.dispatchEvent { onMessageSent(message) }
         webSocketClient.send(jsonObject.toString())
     }
 
-    private fun onMessageSuccess(response: Array<ChatMessageResponse>) {
+    private fun onMessagesSuccess(response: Array<ChatMessageResponse>) {
         model?.let {
             _chatMessages.value = response.mapNotNull {
                 applyNotNull(it.content, it.userId) { content, userId ->
                     ChatMessage(
                         content = it.content,
+                        createdAt = it.createdAt,
                         isIncoming = model.userId != userId
                     )
                 }

@@ -27,6 +27,15 @@
         app:layout_constraintTop_toTopOf="@id/iconImageView"
         app:layout_constraintBottom_toBottomOf="parent"/>
     <TextView
+        android:id="@+id/incomingMessageDateTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:textSize="12sp"
+        android:textColor="@color/textColorSecondary"
+        app:layout_constraintStart_toStartOf="@id/incomingMessageTextView"
+        app:layout_constraintTop_toBottomOf="@id/incomingMessageTextView"/>
+    <TextView
         android:id="@+id/outgoingMessageTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,4 +48,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
+    <TextView
+        android:id="@+id/outgoingMessageDateTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:textSize="12sp"
+        android:textColor="@color/textColorSecondary"
+        app:layout_constraintEnd_toEndOf="@id/outgoingMessageTextView"
+        app:layout_constraintTop_toBottomOf="@id/outgoingMessageTextView"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

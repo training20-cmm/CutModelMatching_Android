@@ -19,7 +19,7 @@ import training20.tcmobile.mvvm.viewmodels.*
 class ApplicationCMM: Application() {
 
     companion object {
-        const val wsServerOrigin = "ws://192.168.3.2:8090"
+        const val wsServerOrigin = "ws://192.168.8.190:8090"
     }
 
     override fun onCreate() {
@@ -29,6 +29,8 @@ class ApplicationCMM: Application() {
         Realm.init(this)
         val realmConfiguration = RealmConfiguration.Builder().deleteRealmIfMigrationNeeded().build()
         Realm.setDefaultConfiguration(realmConfiguration)
+        val model = AuthManagerRealm().currentModel()
+        println(model)
         Realm.getDefaultInstance().executeTransaction {
             Realm.getDefaultInstance().deleteAll()
         }
@@ -72,8 +74,8 @@ class ApplicationCMM: Application() {
             modules(listOf(authManagerModule, eventDispatcherModule, repositoryModule, viewModelModule))
         }
         if (BuildConfig.DEBUG) {
-            Debugger.debug(Role.HAIRDRESSER, "QwZzzb5EiiARnNO9BfBcsOQCe87izmRSFVXROrFrrQ27qUZcyms2XiL3Fr2q")
-//            Debugger.debug(Role.MODEL, "TNkhiq7CPH2xa2tTG2lwMrMsIwhkHHEoHCkTaRo2zJr1C6ExZ1E4tDG1dizy")
+//            Debugger.debug(Role.HAIRDRESSER, "auIx9B16RpR21ONO8haA2jOKqMawyiQMNeiNBOdnVSteVjV0gwtwdPQC2lyf")
+            Debugger.debug(Role.MODEL, "bE9fcQZwxHr1aiZMfkeqkEWfeHRmHUOGytnqBGxNypM95OjLMbW7B44R4Xcz")
         }
     }
 }

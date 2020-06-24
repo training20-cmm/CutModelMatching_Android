@@ -12,7 +12,10 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_hairdresser_chat_room.*
 import kotlinx.android.synthetic.main.fragment_hairdresser_chat_room.messageEditText
 import kotlinx.android.synthetic.main.fragment_hairdresser_chat_room.view.*
+import kotlinx.android.synthetic.main.fragment_hairdresser_chat_room.view.chatRoomRecyclerView
+import kotlinx.android.synthetic.main.fragment_hairdresser_chat_room.view.sendButton
 import kotlinx.android.synthetic.main.fragment_model_chat_room.*
+import kotlinx.android.synthetic.main.fragment_model_chat_room.view.*
 import kotlinx.android.synthetic.main.view_hairdresser_chat_room_list_item.view.*
 import org.json.JSONObject
 import org.koin.android.ext.android.inject
@@ -31,7 +34,6 @@ class HairdresserChatRoomFragment :
 {
 
     private class RecyclerViewHolder(item: View): RecyclerView.ViewHolder(item) {
-        val iconImageView = item.iconImageView
         val incommingMessageTextView = item.incomingMessageTextView
         val incomingMessageDateTimeTextView = item.incomingMessageDateTimeTextView
         val outgoingMessageTextView = item.outgoingMessageTextView
@@ -54,16 +56,13 @@ class HairdresserChatRoomFragment :
         override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
             viewModel.chatMessages.value?.get(position)?.let { chatMessage ->
                 if (chatMessage.isIncoming) {
-                    Picasso.get().load("https://1.bp.blogspot.com/-kwMHBpDRC98/WMfCOCDhmCI/AAAAAAABClk/0YhKPlx69H8akEluJniMmVV-RoJCRtPvACLcB/s800/onsei_ninshiki_smartphone.png").into(holder.iconImageView)
-                    holder.iconImageView.visibility = View.VISIBLE
                     holder.incommingMessageTextView.text = chatMessage.content
                     holder.incommingMessageTextView.visibility = View.VISIBLE
-                    holder.incomingMessageDateTimeTextView.text = "投稿日時"
+                    holder.incomingMessageDateTimeTextView.text = chatMessage.createdAt
                     holder.incomingMessageDateTimeTextView.visibility = View.VISIBLE
                     holder.outgoingMessageTextView.visibility = View.GONE
                     holder.outgoingMessageDateTimeTextView.visibility = View.GONE
                 } else {
-                    holder.iconImageView.visibility = View.GONE
                     holder.outgoingMessageTextView.text = chatMessage.content
                     holder.outgoingMessageDateTimeTextView.text = chatMessage.createdAt
                     holder.outgoingMessageTextView.visibility = View.VISIBLE
@@ -127,12 +126,8 @@ class HairdresserChatRoomFragment :
         view?.chatRoomRecyclerView?.smoothScrollToPosition(recyclerViewAdapter.itemCount)
     }
 
-    override fun onMessageSent(message: String) {
+    override fun onMessageReceived(message: String?, isIncoming: Boolean) {
         recyclerViewAdapter.notifyDataSetChanged()
         view?.chatRoomRecyclerView?.smoothScrollToPosition(recyclerViewAdapter.itemCount)
-    }
-
-    override fun onMessageReceived(message: String?) {
-        recyclerViewAdapter.notifyDataSetChanged()
     }
 }

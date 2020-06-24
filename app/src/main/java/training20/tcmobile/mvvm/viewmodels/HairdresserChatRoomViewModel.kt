@@ -13,6 +13,7 @@ import training20.tcmobile.mvvm.models.ChatMessage
 import training20.tcmobile.mvvm.repositories.ChatRoomRepositoryContract
 import training20.tcmobile.net.http.responses.ChatMessageResponse
 import training20.tcmobile.util.applyNotNull
+import training20.tcmobile.util.ensureNotNull
 import java.net.URI
 
 class HairdresserChatRoomViewModel(
@@ -37,9 +38,19 @@ class HairdresserChatRoomViewModel(
         }
 
         override fun onMessage(message: String?) {
-            message?.let {
-                _chatMessages.value?.add(ChatMessage(content = message, isIncoming = true))
-                eventDispatcher.dispatchEvent { onMessageReceived(message) }
+            val hairdresser = authManager.currentHairdresser()
+            ensureNotNull(hairdresser, message) { hairdresser, message ->
+                val jsonObject = JSONObject(message)
+                val content = jsonObject.get("text") as? String
+                val createdAt = jsonObject.get("createdAt") as? String
+                val userId = jsonObject.get("myUserId") as? Int
+                val isIncoming =  hairdresser.userId != userId
+                _chatMessages.value?.add(ChatMessage(
+                    content = content,
+                    createdAt = createdAt,
+                    isIncoming = isIncoming
+                ))
+                eventDispatcher.dispatchEvent { onMessageReceived(message, isIncoming) }
             }
         }
 
@@ -52,14 +63,16 @@ class HairdresserChatRoomViewModel(
         get() = _chatMessages
     private val _chatMessages = MutableLiveData<MutableList<ChatMessage>>()
     private val webSocketClient = WSClient()
+    private var chatRoomId: Int? = null
     private var partnerUserId: Int? = null
     private val hairdresser = authManager.currentHairdresser()
 
     fun start(chatRoomId: Int, partnerUserId: Int) {
+        this.chatRoomId = chatRoomId
         this.partnerUserId = partnerUserId
         chatRoomRepository.messages(
             chatRoomId,
-            this::onMessageSuccess
+            this::onMessagesSuccess
         )
         webSocketClient.connect()
     }
@@ -67,20 +80,20 @@ class HairdresserChatRoomViewModel(
     fun sendMessage(message: String, myUserId: Int, partnerUserId: Int) {
         val jsonObject = JSONObject()
         jsonObject.put("text", message)
+        jsonObject.put("chatRoomId", chatRoomId)
         jsonObject.put("myUserId", myUserId)
         jsonObject.put("partnerUserId", partnerUserId)
-        _chatMessages.value?.add(ChatMessage(content = message, isIncoming = false))
-        eventDispatcher.dispatchEvent { onMessageSent(message) }
         webSocketClient.send(jsonObject.toString())
     }
 
-    private fun onMessageSuccess(response: Array<ChatMessageResponse>) {
+    private fun onMessagesSuccess(response: Array<ChatMessageResponse>) {
         hairdresser?.let {
             _chatMessages.value = response.mapNotNull {
                 applyNotNull(it.content, it.userId) { content, userId ->
                     ChatMessage(
                         content = it.content,
                         userId = it.userId,
+                        createdAt = it.createdAt,
                         isIncoming = hairdresser.userId != userId
                     )
                 }
