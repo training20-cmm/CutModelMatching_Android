@@ -13,7 +13,6 @@ import training20.tcmobile.R
 import training20.tcmobile.databinding.FragmentHairdresserFoundationBinding
 import training20.tcmobile.mvvm.MvvmFragment
 import training20.tcmobile.mvvm.actions.HairdresserFoundationActions
-import training20.tcmobile.mvvm.event.EventDispatcher
 import training20.tcmobile.mvvm.viewmodels.HairdresserFoundationViewModel
 import training20.tcmobile.ui.recyclerview.adapters.HairdresserFoundationRecyclerViewAdapter
 
