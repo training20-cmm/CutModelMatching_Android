@@ -2,7 +2,9 @@ package training20.tcmobile
 
 import io.realm.Realm
 import training20.tcmobile.auth.AuthManagerRealm
+import training20.tcmobile.mvvm.models.Hairdresser
 import training20.tcmobile.mvvm.models.Model
+import training20.tcmobile.mvvm.repositories.HairdresserRepositoryHttp
 import training20.tcmobile.mvvm.repositories.ModelRepositoryHttp
 import training20.tcmobile.security.AuthenticationTokenManager
 
@@ -11,6 +13,7 @@ object Debugger {
     //*******************************************
     // TODO: DI
     val modelRepository = ModelRepositoryHttp()
+    val hairdresserRepository = HairdresserRepositoryHttp()
     val authManager = AuthManagerRealm()
     //*******************************************
 
@@ -25,10 +28,17 @@ object Debugger {
         this.accessToken = accessToken
         RoleManager.setRole(role)
         AuthenticationTokenManager.putAccessToken(role, accessToken)
-        modelRepository.me(this::onMeSuccess)
+        when (role) {
+            Role.HAIRDRESSER -> hairdresserRepository.me(this::onMeSuccess)
+            Role.MODEL -> modelRepository.me(this::onMeSuccess)
+        }
+    }
+
+    private fun onMeSuccess(hairdresser: Hairdresser?) {
+        authManager.login(hairdresser, accessToken, "")
     }
 
     private fun onMeSuccess(model: Model?) {
-        authManager.login(model, this.accessToken, "")
+        authManager.login(model, accessToken, "")
     }
 }

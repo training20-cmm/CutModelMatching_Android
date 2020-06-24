@@ -12,11 +12,15 @@ import training20.tcmobile.auth.AuthManagerRealm
 import training20.tcmobile.mvvm.actions.HairdresserChatHistoryActions
 import training20.tcmobile.mvvm.actions.HairdresserHomeActions
 import training20.tcmobile.mvvm.event.EventDispatcher
-import training20.tcmobile.mvvm.models.Model
+import training20.tcmobile.mvvm.models.Hairdresser
 import training20.tcmobile.mvvm.repositories.*
 import training20.tcmobile.mvvm.viewmodels.*
 
 class ApplicationCMM: Application() {
+
+    companion object {
+        const val wsServerOrigin = "ws://192.168.8.190:8090"
+    }
 
     override fun onCreate() {
         super.onCreate()
@@ -25,6 +29,8 @@ class ApplicationCMM: Application() {
         Realm.init(this)
         val realmConfiguration = RealmConfiguration.Builder().deleteRealmIfMigrationNeeded().build()
         Realm.setDefaultConfiguration(realmConfiguration)
+        val model = AuthManagerRealm().currentModel()
+        println(model)
         Realm.getDefaultInstance().executeTransaction {
             Realm.getDefaultInstance().deleteAll()
         }
@@ -53,23 +59,23 @@ class ApplicationCMM: Application() {
             viewModel { HairdresserSalonViewModel(get(), get()) }
             viewModel { HairdresserSalonUnregisteredViewModel(get()) }
             viewModel { HairdresserSalonRegistrationViewModel(get()) }
-            viewModel { HairdresserChatRoomViewModel(get()) }
+            viewModel { HairdresserChatRoomViewModel(get(), get(), get()) }
             viewModel { ModelRegistrationFormViewModel(get(), get()) }
             viewModel { ModelFoundationViewModel(get()) }
             viewModel { ModelHomeViewModel(get()) }
-            viewModel { ModelChatHistoryViewModel(get()) }
+            viewModel { ModelChatHistoryViewModel(get(), get()) }
             viewModel { ModelNotificationsViewModel(get()) }
             viewModel { ModelMenuSearchViewModel(get()) }
             viewModel { ModelMenuViewModel(get()) }
-            viewModel { ModelChatRoomViewModel(get()) }
+            viewModel { ModelChatRoomViewModel(get(), get(), get()) }
         }
         startKoin {
             androidContext(this@ApplicationCMM)
             modules(listOf(authManagerModule, eventDispatcherModule, repositoryModule, viewModelModule))
         }
-
         if (BuildConfig.DEBUG) {
-            Debugger.debug(Role.HAIRDRESSER, "NeYtChrE5ThwWv4WSLK4i2IGorn5u4MudgGADWzPXbAt8tgvINuZSLOBqLex")
+//            Debugger.debug(Role.HAIRDRESSER, "auIx9B16RpR21ONO8haA2jOKqMawyiQMNeiNBOdnVSteVjV0gwtwdPQC2lyf")
+            Debugger.debug(Role.MODEL, "bE9fcQZwxHr1aiZMfkeqkEWfeHRmHUOGytnqBGxNypM95OjLMbW7B44R4Xcz")
         }
     }
 }

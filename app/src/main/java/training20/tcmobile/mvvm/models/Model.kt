@@ -2,6 +2,7 @@ package training20.tcmobile.mvvm.models
 
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
+import java.io.Serializable
 
 open class Model(
     var identifier: String? = null,
@@ -16,7 +17,7 @@ open class Model(
     var deletedAt: String? = null,
     var createdAt: String? = null,
     var updatedAt: String? = null
-): RealmObject() {
+): RealmObject(), Serializable {
 
     fun constructor() {}
 }
