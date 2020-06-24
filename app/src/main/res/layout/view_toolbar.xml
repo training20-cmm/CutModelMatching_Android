@@ -10,13 +10,15 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme">
 
-        <ImageButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/toolbarBackButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            app:srcCompat="@drawable/ic_baseline_arrow_white_24"
-            tools:ignore="ContentDescription" />
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            app:icon="@drawable/ic_baseline_arrow_white_24"
+            app:iconTint="@color/colorOnPrimary"
+            style="@style/MaterialIconButton"
+            />
+
         <TextView
             android:id="@+id/toolbarTitleTextView"
             android:layout_width="wrap_content"
