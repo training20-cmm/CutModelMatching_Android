@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.internal.NavigationMenu
 import io.github.yavski.fabspeeddial.FabSpeedDial
-import kotlinx.android.synthetic.main.fragment_hairdresser_home.*
 import kotlinx.android.synthetic.main.fragment_hairdresser_home.view.*
 import kotlinx.android.synthetic.main.fragment_hairdresser_home.view.drawerLayout
 import kotlinx.android.synthetic.main.fragment_hairdresser_home.view.fabSpeedDial
@@ -16,12 +15,11 @@ import org.koin.android.ext.android.inject
 import training20.tcmobile.R
 import training20.tcmobile.databinding.FragmentHairdresserHomeBinding
 import training20.tcmobile.mvvm.actions.HairdresserHomeActions
-import training20.tcmobile.mvvm.event.EventDispatcher
 import training20.tcmobile.mvvm.viewmodels.HairdresserHomeViewModel
 import training20.tcmobile.ui.viewpager.adapter.HairdresserHomeViewPagerAdapter
 
 class HairdresserHomeFragment :
-    NavigationDrawerFragment<FragmentHairdresserHomeBinding, HairdresserHomeViewModel>(),
+    HairdresserNavigationDrawerFragment<HairdresserHomeActions, FragmentHairdresserHomeBinding, HairdresserHomeViewModel>(),
     HairdresserHomeActions
 {
 
@@ -52,7 +50,7 @@ class HairdresserHomeFragment :
                 childFragmentManager
             )
         view.tabLayout.setupWithViewPager(view.viewPager)
-        setupNavigationDrawer(view.toolbar, view.drawerLayout)
+        setupNavigationDrawer(view.toolbar, view.drawerLayout, view.navigationView)
         setupFabSpeedDial(view)
         return view
     }
@@ -64,6 +62,7 @@ class HairdresserHomeFragment :
 
     override fun setupViewModel(viewModel: HairdresserHomeViewModel) {
         viewModel.eventDispatcher.bind(viewLifecycleOwner, this)
+        viewModel.start()
     }
 
     override fun setupDataBinding(

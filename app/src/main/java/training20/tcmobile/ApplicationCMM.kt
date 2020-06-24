@@ -51,7 +51,7 @@ class ApplicationCMM: Application() {
         val viewModelModule = module {
             viewModel { HairdresserRegistrationFormViewModel(get(), get()) }
             viewModel { HairdresserFoundationViewModel(get()) }
-            viewModel { HairdresserHomeViewModel(get(), get()) }
+            viewModel { HairdresserHomeViewModel(get(), get(), get()) }
             viewModel { HairdresserChatHistoryViewModel(get(), get()) }
             viewModel { HairdresserHairstyleListViewModel(get()) }
             viewModel { HairdresserHairstylePostingViewModel(get()) }
