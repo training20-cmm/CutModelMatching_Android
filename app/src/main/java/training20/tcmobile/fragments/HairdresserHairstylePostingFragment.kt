@@ -38,6 +38,7 @@ class HairdresserHairstylePostingFragment :
         }
         view.toolbarTitleTextView.text = "TEST TITLE"
         val toolbarRightButton = view.toolbarRightButton
+        toolbarRightButton.visibility = View.VISIBLE
         toolbarRightButton.text = "編集"
         toolbarRightButton.setBackgroundColor(ContextCompat.getColor(ApplicationContext.context, R.color.colorAccent))
         toolbarRightButton.setOnClickListener {
