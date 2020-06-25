@@ -51,7 +51,7 @@ class ApplicationCMM: Application() {
         val viewModelModule = module {
             viewModel { HairdresserRegistrationFormViewModel(get(), get()) }
             viewModel { HairdresserFoundationViewModel(get()) }
-            viewModel { HairdresserHomeViewModel(get(), get()) }
+            viewModel { HairdresserHomeViewModel(get(), get(), get()) }
             viewModel { HairdresserChatHistoryViewModel(get(), get()) }
             viewModel { HairdresserHairstyleListViewModel(get()) }
             viewModel { HairdresserHairstylePostingViewModel(get()) }
@@ -74,8 +74,8 @@ class ApplicationCMM: Application() {
             modules(listOf(authManagerModule, eventDispatcherModule, repositoryModule, viewModelModule))
         }
         if (BuildConfig.DEBUG) {
-//            Debugger.debug(Role.HAIRDRESSER, "auIx9B16RpR21ONO8haA2jOKqMawyiQMNeiNBOdnVSteVjV0gwtwdPQC2lyf")
-            Debugger.debug(Role.MODEL, "bE9fcQZwxHr1aiZMfkeqkEWfeHRmHUOGytnqBGxNypM95OjLMbW7B44R4Xcz")
+            Debugger.debug(Role.HAIRDRESSER, "auIx9B16RpR21ONO8haA2jOKqMawyiQMNeiNBOdnVSteVjV0gwtwdPQC2lyf")
+//            Debugger.debug(Role.MODEL, "bE9fcQZwxHr1aiZMfkeqkEWfeHRmHUOGytnqBGxNypM95OjLMbW7B44R4Xcz")
         }
     }
 }

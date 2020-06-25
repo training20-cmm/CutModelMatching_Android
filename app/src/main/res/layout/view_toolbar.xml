@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/toolbarBackButton"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            app:icon="@drawable/ic_baseline_arrow_white_24"
+            app:iconTint="@color/colorOnPrimary"
+            style="@style/MaterialIconButton"
+            />
+
+        <TextView
+            android:id="@+id/toolbarTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/colorOnPrimary"
+            android:textSize="20sp"/>
+
+        <Button
+            android:id="@+id/toolbarRightButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:layout_gravity="end"
+            android:visibility="gone"
+            />
+    </androidx.appcompat.widget.Toolbar>
+</layout>
