@@ -74,8 +74,8 @@ class ApplicationCMM: Application() {
             modules(listOf(authManagerModule, eventDispatcherModule, repositoryModule, viewModelModule))
         }
         if (BuildConfig.DEBUG) {
-            Debugger.debug(Role.HAIRDRESSER, "auIx9B16RpR21ONO8haA2jOKqMawyiQMNeiNBOdnVSteVjV0gwtwdPQC2lyf")
-//            Debugger.debug(Role.MODEL, "bE9fcQZwxHr1aiZMfkeqkEWfeHRmHUOGytnqBGxNypM95OjLMbW7B44R4Xcz")
+//            Debugger.debug(Role.HAIRDRESSER, "auIx9B16RpR21ONO8haA2jOKqMawyiQMNeiNBOdnVSteVjV0gwtwdPQC2lyf")
+            Debugger.debug(Role.MODEL, "bE9fcQZwxHr1aiZMfkeqkEWfeHRmHUOGytnqBGxNypM95OjLMbW7B44R4Xcz")
         }
     }
 }
