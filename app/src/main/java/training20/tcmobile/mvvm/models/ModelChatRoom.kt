@@ -2,7 +2,8 @@ package training20.tcmobile.mvvm.models
 
 class ModelChatRoom(
     val hairdresser: Hairdresser,
+    id: Int,
     chatMessages: MutableList<ChatMessage>
-): ChatRoom(chatMessages)
+): ChatRoom(id, chatMessages)
 {
 }

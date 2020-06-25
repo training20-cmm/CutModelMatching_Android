@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_hairdresserFoundationFragment_to_hairdresserSalonUnregisteredFragment"
             app:destination="@id/hairdresserSalonUnregisteredFragment" />
+        <action
+            android:id="@+id/action_hairdresserFoundationFragment_to_hairdresserChatRoomFragment"
+            app:destination="@id/hairdresserChatRoomFragment" />
     </fragment>
     <fragment
         android:id="@+id/hairdresserHairstylePostingFragment"
@@ -48,5 +51,17 @@
         <action
             android:id="@+id/action_hairdresserSalonRegistrationFragment_to_hairdresserSalonFragment"
             app:destination="@id/hairdresserSalonFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/hairdresserChatRoomFragment"
+        android:name="training20.tcmobile.fragments.HairdresserChatRoomFragment"
+        android:label="HairdresserChatRoomFragment">
+        <argument
+            android:name="chatRoomId"
+            app:argType="integer" />
+        <argument
+            android:name="model"
+            app:argType="training20.tcmobile.mvvm.models.Model"
+            />
     </fragment>
 </navigation>
