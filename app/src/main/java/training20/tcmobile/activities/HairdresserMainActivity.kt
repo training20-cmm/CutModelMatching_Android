@@ -37,7 +37,7 @@ class HairdresserMainActivity : AppCompatActivity() {
     private fun setupBottomNavigationBar() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
 
-        val navGraphIds = listOf(R.navigation.hairdresser_home_nav_graph, R.navigation.hairdresser_chat_history_navgraph)
+        val navGraphIds = listOf(R.navigation.hairdresser_home_nav_graph, R.navigation.hairdresser_notifications_nav_graph, R.navigation.hairdresser_chat_history_navgraph)
 
         // Setup the bottom navigation view with a list of navigation graphs
         val controller = bottomNavigationView.setupWithNavController(

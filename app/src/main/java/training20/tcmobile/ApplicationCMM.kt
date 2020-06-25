@@ -19,7 +19,7 @@ import training20.tcmobile.mvvm.viewmodels.*
 class ApplicationCMM: Application() {
 
     companion object {
-        const val wsServerOrigin = "ws://192.168.8.190:8090"
+        const val wsServerOrigin = "ws://192.168.3.2:8090"
     }
 
     override fun onCreate() {
@@ -74,8 +74,8 @@ class ApplicationCMM: Application() {
             modules(listOf(authManagerModule, eventDispatcherModule, repositoryModule, viewModelModule))
         }
         if (BuildConfig.DEBUG) {
-            Debugger.debug(Role.HAIRDRESSER, "S4smF7tNDqKWMJVpeErxQil9hFV0IBRgj6OKUfKO9TMTttmbNTOwg27Q9N6x")
-//            Debugger.debug(Role.MODEL, "bE9fcQZwxHr1aiZMfkeqkEWfeHRmHUOGytnqBGxNypM95OjLMbW7B44R4Xcz")
+//            Debugger.debug(Role.HAIRDRESSER, "S4smF7tNDqKWMJVpeErxQil9hFV0IBRgj6OKUfKO9TMTttmbNTOwg27Q9N6x")
+            Debugger.debug(Role.MODEL, "d4207PQbW6VKYElqsE6yIUjNoY7TpvOIoFtixsZJHOttQyMh7eLeydky8AX7")
         }
     }
 }

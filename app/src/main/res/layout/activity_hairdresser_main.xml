@@ -10,7 +10,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".activities.HairdresserMainActivity">
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_fragment"
@@ -25,8 +25,8 @@
             android:id="@+id/bottom_nav"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/darker_gray"
-            app:itemBackground="@android:color/darker_gray"
+            android:background="@color/bottomNavigation"
+            app:itemBackground="@color/bottomNavigation"
             app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
             app:layout_constraintBottom_toBottomOf="parent"
             app:menu="@menu/menu_hairdresser_bottom_navigation" />
