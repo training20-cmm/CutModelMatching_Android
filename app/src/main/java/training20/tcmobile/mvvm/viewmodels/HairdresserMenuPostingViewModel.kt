@@ -7,6 +7,7 @@ import android.app.Dialog
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.util.Log
+import androidx.databinding.ObservableInt
 import androidx.fragment.app.DialogFragment
 import training20.tcmobile.mvvm.actions.HairdresserMenuPostingActions
 import training20.tcmobile.mvvm.event.EventDispatcher
@@ -39,21 +40,28 @@ class HairdresserMenuPostingViewModel(
         response_sample(4, "test4"), response_sample(5, "test5"))
 
     var title = ""
-    var fee = ""
-    var comments = ""
-    // radiobuttonのグループに着けるとできるといわれたけど嘘だった
-    // var gender = ObservableInt()
+    var price = ""
+    var details = ""
+    var requiredtime = ""
+    var timeDates: Array<String> = arrayOf()
+    var minutes = ""
+    var gender = ""
     var male = false
     var female = false
     var resource = 0
-
+    var hairdresser_id = 0
 
     fun onclickPosting() {
         Log.d("CheckClick", "click!")
+        gender = if (male) "男" else "女"
         menuRepository.store(
             title,
-            "",
-            arrayOf(),
+            details,
+            timeDates,
+            gender,
+            price,
+            minutes,
+            hairdresser_id,
             onSuccess = this::onMenuStoreSuccess
         )
     }

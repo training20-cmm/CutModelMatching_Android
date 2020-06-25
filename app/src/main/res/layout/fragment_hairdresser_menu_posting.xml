@@ -146,37 +146,41 @@
                         app:layout_constraintTop_toBottomOf="@+id/starttimeText" />
                     <!--                        android:time="@={viewModel.starttime}"/>-->
 
+                    <LinearLayout
+                        android:id="@+id/datetimeArea"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="70dp"
+                        android:layout_marginRight="70dp"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toTopOf="@+id/requiredText"
+                        app:layout_constraintTop_toBottomOf="@+id/startTime"
+                        tools:layout_editor_absoluteX="70dp" />
+
                     <TextView
                         android:id="@+id/requiredText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:text="所要時間 (分)"
-                        app:layout_constraintStart_toStartOf="@+id/startTime"
-                        app:layout_constraintTop_toBottomOf="@+id/startTime" />
+                        app:layout_constraintTop_toBottomOf="@+id/startTime"
+                        tools:layout_editor_absoluteX="70dp" />
+
 
                     <EditText
                         android:id="@+id/requiredTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:layout_marginBottom="10dp"
                         android:ems="10"
                         android:inputType="number"
+                        android:text="@={viewModel.requiredtime}"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/requiredText"
                         app:layout_constraintTop_toBottomOf="@+id/requiredText" />
-                    <!--                        android:numder="@={viewModel.requiredtime}"/>-->
-
-                    <LinearLayout
-                        android:id="@+id/datetimeArea"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="70dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="70dp"
-                        android:layout_marginBottom="10dp"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/requiredTime"></LinearLayout>
 
                     <ImageButton
                         android:id="@+id/datetimeAdd"
@@ -184,9 +188,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="70dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/requiredTime"
+                        app:layout_constraintBottom_toBottomOf="@+id/startTime"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/requiredTime"
+                        app:layout_constraintStart_toEndOf="@+id/startTime"
                         app:srcCompat="@drawable/ic_add_white_24dp" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -230,7 +234,7 @@
                 android:ems="10"
                 android:hint="Price"
                 android:inputType="numberDecimal"
-                android:text="@={viewModel.fee}"
+                android:text="@={viewModel.price}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/order_area" />
 
@@ -294,7 +298,7 @@
                 android:inputType="textMultiLine"
                 android:maxLines="5"
                 android:minLines="2"
-                android:text="@={viewModel.comments}"
+                android:text="@={viewModel.details}"
                 android:textAlignment="textStart"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="parent"

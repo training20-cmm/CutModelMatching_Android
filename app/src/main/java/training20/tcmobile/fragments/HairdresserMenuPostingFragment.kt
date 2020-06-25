@@ -108,7 +108,7 @@ class HairdresserMenuPostingFragment :
     private fun addtexts(view: View) {
         view.datetimeAdd.setOnClickListener {
             val day_time = TextView(activity)
-            day_time.text = "希望日 : " + selectDate.text.toString() + "\n希望時間 : " + startTime.text.toString() + "\n所要時間 :" + requiredTime.text.toString() + "分"
+            day_time.text = "希望日 : " + selectDate.text.toString() + "\n希望時間 : " + startTime.text.toString()
             datetimeArea.addView(day_time)
             // マージン実装したいな……
         }
