@@ -17,154 +17,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <RadioButton
-                android:id="@+id/model_gender_f"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/hairdresser_menu_gender_f"
-                app:layout_constraintBottom_toTopOf="@+id/orderRecycle_view"
-                app:layout_constraintStart_toEndOf="@+id/model_gender_m"
-                app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-            <RadioButton
-                android:id="@+id/model_gender_m"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/hairdresser_menu_gender_m"
-                app:layout_constraintBottom_toTopOf="@+id/orderRecycle_view"
-                app:layout_constraintStart_toStartOf="@+id/textView6" />
-
-            <ImageView
-                android:id="@+id/sample_image"
-                android:layout_width="286dp"
-                android:layout_height="178dp"
-                android:layout_marginStart="70dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="70dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fee"
-                app:srcCompat="@drawable/cat2" />
-
-            <EditText
-                android:id="@+id/fee"
-                android:layout_width="157dp"
-                android:layout_height="46dp"
-                android:layout_marginStart="70dp"
-                android:layout_marginTop="30dp"
-                android:ems="10"
-                android:hint="料金設定"
-                android:inputType="numberDecimal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/order_area" />
-
-            <EditText
-                android:id="@+id/comments"
-                android:layout_width="275dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="70dp"
-                android:layout_marginEnd="70dp"
-                android:layout_marginBottom="100dp"
-                android:hint="Comments"
-                android:inputType="textMultiLine"
-                android:textAlignment="textStart"
-                android:textAllCaps="false"
-                android:minLines="2"
-                android:maxLines="5"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <EditText
-                android:id="@+id/title"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="70dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="70dp"
-                android:hint="Title"
-                android:inputType="text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar_area" />
-
-            <com.google.android.flexbox.FlexboxLayout
-                android:id="@+id/orderRecycle_view"
-                android:layout_width="270dp"
-                android:layout_height="149dp"
-                android:layout_marginStart="70dp"
-                android:layout_marginEnd="100dp"
-                app:layout_constraintBottom_toTopOf="@+id/culender_area"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent">
-
-            </com.google.android.flexbox.FlexboxLayout>
-
-            <RelativeLayout
-                android:id="@+id/culender_area"
-                android:layout_width="422dp"
-                android:layout_height="241dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/orderRecycle_view">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/dateArea"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="70dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="80dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/dateBtn" />
-
-                    <Button
-                        android:id="@+id/dateBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="70dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="100dp"
-                        android:text="日付"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <Button
-                        android:id="@+id/timeBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="80dp"
-                        android:text="時間"
-                        app:layout_constraintBottom_toBottomOf="@+id/dateBtn"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/dateBtn"
-                        app:layout_constraintTop_toTopOf="@+id/dateBtn" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/order_area"
-                android:layout_width="423dp"
-                android:layout_height="134dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/culender_area">
-
-            </RelativeLayout>
-
             <RelativeLayout
                 android:id="@+id/toolbar_area"
-                android:layout_width="424dp"
+                android:layout_width="match_parent"
                 android:layout_height="60dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -172,51 +27,280 @@
 
             </RelativeLayout>
 
-            <TextView
-                android:id="@+id/textView6"
+            <Button
+                android:id="@+id/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="30dp"
+                android:onClick="@{() -> viewModel.onclickPosting()}"
+                android:text="投稿"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="70dp"
+                android:hint="Title"
+                android:inputType="text"
+                android:text="@={viewModel.title}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar_area" />
+
+            <TextView
+                android:id="@+id/model_gender"
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="20dp"
                 android:text="募集モデルの性別"
-                app:layout_constraintBottom_toTopOf="@+id/model_gender_m"
-                app:layout_constraintStart_toStartOf="@+id/title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/title" />
+
+            <RadioGroup
+                android:id="@+id/gender_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/model_gender">
+
+                <RadioButton
+                    android:id="@+id/female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="100dp"
+                    android:checked="@={viewModel.female}"
+                    android:text="@string/hairdresser_menu_gender_f" />
+
+                <RadioButton
+                    android:id="@+id/male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:checked="@={viewModel.male}"
+                    android:text="@string/hairdresser_menu_gender_m" />
+
+            </RadioGroup>
+
+            <RelativeLayout
+                android:id="@+id/dateTime_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gender_area">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/dateText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="70dp"
+                        android:layout_marginTop="10dp"
+                        android:text="日付"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/selectDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:ems="10"
+                        android:inputType="date"
+                        app:layout_constraintStart_toStartOf="@+id/dateText"
+                        app:layout_constraintTop_toBottomOf="@+id/dateText" />
+                    <!--                        android:date="@={viewModel.date}"/>-->
+
+                    <TextView
+                        android:id="@+id/starttimeText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="希望時刻"
+                        app:layout_constraintStart_toStartOf="@+id/selectDate"
+                        app:layout_constraintTop_toBottomOf="@+id/selectDate" />
+
+                    <EditText
+                        android:id="@+id/startTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:ems="10"
+                        android:inputType="time"
+                        app:layout_constraintStart_toStartOf="@+id/starttimeText"
+                        app:layout_constraintTop_toBottomOf="@+id/starttimeText" />
+                    <!--                        android:time="@={viewModel.starttime}"/>-->
+
+                    <TextView
+                        android:id="@+id/requiredText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="所要時間 (分)"
+                        app:layout_constraintStart_toStartOf="@+id/startTime"
+                        app:layout_constraintTop_toBottomOf="@+id/startTime" />
+
+                    <EditText
+                        android:id="@+id/requiredTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:ems="10"
+                        android:inputType="number"
+                        app:layout_constraintStart_toStartOf="@+id/requiredText"
+                        app:layout_constraintTop_toBottomOf="@+id/requiredText" />
+                    <!--                        android:numder="@={viewModel.requiredtime}"/>-->
+
+                    <LinearLayout
+                        android:id="@+id/datetimeArea"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="70dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="70dp"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/requiredTime"></LinearLayout>
+
+                    <ImageButton
+                        android:id="@+id/datetimeAdd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="70dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/requiredTime"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/requiredTime"
+                        app:srcCompat="@drawable/ic_add_white_24dp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/order_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dateTime_area">
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="70dp"
+                    android:layout_marginLeft="70dp"
+                    android:padding="10dp"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/feeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="10dp"
+                android:text="料金設定"
+                app:layout_constraintBottom_toTopOf="@+id/fee"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/order_area" />
+
+            <EditText
+                android:id="@+id/fee"
+                android:layout_width="157dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="50dp"
+                android:ems="10"
+                android:hint="Price"
+                android:inputType="numberDecimal"
+                android:text="@={viewModel.fee}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/order_area" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="8dp"
                 android:text="円"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:layout_constraintBottom_toBottomOf="@+id/fee"
                 app:layout_constraintStart_toEndOf="@+id/fee" />
 
+            <ImageView
+                android:id="@+id/image_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="70dp"
+                app:imageResource="@{viewModel.resource}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fee" />
+
             <Button
                 android:id="@+id/photoBtn"
                 android:layout_width="140dp"
                 android:layout_height="53dp"
-                android:layout_marginTop="8dp"
-                android:text="画像を選択する"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="70dp"
+                android:text="@string/hairdresser_menu_posting_no_photo_selected"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintHorizontal_bias="0.496"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sample_image" />
+                app:layout_constraintTop_toBottomOf="@+id/image_view" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="70dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="100dp"
                 android:layout_marginEnd="280dp"
                 android:layout_marginBottom="8dp"
                 android:text="コメント"
                 app:layout_constraintBottom_toTopOf="@+id/comments"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/photoBtn" />
+                app:layout_constraintTop_toBottomOf="@+id/image_view" />
+
+            <EditText
+                android:id="@+id/comments"
+                android:layout_width="275dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="70dp"
+                android:layout_marginEnd="70dp"
+                android:layout_marginBottom="20dp"
+                android:hint="Comments"
+                android:inputType="textMultiLine"
+                android:maxLines="5"
+                android:minLines="2"
+                android:text="@={viewModel.comments}"
+                android:textAlignment="textStart"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
