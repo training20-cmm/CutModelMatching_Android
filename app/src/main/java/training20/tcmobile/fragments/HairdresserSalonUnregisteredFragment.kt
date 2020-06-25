@@ -35,11 +35,11 @@ class HairdresserSalonUnregisteredFragment :
 
         //はいを押してサロン登録画面へ遷移する
         view.hairdresserSalonUnregistered_yes.setOnClickListener {v ->
-            findNavController().navigate(R.id.action_hairdresserSalonUnregisteredFragment_to_hairdresserSalonRegistrationFragment)
+            //findNavController().navigate(R.id.action_hairdresserHomefragment)
         }
         //いいえを押してホームへ遷移する
         view.hairdresserSalonUnregistered_no.setOnClickListener {v ->
-            findNavController().navigate(R.id.hairdresserFoundationFragment)
+            //findNavController().navigate(R.id.hairdresserFoundationFragment)
         }
         //戻るボタンを押して遷移する
         view.hairdresserSalonUnregistered_backBtn.setOnClickListener {v ->

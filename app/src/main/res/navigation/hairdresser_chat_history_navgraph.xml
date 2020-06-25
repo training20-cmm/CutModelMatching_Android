@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/hairdresser_chat_history_nav_graph"
+    app:startDestination="@id/hairdresserChatHistoryFragment">
+
+    <fragment
+        android:id="@+id/hairdresserChatHistoryFragment"
+        android:name="training20.tcmobile.fragments.HairdresserChatHistoryFragment"
+        android:label="HairdresserChatHistoryFragment" >
+        <action
+            android:id="@+id/action_hairdresserChatHistoryFragment_to_hairdresserChatRoomFragment"
+            app:destination="@id/hairdresserChatRoomFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/hairdresserChatRoomFragment"
+        android:name="training20.tcmobile.fragments.HairdresserChatRoomFragment"
+        android:label="HairdresserChatRoomFragment">
+        <argument
+            android:name="chatRoomId"
+            app:argType="integer" />
+        <argument
+            android:name="model"
+            app:argType="training20.tcmobile.mvvm.models.Model"
+            />
+    </fragment>
+</navigation>

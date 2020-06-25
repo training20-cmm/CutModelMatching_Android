@@ -105,7 +105,7 @@ class HairdresserChatHistoryFragment :
 
     private fun onChatHistoryListItemClicked(chatRoom: HairdresserChatRoom?) {
         chatRoom?.let { chatRoom ->
-            val action = HairdresserFoundationFragmentDirections.actionHairdresserFoundationFragmentToHairdresserChatRoomFragment(
+            val action = HairdresserChatHistoryFragmentDirections.actionHairdresserChatHistoryFragmentToHairdresserChatRoomFragment(
                 chatRoom.id,
                 chatRoom.model
             )
