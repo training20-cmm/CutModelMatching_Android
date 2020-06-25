@@ -31,7 +31,6 @@ class HairdresserSalonUnregisteredFragment :
         // Inflate the layout for this fragment
         //xmlのレイアウトをここでViewとして作成する
         val view = inflater.inflate(R.layout.fragment_hairdresser_salon_unregistered, container, false)
-        //view.findViewById<Button>(R.id.hairdresserSalonUnregistered_yes).setOnClickListener()
 
         //はいを押してサロン登録画面へ遷移する
         view.hairdresserSalonUnregistered_yes.setOnClickListener {v ->
@@ -42,7 +41,7 @@ class HairdresserSalonUnregisteredFragment :
             findNavController().navigate(R.id.hairdresserFoundationFragment)
         }
         //戻るボタンを押して遷移する
-        view.hairdresserSalonUnregistered_backBtn.setOnClickListener {v ->
+        view.backButton.setOnClickListener {v ->
             back()
         }
 
