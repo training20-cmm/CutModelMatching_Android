@@ -32,5 +32,13 @@
     <fragment
         android:id="@+id/modelChatRoomFragment"
         android:name="training20.tcmobile.fragments.ModelChatRoomFragment"
-        android:label="ModelChatRoomFragment" />
+        android:label="ModelChatRoomFragment">
+        <argument
+            android:name="chatRoomId"
+            app:argType="integer" />
+        <argument
+            android:name="hairdresser"
+            app:argType="training20.tcmobile.mvvm.models.Hairdresser"
+            />
+    </fragment>
 </navigation>

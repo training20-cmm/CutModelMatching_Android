@@ -6,6 +6,7 @@ class ChatMessage(
     val imagePath: String? = null,
     val userId: Int? = null,
     val createdAt: String? = null,
-    val updatedAt: String? = null
+    val updatedAt: String? = null,
+    var isIncoming: Boolean = false
 ) {
 }

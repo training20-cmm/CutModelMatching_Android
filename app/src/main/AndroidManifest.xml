@@ -3,6 +3,7 @@
     package="training20.tcmobile">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:name=".ApplicationCMM"
@@ -13,13 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.HairdresserMainActivity" />
+<!--        <activity android:name=".activities.HairdresserMainActivity" />-->
         <activity android:name=".activities.HairdresserRegistrationFormActivity" />
         <activity android:name=".activities.HairdresserSalonReservationCalendarDayActivity" />
-        <activity android:name=".activities.ModelMainActivity" />
+<!--        <activity android:name=".activities.ModelMainActivity" />-->
         <activity android:name=".activities.ModelRegistrationFormActivity" />
-        <activity android:name=".activities.RoleSelectionActivity">
-<!--        <activity android:name=".activities.ModelMainActivity">-->
+<!--        <activity android:name=".activities.RoleSelectionActivity">-->
+        <activity android:name=".activities.ModelMainActivity">
 <!--        <activity android:name=".activities.HairdresserMainActivity" >-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

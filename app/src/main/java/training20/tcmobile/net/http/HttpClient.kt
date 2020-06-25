@@ -28,7 +28,7 @@ class HttpClient<T>(
 ) {
 
     companion object {
-        private const val serverOrigin = "http://192.168.8.131:8080"
+        private const val serverOrigin = "http://192.168.8.190:8080"
         const val baseUrl = "$serverOrigin/api"
     }
 
