@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_hairdresserHomeFragment_to_hairdresserSalonUnregisteredFragment"
             app:destination="@id/hairdresserSalonUnregisteredFragment" />
+        <action
+            android:id="@+id/action_hairdresserHomeFragment_to_hairdresserSalonFragment"
+            app:destination="@id/hairdresserSalonFragment" />
     </fragment>
     <fragment
         android:id="@+id/hairdresserHairstylePostingFragment"
@@ -21,5 +24,21 @@
     <fragment
         android:id="@+id/hairdresserSalonUnregisteredFragment"
         android:name="training20.tcmobile.fragments.HairdresserSalonUnregisteredFragment"
-        android:label="HairdresserSalonUnregisteredFragment" />
+        android:label="HairdresserSalonUnregisteredFragment" >
+        <action
+            android:id="@+id/action_hairdresserSalonUnregisteredFragment_to_hairdresserSalonRegistrationFragment"
+            app:destination="@id/hairdresserSalonRegistrationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/hairdresserSalonFragment"
+        android:name="training20.tcmobile.fragments.HairdresserSalonFragment"
+        android:label="HairdresserSalonFragment" />
+    <fragment
+        android:id="@+id/hairdresserSalonRegistrationFragment"
+        android:name="training20.tcmobile.fragments.HairdresserSalonRegistrationFragment"
+        android:label="HairdresserSalonRegistrationFragment" >
+        <action
+            android:id="@+id/action_hairdresserSalonRegistrationFragment_to_hairdresserSalonFragment"
+            app:destination="@id/hairdresserSalonFragment" />
+    </fragment>
 </navigation>
