@@ -30,6 +30,7 @@ import training20.tcmobile.mvvm.models.ChatMessage
 import training20.tcmobile.mvvm.models.Model
 import training20.tcmobile.mvvm.models.User
 import training20.tcmobile.mvvm.viewmodels.ModelChatRoomViewModel
+import training20.tcmobile.net.http.HttpClient
 import training20.tcmobile.util.ensureNotNull
 import java.net.URI
 
@@ -62,10 +63,8 @@ class ModelChatRoomFragment :
         override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
             viewModel.chatMessages.value?.get(position)?.let { chatMessage ->
                 if (chatMessage.isIncoming) {
-                    // TODO: パスを一か所に定義
-                    //Picasso.get().load("https://1.bp.blogspot.com/-kwMHBpDRC98/WMfCOCDhmCI/AAAAAAABClk/0YhKPlx69H8akEluJniMmVV-RoJCRtPvACLcB/s800/onsei_ninshiki_smartphone.png").into(holder.iconImageView)
                     Picasso.get()
-                        .load("http://192.168.8.190:8080" + args.hairdresser.profileImagePath)
+                        .load(HttpClient.serverOrigin + args.hairdresser.profileImagePath)
                         .into(holder.iconImageView)
                     holder.iconImageView.visibility = View.VISIBLE
                     holder.incomingMessageTextView.text = chatMessage.content
