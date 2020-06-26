@@ -1,5 +1,6 @@
 package training20.tcmobile.mvvm.repositories
 
+import training20.tcmobile.mvvm.models.Salon
 import training20.tcmobile.net.http.RequestOptions
 import training20.tcmobile.net.http.responses.ErrorResponse
 import training20.tcmobile.net.http.responses.ModelRegistrationResponse
@@ -37,7 +38,7 @@ interface SalonRepositoryContract {
 //    }
 
     fun index(
-        onSuccess: ((SalonResponse) -> Unit)? = null,
+        onSuccess: ((Salon) -> Unit)? = null,
         onError: ((String, Int, ErrorResponse) -> Unit)? = null,
         onFailure: ((IOException) -> Unit)? = null,
         onComplete: (() -> Unit)? = null,
