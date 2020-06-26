@@ -75,7 +75,10 @@ dependencies {
 
     def fragment_version = "1.2.2"
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
+    implementation "android.arch.lifecycle:extensions:1.1.0"
     testImplementation 'junit:junit:4.12'
+    testImplementation "com.nhaarman:mockito-kotlin:1.5.0"
+    testImplementation "android.arch.core:core-testing:1.1.0"
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.2.0'
