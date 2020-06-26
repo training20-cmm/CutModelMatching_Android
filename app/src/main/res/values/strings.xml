@@ -99,6 +99,7 @@
     <string name="pm_11">午後11時</string>
     <string name="pm_12">午後12時</string>
     <string name="transition_name_role_selection_fragment_header_image_view">headerImageView</string>
+    <string name="title_activity_maps">Map</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
