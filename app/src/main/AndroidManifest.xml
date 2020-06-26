@@ -11,6 +11,7 @@
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 
     <application
@@ -31,6 +32,7 @@
 
 
         <!--        <activity android:name=".activities.HairdresserMainActivity" />-->
+<!--        <activity android:name=".activities.HairdresserMainActivity" />-->
         <activity android:name=".activities.HairdresserRegistrationFormActivity" />
         <activity android:name=".activities.HairdresserSalonReservationCalendarDayActivity" />
 <!--        <activity android:name=".activities.ModelMainActivity" />-->
