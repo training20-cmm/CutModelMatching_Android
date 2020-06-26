@@ -31,7 +31,7 @@ class TagSelectionFragment : Fragment() {
 
     class Adapter(
         fragmentManager: FragmentManager,
-        private val tabs: ArrayList<Tab>,
+        private val tabs: MutableList<Tab>,
         private val listItemClickListener: (Tag) -> Unit
     ): FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 

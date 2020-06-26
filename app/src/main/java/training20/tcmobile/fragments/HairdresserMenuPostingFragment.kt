@@ -29,6 +29,7 @@ import training20.tcmobile.mvvm.viewmodels.DatePickerDialogFragment
 import training20.tcmobile.mvvm.viewmodels.HairdresserMenuPostingViewModel
 import training20.tcmobile.mvvm.viewmodels.TimePikerDialogFragment
 import training20.tcmobile.ui.recyclerview.adapters.HairdresserMenuPostingRecyclerViewAdpter
+import training20.tcmobile.util.applyNotNull
 
 
 //　viewを操作するところ
@@ -62,7 +63,6 @@ class HairdresserMenuPostingFragment :
         selectdate(view)
         selecttime(view)
         addtexts(view)
-        setupTagSelectionFragment(view)
         return view
     }
 
@@ -94,6 +94,10 @@ class HairdresserMenuPostingFragment :
         adapter.notifyDataSetChanged()
     }
 
+    override fun onMenuTagCategoriesChanged() {
+        setupTagSelectionFragment()
+    }
+
     // カレンダーで選択をするためのダイアログをだす処理
     private fun selectdate(view: View) {
         val datePicker = DatePickerDialogFragment.newInstance(this)
@@ -117,18 +121,17 @@ class HairdresserMenuPostingFragment :
         }
     }
 
-    private fun setupTagSelectionFragment(view: View) {
-        //*******************************************************************
-        // TODO: ViewModelを経由してサーバからタグとタグのカテゴリを取得する
-        val genderTags = mutableListOf(TagSelectionFragment.Tag(1, "メンズ"), TagSelectionFragment.Tag(2, "レディース"))
-        val styleTags = mutableListOf(TagSelectionFragment.Tag(3, "セミロング"), TagSelectionFragment.Tag(4, "ミディアム"), TagSelectionFragment.Tag(5, "ロング"), TagSelectionFragment.Tag(6, "ショート"), TagSelectionFragment.Tag(7, "ベリーショート"), TagSelectionFragment.Tag(8, "マッシュ"))
-        val allTags = arrayListOf(genderTags, styleTags).flatten().toMutableList()
-        val tabs = arrayListOf(
-            TagSelectionFragment.Tab("全て", allTags),
-            TagSelectionFragment.Tab("性別", genderTags),
-            TagSelectionFragment.Tab("スタイル", styleTags)
-        )
-        //*******************************************************************
+    private fun setupTagSelectionFragment() {
+        val tabs = viewModel.menuTagCategories?.mapNotNull { menuTagCategory ->
+            val tags = menuTagCategory.tags?.mapNotNull {
+                applyNotNull(it.id, it.name) { id, name ->
+                    TagSelectionFragment.Tag(id, name)
+                }
+            }?.toMutableList()
+            applyNotNull(menuTagCategory.name, tags) { name, tags ->
+                TagSelectionFragment.Tab(name, tags)
+            }
+        }?.toMutableList() ?: return
         val tagListItemClickListener: (TagSelectionFragment.Tag) -> Unit = { tag ->
             //*******************************************************************
             // NOTE: このidをサーバに送る
@@ -136,11 +139,11 @@ class HairdresserMenuPostingFragment :
             //*******************************************************************
         }
         val adapter = TagSelectionFragment.Adapter(childFragmentManager, tabs, tagListItemClickListener)
-        val tabPager = view.tabPager
-        tabPager.adapter = adapter
-        view.tabLayout.setupWithViewPager(tabPager)
+        val tabPager = view?.tabPager
+        tabPager?.adapter = adapter
+        view?.tabLayout?.setupWithViewPager(tabPager)
 
-        view.filterInput.addTextChangedListener(object: TextWatcher {
+        view?.filterInput?.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {

@@ -5,6 +5,7 @@ class MenuTagCategory(
     var name: String? = null,
     var index: Int? = null,
     var createdAt: String? = null,
-    var updatedAt: String? = null
+    var updatedAt: String? = null,
+    val tags: MutableList<MenuTag>? = null
 ) {
 }
