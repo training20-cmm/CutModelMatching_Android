@@ -9,10 +9,12 @@ interface MenuRepositoryContract {
     fun store(
         title: String,
         details: String,
-        timeDates: Array<String>,
+        timeDates: MutableList<String>,
+        timeStart: MutableList<String>,
         gender: String,
         price: String,
         minutes: String,
+        treatmentIds: MutableList<Int>,
         hairdresser_id: Int,
         onSuccess: (() -> Unit)? = null,
         onError: ((String, Int, ErrorResponse) -> Unit)? = null,

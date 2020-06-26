@@ -7,6 +7,8 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
+import training20.tcmobile.auth.AuthManager
+import training20.tcmobile.auth.AuthManagerRealm
 import training20.tcmobile.mvvm.actions.HairdresserChatHistoryActions
 import training20.tcmobile.mvvm.actions.HairdresserHomeActions
 import training20.tcmobile.mvvm.event.EventDispatcher
@@ -72,7 +74,7 @@ class ApplicationCMM: Application() {
             modules(listOf(authManagerModule, eventDispatcherModule, repositoryModule, viewModelModule))
         }
         if (BuildConfig.DEBUG) {
-            Debugger.debug(Role.HAIRDRESSER, "auIx9B16RpR21ONO8haA2jOKqMawyiQMNeiNBOdnVSteVjV0gwtwdPQC2lyf")
+            Debugger.debug(Role.HAIRDRESSER, "cOWwWzNFX6iVSUYDfytndvOMJMu9qOFui1mVSwdExvUybckzYExMq9twmrOD")
 //            Debugger.debug(Role.MODEL, "bE9fcQZwxHr1aiZMfkeqkEWfeHRmHUOGytnqBGxNypM95OjLMbW7B44R4Xcz")
         }
     }

@@ -35,21 +35,26 @@ class HairdresserMenuPostingViewModel(
 
     val menuRepository = MenuRepositoryHttp()
 
-    val response:Array<response_sample> = arrayOf(response_sample(1, "test1"),
-        response_sample(2, "test2"), response_sample(3, "test3"),
-        response_sample(4, "test4"), response_sample(5, "test5"))
+    val response:Array<response_sample> = arrayOf(response_sample(1, "カット"),
+        response_sample(2, "パーマ"), response_sample(3, "縮毛矯正"),
+        response_sample(4, "エクステ"), response_sample(5, "シャンプー"),
+        response_sample(6, "トリートメント"), response_sample(7, "ヘッドスパ"),
+        response_sample(8, "ヘアセット"))
 
-    var title = ""
-    var price = ""
-    var details = ""
-    var requiredtime = ""
-    var timeDates: Array<String> = arrayOf()
-    var minutes = ""
+    var title = "test"
+    var price = "1000"
+    var details = "sample_sample_sample"
+    var requiredtime = "20"
+    var timeDates: MutableList<String> = mutableListOf("2020/12/12", "2020/12/13")
+    var timeStarts: MutableList<String> = mutableListOf("10:00", "11:00")
+    var minutes = "20"
     var gender = ""
     var male = false
     var female = false
-    var resource = 0
     var hairdresser_id = 0
+    var imageURI = ""
+    var treatment: MutableList<Int> = mutableListOf()
+    var checked = false
 
     fun onclickPosting() {
         Log.d("CheckClick", "click!")
@@ -58,9 +63,11 @@ class HairdresserMenuPostingViewModel(
             title,
             details,
             timeDates,
+            timeStarts,
             gender,
             price,
             minutes,
+            treatment,
             hairdresser_id,
             onSuccess = this::onMenuStoreSuccess
         )
@@ -79,6 +86,11 @@ class HairdresserMenuPostingViewModel(
 
     private fun onMenuStoreSuccess() {
         println("OK")
+    }
+
+    fun itemcheck(id: Int) {
+        Log.d("checkbox", "click")
+        if (treatment.contains(id))  treatment.removeAt(treatment.indexOf(id)) else treatment.add(id)
     }
 }
 

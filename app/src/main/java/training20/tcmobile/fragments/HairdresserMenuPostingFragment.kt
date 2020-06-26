@@ -16,8 +16,10 @@ import com.google.android.flexbox.*
 import kotlinx.android.synthetic.main.fragment_hairdresser_menu_posting.*
 import kotlinx.android.synthetic.main.fragment_hairdresser_menu_posting.view.*
 import org.koin.android.ext.android.inject
+import training20.tcmobile.auth.AuthManager
 import training20.tcmobile.databinding.FragmentHairdresserMenuPostingBinding
 import training20.tcmobile.mvvm.actions.HairdresserMenuPostingActions
+import training20.tcmobile.mvvm.models.Hairdresser
 import training20.tcmobile.mvvm.viewmodels.DatePickerDialogFragment
 import training20.tcmobile.mvvm.viewmodels.HairdresserMenuPostingViewModel
 import training20.tcmobile.mvvm.viewmodels.TimePikerDialogFragment
@@ -36,6 +38,8 @@ class HairdresserMenuPostingFragment :
     override val viewModel: HairdresserMenuPostingViewModel by inject()
 
     private val adapter = HairdresserMenuPostingRecyclerViewAdpter(viewModel)
+    private val authManager: AuthManager by inject()
+    private val hairdresser = authManager.currentHairdresser()
 //    private lateinit var binding: FragmentHairdresserMenuPostingBinding
 
     override fun onCreateView(
@@ -43,7 +47,12 @@ class HairdresserMenuPostingFragment :
         savedInstanceState: Bundle?
     ): View? {
         val view = super.onCreateView(inflater, container, savedInstanceState) ?: return null
-//        layoutSetup(view)
+        layoutSetup(view)
+        view.button.setOnClickListener {
+            val hairdresser = authManager.currentHairdresser()
+            viewModel.hairdresser_id = hairdresser?.id ?: 0
+            viewModel.onclickPosting()
+        }
         selectPhoto(view)
         selectdate(view)
         selecttime(view)
@@ -58,6 +67,9 @@ class HairdresserMenuPostingFragment :
         FragmentHairdresserMenuPostingBinding.inflate(inflater, container, false)
 
     override fun setupViewModel(viewModel: HairdresserMenuPostingViewModel) {
+        //viewModel.hairdresser_id = hairdresser?.id ?: 0
+        val hairdresser = authManager.currentHairdresser()
+        println(hairdresser)
         viewModel.eventDispatcher.bind(viewLifecycleOwner, this)
         viewModel.start()
     }
@@ -87,8 +99,8 @@ class HairdresserMenuPostingFragment :
     // 日付が選択されたあと呼び出されるところ
     // ここでview画面に表示させればいい感じ
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, day: Int) {
-        selectDate.setText(String.format("%d / %02d / %d", year, month+1, day))
-        println("OK")
+        selectDate.setText(String.format("%d/%02d/%02d", year, month+1, day))
+        println("date_OK")
     }
 
     // 時計で時間を選択する処理
@@ -100,15 +112,23 @@ class HairdresserMenuPostingFragment :
     }
 
     override fun onTimeSet(view: TimePicker?, hour: Int, minute: Int) {
-        startTime.setText(String.format("%d : %d", hour, minute))
+        startTime.setText(String.format("%02d:%02d", hour, minute))
         println("time_ok")
     }
 
     // 希望日時を追加する
     private fun addtexts(view: View) {
         view.datetimeAdd.setOnClickListener {
+            val date = selectDate.text.toString()
+            val starttime = startTime.text.toString()
+            // 日付を配列にいれたい
+            viewModel.timeDates.add(date)
+            viewModel.timeStarts.add(starttime)
+            Log.d("click_add", "time&date_add!")
+            println("ok")
+            // 表示させたい
             val day_time = TextView(activity)
-            day_time.text = "希望日 : " + selectDate.text.toString() + "\n希望時間 : " + startTime.text.toString()
+            day_time.text = "希望日 : " + date + "\n希望時間 : " + starttime
             datetimeArea.addView(day_time)
             // マージン実装したいな……
         }
@@ -117,13 +137,12 @@ class HairdresserMenuPostingFragment :
     // flexboxLayoutのセットアップ
     private fun layoutSetup(view: View) {
         val flexboxLayoutManager = FlexboxLayoutManager(activity)
-        flexboxLayoutManager.flexDirection = FlexDirection.COLUMN
+        flexboxLayoutManager.flexDirection = FlexDirection.ROW
         flexboxLayoutManager.flexWrap = FlexWrap.WRAP
-        flexboxLayoutManager.justifyContent = JustifyContent.SPACE_AROUND
-        flexboxLayoutManager.alignItems = AlignItems.STRETCH
 
         view.recyclerView.layoutManager = flexboxLayoutManager
         view.recyclerView.adapter = HairdresserMenuPostingRecyclerViewAdpter(viewModel)
+         //HairdresserMenuPostingRecyclerViewAdpter(viewModel).setdata(viewModel.response)
     }
 
     // 写真を選択させたい

@@ -14,10 +14,12 @@ class MenuRepositoryHttp: MenuRepositoryContract {
     override fun store(
         title: String,
         details: String,
-        timeDates: Array<String>,
+        timeDates: MutableList<String>,
+        timeStart: MutableList<String>,
         gender: String,
         price: String,
         minutes: String,
+        treatmentIds: MutableList<Int>,
         hairdresser_id: Int,
         onSuccess: (() -> Unit)?,
         onError: ((String, Int, ErrorResponse) -> Unit)?,
@@ -32,8 +34,10 @@ class MenuRepositoryHttp: MenuRepositoryContract {
             Pair("minutes", minutes.toString()),
             Pair("hairdresser_id", hairdresser_id.toString())
         )
+        treatmentIds.forEach { queries.add(Pair("treatmentIds[]", it.toString())) }
         timeDates.forEach { queries.add(Pair("timeDates[]", it)) }
-        HttpClient(ModelRegistrationResponse::class.java, HttpMethod.POST, "menus", *queries.toTypedArray())
+        timeStart.forEach { queries.add(Pair("timeStart[]", it)) }
+        HttpClient(ModelRegistrationResponse::class.java, HttpMethod.POST, "menus", queries =  *queries.toTypedArray())
             .send({
                 onSuccess?.invoke()
             }, onError, onFailure, onComplete)

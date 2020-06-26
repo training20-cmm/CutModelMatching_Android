@@ -20,7 +20,7 @@
             <RelativeLayout
                 android:id="@+id/toolbar_area"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -33,7 +33,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="30dp"
-                android:onClick="@{() -> viewModel.onclickPosting()}"
                 android:text="投稿"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -55,7 +54,6 @@
             <TextView
                 android:id="@+id/model_gender"
                 android:layout_width="match_parent"
-
                 android:layout_height="wrap_content"
                 android:layout_marginStart="70dp"
                 android:layout_marginTop="20dp"
@@ -68,7 +66,6 @@
                 android:id="@+id/gender_area"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:checked="false"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -144,20 +141,18 @@
                         android:inputType="time"
                         app:layout_constraintStart_toStartOf="@+id/starttimeText"
                         app:layout_constraintTop_toBottomOf="@+id/starttimeText" />
-                    <!--                        android:time="@={viewModel.starttime}"/>-->
+<!--                        android:time="@={viewModel.starttime}"/>&ndash;&gt;-->
 
                     <LinearLayout
                         android:id="@+id/datetimeArea"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginLeft="70dp"
-                        android:layout_marginRight="70dp"
                         android:orientation="vertical"
-                        app:layout_constraintBottom_toTopOf="@+id/requiredText"
+                        app:layout_constraintEnd_toEndOf="@+id/startTime"
+                        app:layout_constraintStart_toStartOf="@+id/startTime"
                         app:layout_constraintTop_toBottomOf="@+id/startTime"
-                        tools:layout_editor_absoluteX="70dp" />
+                        tools:ignore="MissingConstraints" />
 
                     <TextView
                         android:id="@+id/requiredText"
@@ -165,8 +160,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:text="所要時間 (分)"
-                        app:layout_constraintTop_toBottomOf="@+id/startTime"
-                        tools:layout_editor_absoluteX="70dp" />
+                        app:layout_constraintStart_toStartOf="@+id/startTime"
+                        app:layout_constraintTop_toBottomOf="@+id/datetimeArea" />
 
 
                     <EditText
@@ -239,6 +234,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/order_area" />
 
             <TextView
+                android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -255,10 +251,10 @@
                 android:layout_marginStart="70dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="70dp"
-                app:imageResource="@{viewModel.resource}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fee" />
+                app:layout_constraintTop_toBottomOf="@+id/fee"/>
+<!--                android:text="@{viewModel.imageURI}"/>-->
 
             <Button
                 android:id="@+id/photoBtn"
@@ -293,7 +289,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="70dp"
                 android:layout_marginEnd="70dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="10dp"
                 android:hint="Comments"
                 android:inputType="textMultiLine"
                 android:maxLines="5"
@@ -302,9 +298,18 @@
                 android:textAlignment="textStart"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/underbar_area"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent" />
+
+            <RelativeLayout
+                android:id="@+id/underbar_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:layout_editor_absoluteX="1dp">
+
+            </RelativeLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

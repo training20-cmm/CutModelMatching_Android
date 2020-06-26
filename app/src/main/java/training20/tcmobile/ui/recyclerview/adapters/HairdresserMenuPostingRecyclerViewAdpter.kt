@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import training20.tcmobile.R
 import training20.tcmobile.mvvm.viewmodels.HairdresserMenuPostingViewModel
+import training20.tcmobile.mvvm.viewmodels.response_sample
 import training20.tcmobile.ui.recyclerview.viewholders.HairdresserMenuPostingViewHolder
 
 class HairdresserMenuPostingRecyclerViewAdpter(
@@ -22,12 +23,22 @@ class HairdresserMenuPostingRecyclerViewAdpter(
 
 
     override fun getItemCount(): Int {
-        return 1
+        return hairdresserMenuPostingViewModel.response.size
     }
 
     // 部品に表示する部分
     override fun onBindViewHolder(holder: HairdresserMenuPostingViewHolder, position: Int) {
-        holder.checkboxText?.text = "テスト" // 表示させるところ
+        val item = hairdresserMenuPostingViewModel.response[position]
+        println(item)
+        holder.checkboxText.text = item.name // 表示させるところ
+
+        // ここでチェックボックスにイベントリスナーを付ける
+        holder.checkbox.setOnClickListener {
+            // 具体的な処理はviewmodelに
+            hairdresserMenuPostingViewModel.itemcheck(item.id)
+        }
     }
+
+
 
 }
