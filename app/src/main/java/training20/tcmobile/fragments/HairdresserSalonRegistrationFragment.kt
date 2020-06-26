@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.databinding.ObservableInt
 import kotlinx.android.synthetic.main.fragment_hairdresser_salon_registration.*
 import kotlinx.android.synthetic.main.fragment_hairdresser_salon_registration.view.*
 import org.koin.android.ext.android.inject
@@ -16,6 +17,7 @@ import training20.tcmobile.R
 import training20.tcmobile.databinding.FragmentHairdresserSalonRegistrationBinding
 import training20.tcmobile.mvvm.actions.HairdresserSalonRegistrationActions
 import training20.tcmobile.mvvm.viewmodels.HairdresserSalonRegistrationViewModel
+import java.io.File
 
 class HairdresserSalonRegistrationFragment:
     BackableFragment<HairdresserSalonRegistrationActions, FragmentHairdresserSalonRegistrationBinding, HairdresserSalonRegistrationViewModel>(),
@@ -85,6 +87,10 @@ class HairdresserSalonRegistrationFragment:
                         val inputStream = activity?.contentResolver?.openInputStream(uri)
                         val image = BitmapFactory.decodeStream(inputStream)
                         image_view.setImageBitmap(image)
+                        println(uri.toString())
+                        val file = File(uri.toString())
+                        println(file)
+                        viewModel.uri = uri.toString()
                     }
                 } catch (e: Exception) {
                     Log.d("ClickEvent", "show_photo_error")

@@ -28,11 +28,12 @@ class SalonRepositoryHttpMock {
         salonmemo: String,
         seatsnumber: String,
         paymentMethods: MutableList<String>,
+        uri: String,
         starttime: String,
         endtime: String,
         Starttime2: String,
         endtime2: String,
-        week: String,
+        regularHoliday: String,
         onSuccess: ((SalonMock) -> Unit)? = null,
         onError: ((String, Int, ErrorResponse) -> Unit)? = null,
         onFailure: ((IOException) -> Unit)? = null,
@@ -47,11 +48,12 @@ class SalonRepositoryHttpMock {
             Pair("bioText", salonmemo),
             Pair("capacity", seatsnumber),
             Pair("parking", "0"),
+            Pair("images", uri),
             Pair("openHoursWeekdays", starttime),
             Pair("closeHoursWeekdays", endtime),
             Pair("openHoursWeekends", Starttime2),
             Pair("closeHoursWeekends", endtime2),
-            Pair("regularHoliday", week)
+            Pair("regularHoliday", regularHoliday)
         )
         paymentMethods.forEach { queries.add(Pair("paymentMethodIds[]", it))}
         HttpClient(SalonResponse::class.java, HttpMethod.POST, "salons", queries = *queries.toTypedArray())
@@ -65,12 +67,12 @@ class HairdresserSalonRegistrationViewModel(
     eventDispatcher: EventDispatcher<HairdresserSalonRegistrationActions>
 ): BackableViewModel<HairdresserSalonRegistrationActions>(eventDispatcher) {
     var imageResource = ObservableInt()
-    var salonname = "title"
-    var salonmemo = "tt"
-    var postalcode = "1234567"
+    var salonname = "title01"
+    var salonmemo = "testmemo01"
+    var postalcode = "1230001"
     var prefecturePosition = 0
-    var address = "sos"
-    var residence = "202"
+    var address = "sos01"
+    var residence = "101"
     var seatsnumber = "5"
     //var gender: ObservableInt? = null
     var cash = false
@@ -82,8 +84,10 @@ class HairdresserSalonRegistrationViewModel(
     var weekPosition = 0
     var prefectures = arrayOf<String>()
     var week = arrayOf<String>()
+    var uri = ""
 
     val paymentMethods: MutableList<String> = mutableListOf()
+
 
 
     private val salonRepository = SalonRepositoryHttpMock()
@@ -96,6 +100,7 @@ class HairdresserSalonRegistrationViewModel(
             paymentMethods.add("2")
         }
 
+        val regularHoliday = week[weekPosition][0].toString()
             salonRepository.store(
                 salonname,
                 postalcode,
@@ -105,11 +110,12 @@ class HairdresserSalonRegistrationViewModel(
                 salonmemo,
                 seatsnumber,
                 paymentMethods,
+                uri,
                 starttime,
                 endtime,
                 starttime2,
                 endtime2,
-                week[weekPosition],
+                regularHoliday,
                 onSuccess = this::onSalonStoreSuccess
             )
     }
