@@ -28,6 +28,7 @@ import training20.tcmobile.R
 import training20.tcmobile.databinding.FragmentHairdresserSalonBinding
 import training20.tcmobile.mvvm.actions.HairdresserSalonActions
 import training20.tcmobile.mvvm.viewmodels.HairdresserSalonViewModel
+import training20.tcmobile.net.http.HttpClient
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.util.*
@@ -125,7 +126,7 @@ class HairdresserSalonFragment :
 
         for((index,value) in viewModel.salon.value?.images!!.withIndex()) {
 
-            val imagepath = "http://192.168.8.188:8080" + viewModel.salon.value?.images?.get(index)?.path
+            val imagepath = HttpClient.serverOrigin + viewModel.salon.value?.images?.get(index)?.path
 
             val imageView = activity?.layoutInflater?.inflate(R.layout.fragment_hairdreser_image_view, null) as ImageView?
 
