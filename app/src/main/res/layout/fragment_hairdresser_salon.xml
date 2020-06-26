@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -14,10 +15,351 @@
         tools:context=".fragments.HairdresserSalonFragment">
 
         <!-- TODO: Update blank fragment layout -->
-        <TextView
+
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/view_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:layout_height="wrap_content"
+
+            />
+
+        <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="100dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1620dp">
+
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:orientation="horizontal"
+                            android:paddingTop="20dp"
+                            android:paddingBottom="20dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/regularHoliday">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/activity_hairdresser_salon_matching_calendar_sunday"
+                                android:textAlignment="center"
+                                android:textColor="@color/textColorSecondary" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/activity_hairdresser_salon_matching_calendar_monday"
+                                android:textAlignment="center"
+                                android:textColor="@color/textColorSecondary" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/activity_hairdresser_salon_matching_calendar_tuesday"
+                                android:textAlignment="center"
+                                android:textColor="@color/textColorSecondary" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/activity_hairdresser_salon_matching_calendar_wednesday"
+                                android:textAlignment="center"
+                                android:textColor="@color/textColorSecondary" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/activity_hairdresser_salon_matching_calendar_thursday"
+                                android:textAlignment="center"
+                                android:textColor="@color/textColorSecondary" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/activity_hairdresser_salon_matching_calendar_friday"
+                                android:textAlignment="center"
+                                android:textColor="@color/textColorSecondary" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/activity_hairdresser_salon_matching_calendar_saturday"
+                                android:textAlignment="center"
+                                android:textColor="@color/textColorSecondary" />
+
+                        </LinearLayout>
+
+                        <TableLayout
+                            android:id="@+id/calendarTableLayout"
+                            android:layout_width="0dp"
+                            android:layout_height="300dp"
+                            android:layout_weight="1"
+                            android:background="#f1f1f1"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+                            <include
+                                android:id="@+id/row1"
+                                layout="@layout/view_hairdresser_salon_matching_calendar_table_row"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_marginBottom="1dp"
+                                android:layout_weight="1" />
+
+                            <include
+                                android:id="@+id/row2"
+                                layout="@layout/view_hairdresser_salon_matching_calendar_table_row"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_marginBottom="1dp"
+                                android:layout_weight="1" />
+
+                            <include
+                                android:id="@+id/row3"
+                                layout="@layout/view_hairdresser_salon_matching_calendar_table_row"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_marginBottom="1dp"
+                                android:layout_weight="1" />
+
+                            <include
+                                android:id="@+id/row4"
+                                layout="@layout/view_hairdresser_salon_matching_calendar_table_row"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_marginBottom="1dp"
+                                android:layout_weight="1" />
+
+                            <include
+                                android:id="@+id/row5"
+                                layout="@layout/view_hairdresser_salon_matching_calendar_table_row"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_marginBottom="1dp"
+                                android:layout_weight="1" />
+
+                            <include
+                                android:id="@+id/row6"
+                                layout="@layout/view_hairdresser_salon_matching_calendar_table_row"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_marginBottom="1dp"
+                                android:layout_weight="1" />
+                        </TableLayout>
+
+                        <HorizontalScrollView
+                            android:id="@+id/horizontalScrollView"
+                            android:layout_width="416dp"
+                            android:layout_height="160dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <LinearLayout
+                                android:id="@+id/imageLinearLayout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal" />
+                        </HorizontalScrollView>
+
+                        <TextView
+                            android:id="@+id/salonName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="32dp"
+                            android:layout_marginTop="16dp"
+                            android:text="@string/fragment_hairdresser_salon_name"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
+
+                        <TextView
+                            android:id="@+id/salonNameValue"
+                            android:layout_width="300dp"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginTop="16dp"
+                            android:text="@{viewModel.salon.name}"
+                            app:layout_constraintStart_toStartOf="@+id/salonName"
+                            app:layout_constraintTop_toBottomOf="@+id/salonName" />
+
+                        <TextView
+                            android:id="@+id/salonBio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="80dp"
+                            android:text="@string/fragment_hairdresser_salon_bio"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            app:layout_constraintStart_toStartOf="@+id/salonName"
+                            app:layout_constraintTop_toBottomOf="@+id/salonName" />
+
+                        <TextView
+                            android:id="@+id/salonBioValue"
+                            android:layout_width="300dp"
+                            android:layout_height="100dp"
+                            android:layout_marginTop="16dp"
+                            android:text="@{viewModel.salon.bioText}"
+                            app:layout_constraintStart_toStartOf="@+id/salonNameValue"
+                            app:layout_constraintTop_toBottomOf="@+id/salonBio" />
+
+                        <TextView
+                            android:id="@+id/salonAddress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="128dp"
+                            android:text="@string/fragment_hairdresser_salon_address"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            app:layout_constraintStart_toStartOf="@+id/salonBio"
+                            app:layout_constraintTop_toBottomOf="@+id/salonBio" />
+
+                        <TextView
+                            android:id="@+id/salonAddressValue"
+                            android:layout_width="300dp"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="16dp"
+                            android:text="@{viewModel.salon.address}"
+                            app:layout_constraintStart_toStartOf="@+id/salonBioValue"
+                            app:layout_constraintTop_toBottomOf="@+id/salonAddress" />
+
+                        <TextView
+                            android:id="@+id/salonCapacity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="80dp"
+                            android:text="@string/fragment_hairdresser_salon_capacity"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            app:layout_constraintStart_toStartOf="@+id/salonAddress"
+                            app:layout_constraintTop_toBottomOf="@+id/salonAddress" />
+
+                        <TextView
+                            android:id="@+id/salonCapacityValue"
+                            android:layout_width="300dp"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="16dp"
+                            android:inputType="number"
+
+                            app:layout_constraintStart_toStartOf="@+id/salonAddressValue"
+                            app:layout_constraintTop_toBottomOf="@+id/salonCapacity" />
+
+                        <TextView
+                            android:id="@+id/salonPayment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="80dp"
+                            android:text="@string/fragment_hairdresser_salon_payment"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            app:layout_constraintStart_toStartOf="@+id/salonCapacity"
+                            app:layout_constraintTop_toBottomOf="@+id/salonCapacity" />
+
+                        <TextView
+                            android:id="@+id/salonPaymentValue"
+                            android:layout_width="300dp"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="16dp"
+                            android:text=""
+                            app:layout_constraintStart_toStartOf="@+id/salonCapacityValue"
+                            app:layout_constraintTop_toBottomOf="@+id/salonPayment" />
+
+                        <TextView
+                            android:id="@+id/salonBusinessHours"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="80dp"
+                            android:text="@string/fragment_hairdresser_salon_business_hours"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            app:layout_constraintStart_toStartOf="@+id/salonPayment"
+                            app:layout_constraintTop_toBottomOf="@+id/salonPayment" />
+
+                        <TextView
+                            android:id="@+id/weekdayValue"
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+
+                            app:layout_constraintStart_toStartOf="@+id/salonPaymentValue"
+                            app:layout_constraintTop_toBottomOf="@+id/salonBusinessHours" />
+
+                        <TextView
+                            android:id="@+id/weekendValue"
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintStart_toStartOf="@+id/weekdayValue"
+                            app:layout_constraintTop_toBottomOf="@+id/weekdayValue" />
+
+                        <TextView
+                            android:id="@+id/regularHoliday"
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintStart_toStartOf="@+id/weekdayValue"
+                            app:layout_constraintTop_toBottomOf="@+id/weekendValue" />
+
+                        <TextView
+                            android:id="@+id/salonMap"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="@string/fragment_hairdresser_salon_map"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            app:layout_constraintStart_toStartOf="@+id/salonBusinessHours"
+                            app:layout_constraintTop_toBottomOf="@+id/calendarTableLayout" />
+
+                        <com.google.android.gms.maps.MapView
+
+                            android:id="@+id/mapView"
+                            android:layout_width="300dp"
+                            android:layout_height="250dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="16dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/salonMap">
+
+                        </com.google.android.gms.maps.MapView>
+
+
+                        <!--                        <fragment-->
+                        <!--                            android:id="@+id/map"-->
+                        <!--                            android:name="com.google.android.gms.maps.SupportMapFragment"-->
+                        <!--                            android:layout_width="250dp"-->
+                        <!--                            android:layout_height="250dp"-->
+                        <!--                            android:layout_marginTop="16dp"-->
+                        <!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+                        <!--                            app:layout_constraintEnd_toEndOf="parent"-->
+                        <!--                            app:layout_constraintStart_toStartOf="parent"-->
+                        <!--                            app:layout_constraintTop_toBottomOf="@+id/salonMap"-->
+                        <!--                            app:layout_constraintVertical_bias="0.0"-->
+                        <!--                            tools:context=".MapsActivity"-->
+                        <!--                            tools:ignore="MissingConstraints" />-->
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+            </ScrollView>
 
     </FrameLayout>
 </layout>

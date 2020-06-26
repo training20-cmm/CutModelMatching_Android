@@ -3,11 +3,12 @@
 
     <group android:id="@+id/appNavigation">
         <item
+            android:id="@+id/navigationDrawerMenuMySalon"
             android:title="@string/activity_hairdresser_home_navigation_drawer_menu_my_salon" />
-        <item
-            android:title="@string/activity_hairdresser_home_navigation_drawer_menu_reservations" />
     </group>
     <group android:id="@+id/roleNavigation">
-        <item android:title="@string/activity_hairdresser_home_navigation_drawer_menu_logout" />
+        <item
+            android:id="@+id/navigationDrawerMenuLogout"
+            android:title="@string/activity_hairdresser_home_navigation_drawer_menu_logout" />
     </group>
 </menu>

@@ -17,12 +17,18 @@ class ApplicationCMM: Application() {
         super.onCreate()
         ApplicationContext.onCreateApplication(applicationContext)
 
-        //
-        if (BuildConfig.DEBUG) {
-            //Debugger.debug(Role.HAIRDRESSER, "uShHjzAz60uPmdQZxEUxGj0s0MGSOk7aLrTuYf75LyA2Y8s7SMbVsFRFoT8F")
-            Debugger.debug(Role.HAIRDRESSER, "uxUcrOlXs1LWYgCYPWL2YQ2VxR7d1VfYbn7PmhGdWFIM286qlYA00hOiFRHj")
+        Realm.init(this)
+        val realmConfiguration = RealmConfiguration.Builder().deleteRealmIfMigrationNeeded().build()
+        Realm.setDefaultConfiguration(realmConfiguration)
+        val model = AuthManagerRealm().currentModel()
+        println(model)
+        Realm.getDefaultInstance().executeTransaction {
+            Realm.getDefaultInstance().deleteAll()
         }
-        //
+        val authManagerModule = module {
+            factory { AuthManagerRealm() as AuthManager }
+        }
+
         val eventDispatcherModule = module {
             factory { EventDispatcher<HairdresserChatHistoryActions>() }
         }
@@ -36,7 +42,7 @@ class ApplicationCMM: Application() {
         val viewModelModule = module {
             viewModel { HairdresserRegistrationFormViewModel(get(), get()) }
             viewModel { HairdresserFoundationViewModel(get()) }
-            viewModel { HairdresserHomeViewModel(get(), get()) }
+            viewModel { HairdresserHomeViewModel(get(), get(), get()) }
             viewModel { HairdresserChatHistoryViewModel(get(), get()) }
             viewModel { HairdresserHairstyleListViewModel(get()) }
             viewModel { HairdresserHairstylePostingViewModel(get()) }
@@ -44,19 +50,24 @@ class ApplicationCMM: Application() {
             viewModel { HairdresserSalonViewModel(get(), get()) }
             viewModel { HairdresserSalonUnregisteredViewModel(get()) }
             viewModel { HairdresserSalonRegistrationViewModel(get()) }
-            viewModel { HairdresserChatRoomViewModel(get()) }
+            viewModel { HairdresserChatRoomViewModel(get(), get(), get()) }
             viewModel { ModelRegistrationFormViewModel(get(), get()) }
             viewModel { ModelFoundationViewModel(get()) }
             viewModel { ModelHomeViewModel(get()) }
-            viewModel { ModelChatHistoryViewModel(get()) }
+            viewModel { ModelChatHistoryViewModel(get(), get()) }
             viewModel { ModelNotificationsViewModel(get()) }
             viewModel { ModelMenuSearchViewModel(get()) }
             viewModel { ModelMenuViewModel(get()) }
-            viewModel { ModelChatRoomViewModel(get()) }
+            viewModel { ModelChatRoomViewModel(get(), get(), get()) }
+            viewModel { ModelReservationConfirmationViewModel(get())}
         }
         startKoin {
             androidContext(this@ApplicationCMM)
-            modules(listOf(eventDispatcherModule, repositoryModule, viewModelModule))
+            modules(listOf(authManagerModule, eventDispatcherModule, repositoryModule, viewModelModule))
+        }
+        if (BuildConfig.DEBUG) {
+//            Debugger.debug(Role.HAIRDRESSER, "S4smF7tNDqKWMJVpeErxQil9hFV0IBRgj6OKUfKO9TMTttmbNTOwg27Q9N6x")
+            Debugger.debug(Role.MODEL, "d4207PQbW6VKYElqsE6yIUjNoY7TpvOIoFtixsZJHOttQyMh7eLeydky8AX7")
         }
     }
 }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/model_search_result_nav_graph"
+    app:startDestination="@id/modelSearchResultFragment">
+
+    <fragment
+        android:id="@+id/modelSearchResultFragment"
+        android:name="training20.tcmobile.fragments.ModelSearchResultFragment"
+        android:label="ModelSearchResultFragment" >
+        <action
+            android:id="@+id/action_modelSearchResultFragment_to_modelMenuSearchFragment"
+            app:destination="@id/modelMenuSearchFragment" />
+        <action
+            android:id="@+id/action_modelSearchResultFragment_to_modelMenuFragment"
+            app:destination="@id/modelMenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/modelMenuSearchFragment"
+        android:name="training20.tcmobile.fragments.ModelMenuSearchFragment"
+        android:label="ModelMenuSearchFragment" />
+    <fragment
+        android:id="@+id/modelMenuFragment"
+        android:name="training20.tcmobile.fragments.ModelMenuFragment"
+        android:label="ModelMenuFragment" >
+        <action
+            android:id="@+id/action_modelMenuFragment_to_modelReservationConfirmationFragment"
+            app:destination="@id/modelReservationConfirmationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/modelReservationConfirmationFragment"
+        android:name="training20.tcmobile.fragments.ModelReservationConfirmationFragment"
+        android:label="ModelReservationConfirmationFragment" />
+</navigation>

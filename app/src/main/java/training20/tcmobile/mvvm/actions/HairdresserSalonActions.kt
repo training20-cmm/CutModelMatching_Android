@@ -1,3 +1,5 @@
 package training20.tcmobile.mvvm.actions
 
-interface HairdresserSalonActions: BackAction
+interface HairdresserSalonActions: BackAction{
+    fun onSalonCompleted()
+}

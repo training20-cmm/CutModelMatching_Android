@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#87bfe4</color>
+    <color name="colorPrimary">#87E4D8</color>
     <color name="colorPrimaryDark">#80cbc4</color>
     <color name="colorAccent">#f06292</color>
 
@@ -25,4 +25,6 @@
     <color name="blackout">#de000000</color>
 
     <color name="ratingStar">#FFD700</color>
+
+    <color name="bottomNavigation">#F0F0F0</color>
 </resources>

@@ -5,13 +5,16 @@ import androidx.lifecycle.ViewModel
 import kotlinx.android.synthetic.main.activity_model_registration_form.view.*
 import training20.tcmobile.mvvm.actions.ModelRegistrationFormActions
 import training20.tcmobile.mvvm.event.EventDispatcher
+import training20.tcmobile.mvvm.models.AccessToken
+import training20.tcmobile.mvvm.models.Model
+import training20.tcmobile.mvvm.models.RefreshToken
 import training20.tcmobile.mvvm.repositories.ModelRepositoryContract
 import training20.tcmobile.mvvm.repositories.ModelRepositoryHttp
 import training20.tcmobile.net.http.responses.ModelRegistrationResponse
 
 class ModelRegistrationFormViewModel(
-   val eventDispatcher: EventDispatcher<ModelRegistrationFormActions>,
-   private val modelRepository: ModelRepositoryContract
+    val eventDispatcher: EventDispatcher<ModelRegistrationFormActions>,
+    private val modelRepository: ModelRepositoryContract
 ): ViewModel()
 {
     var name = ""
@@ -31,7 +34,7 @@ class ModelRegistrationFormViewModel(
         )
     }
 
-    private fun onModelRegistrationSuccess(response: ModelRegistrationResponse) {
-        eventDispatcher.dispatchEvent { onModelRegistrationSuccess(response) }
+    private fun onModelRegistrationSuccess(model: Model?, accessToken: AccessToken?, refreshToken: RefreshToken?) {
+        eventDispatcher.dispatchEvent { onModelRegistrationSuccess(model, accessToken, refreshToken) }
     }
 }

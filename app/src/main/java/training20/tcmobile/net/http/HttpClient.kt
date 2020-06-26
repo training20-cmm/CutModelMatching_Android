@@ -9,12 +9,13 @@ import training20.tcmobile.ErrorCode
 import training20.tcmobile.Role
 import training20.tcmobile.RoleManager
 import training20.tcmobile.net.http.responses.AccessTokenIssuanceResponse
+import training20.tcmobile.net.http.responses.ErrorResponse
 import training20.tcmobile.net.url.Query
 import training20.tcmobile.notification.Notification
 import training20.tcmobile.notification.NotificationCenter
 import training20.tcmobile.notification.NotificationType
-import training20.tcmobile.net.http.responses.ErrorResponse
 import training20.tcmobile.security.AuthenticationTokenManager
+import java.io.File
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 
@@ -24,6 +25,7 @@ class HttpClient<T>(
     private val method: HttpMethod,
     private val path: String,
     private val options: RequestOptions? = null,
+    private val files: Array<Pair<String, File>>? = null,
     private vararg val queries: Pair<String, String>
 ) {
 
@@ -74,22 +76,36 @@ class HttpClient<T>(
             val accessToken = AuthenticationTokenManager.getOrLoadAccessToken(role) ?: ""
             builder = Request.Builder().header(HttpHeader.AUTHORIZATION.value, accessToken)
         }
-        var urlQueryString = Query().apply { queries.forEach { append(it.first, it.second) } }.make()
-        options?.embed?.let { embed ->
-            if (!urlQueryString.isEmpty()) {
-                urlQueryString += "&"
-            }
-            urlQueryString += "embed=${embed}"
-        }
         val url = "$baseUrl/$path"
         request = when (method) {
             HttpMethod.POST -> {
-                val mediaType =
-                    MediaType.parse("application/x-www-form-urlencoded")
-                val body = RequestBody.create(mediaType, urlQueryString)
-                builder.url(url).post(body).build()
+                if (files == null) {
+                    val mediaType =
+                        MediaType.parse("application/x-www-form-urlencoded")
+                    val urlQueryString = makeUrlEncodedQueryString()
+                    val body = RequestBody.create(mediaType, urlQueryString)
+                    builder.url(url).post(body).build()
+                } else {
+                    val media = MediaType.parse("multipart/form-data")
+                    val boundary = System.currentTimeMillis().toString()
+                    var bodyBuilder = MultipartBody.Builder(boundary).setType(MultipartBody.FORM)
+                    files.forEach {
+                        val key = it.first
+                        val file = it.second
+                        bodyBuilder = bodyBuilder.addFormDataPart(key, file.name, RequestBody.create(media, file))
+                    }
+                    queries.forEach {
+                        bodyBuilder = bodyBuilder.addFormDataPart(it.first, it.second)
+                    }
+                    options?.embed?.let { embed ->
+                        bodyBuilder.addFormDataPart("embed", embed)
+                    }
+                    val body = bodyBuilder.build()
+                    builder.url(url).post(body).build()
+                }
             }
             else -> {
+                val urlQueryString = makeUrlEncodedQueryString()
                 builder.url("$url?$urlQueryString").build()
             }
         }
@@ -247,6 +263,17 @@ class HttpClient<T>(
         } else {
             OkHttpClient()
         }
+    }
+
+    private fun makeUrlEncodedQueryString(): String {
+        var urlQueryString = Query().apply { queries.forEach { append(it.first, it.second) } }.make()
+        options?.embed?.let { embed ->
+            if (urlQueryString.isNotEmpty()) {
+                urlQueryString += "&"
+            }
+            urlQueryString += "embed=${embed}"
+        }
+        return urlQueryString
     }
 
 }

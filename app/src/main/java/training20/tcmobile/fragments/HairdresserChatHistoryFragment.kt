@@ -4,20 +4,54 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_hairdresser_chat_history.view.*
+import kotlinx.android.synthetic.main.view_hairdresser_chat_history_list_item.view.*
 import org.koin.android.ext.android.inject
+import training20.tcmobile.R
 import training20.tcmobile.databinding.FragmentHairdresserChatHistoryBinding
 import training20.tcmobile.mvvm.MvvmFragment
 import training20.tcmobile.mvvm.actions.HairdresserChatHistoryActions
+import training20.tcmobile.mvvm.models.HairdresserChatRoom
 import training20.tcmobile.mvvm.viewmodels.HairdresserChatHistoryViewModel
-import training20.tcmobile.ui.recyclerview.adapters.ChatHistoryRecyclerViewAdapter
 
 class HairdresserChatHistoryFragment :
     MvvmFragment<FragmentHairdresserChatHistoryBinding, HairdresserChatHistoryViewModel>(),
     HairdresserChatHistoryActions
 {
+
+    private class RecyclerViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+        val constraintLayout = itemView.chatHistoryListItemConstraintLayout
+        val nameTextView = itemView.nameTextView
+        val messageTextView = itemView.messageTextView
+    }
+
+    private inner class RecyclerViewAdapter(
+        private val chatHistoryViewModel: HairdresserChatHistoryViewModel
+    ): RecyclerView.Adapter<RecyclerViewHolder>()
+    {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.view_hairdresser_chat_history_list_item, parent, false)
+            return RecyclerViewHolder(view)
+        }
+
+        override fun getItemCount(): Int {
+            return chatHistoryViewModel.chatRooms.value?.size ?: 0
+        }
+
+        override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
+            val chatRoom = chatHistoryViewModel.chatRooms.value?.get(position)
+            holder.nameTextView.text = chatRoom?.model?.name
+            holder.messageTextView.text = chatRoom?.chatMessages?.first()?.content
+            holder.constraintLayout.setOnClickListener {
+                this@HairdresserChatHistoryFragment.onChatHistoryListItemClicked(chatHistoryViewModel.chatRooms.value?.get(position))
+            }
+        }
+
+    }
 
     companion object {
 
@@ -29,7 +63,7 @@ class HairdresserChatHistoryFragment :
 
     override val viewModel: HairdresserChatHistoryViewModel by inject()
 
-    private val chatHistoryRecyclerViewAdapter = ChatHistoryRecyclerViewAdapter(viewModel)
+    private val chatHistoryRecyclerViewAdapter = RecyclerViewAdapter(viewModel)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -62,9 +96,20 @@ class HairdresserChatHistoryFragment :
         dataBinding: FragmentHairdresserChatHistoryBinding,
         savedInstanceState: Bundle?
     ) {
+        dataBinding.viewModel = viewModel
     }
 
     override fun onChatRoomsChanged() {
         chatHistoryRecyclerViewAdapter.notifyDataSetChanged()
+    }
+
+    private fun onChatHistoryListItemClicked(chatRoom: HairdresserChatRoom?) {
+        chatRoom?.let { chatRoom ->
+            val action = HairdresserChatHistoryFragmentDirections.actionHairdresserChatHistoryFragmentToHairdresserChatRoomFragment(
+                chatRoom.id,
+                chatRoom.model
+            )
+            findNavController().navigate(action)
+        }
     }
 }
