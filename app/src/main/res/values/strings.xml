@@ -105,6 +105,7 @@
     <string name="fragment_hairdresser_salon_registration_hint_enter_starttime2">開店時間</string>
     <string name="fragment_hairdresser_salon_registration_hint_enter_endtime2">閉店時間</string>
     <string name="fragment_hairdresser_salon_registration_button_registration">登録</string>
+    <string name="fragment_hairdresser_salon_registration_button_photo">追加</string>
 
     <string-array name="prefectures">
         <item>都道府県</item><item>北海道</item><item>青森</item><item>岩手</item><item>宮城</item><item>秋田</item><item>山形</item>
