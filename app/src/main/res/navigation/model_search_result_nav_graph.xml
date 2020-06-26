@@ -11,9 +11,24 @@
         <action
             android:id="@+id/action_modelSearchResultFragment_to_modelMenuSearchFragment"
             app:destination="@id/modelMenuSearchFragment" />
+        <action
+            android:id="@+id/action_modelSearchResultFragment_to_modelMenuFragment"
+            app:destination="@id/modelMenuFragment" />
     </fragment>
     <fragment
         android:id="@+id/modelMenuSearchFragment"
         android:name="training20.tcmobile.fragments.ModelMenuSearchFragment"
         android:label="ModelMenuSearchFragment" />
+    <fragment
+        android:id="@+id/modelMenuFragment"
+        android:name="training20.tcmobile.fragments.ModelMenuFragment"
+        android:label="ModelMenuFragment" >
+        <action
+            android:id="@+id/action_modelMenuFragment_to_modelReservationConfirmationFragment"
+            app:destination="@id/modelReservationConfirmationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/modelReservationConfirmationFragment"
+        android:name="training20.tcmobile.fragments.ModelReservationConfirmationFragment"
+        android:label="ModelReservationConfirmationFragment" />
 </navigation>
