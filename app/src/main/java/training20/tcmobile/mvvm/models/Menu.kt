@@ -9,7 +9,11 @@ class Menu(
     var gender: Char? = null,
     var price: Int? = null,
     var minutes: Int? = null,
-    var hairdresser_id: Int? = null,
-    var images: Array<MenuImage>? = null
+    var hairdresserId: Int? = null,
+    var images: Array<MenuImage>? = null,
+    var Tag: Array<MenuTag>? = null,
+    var Time: Array<MenuTime>? = null,
+    var createdAt: String? = null,
+    var updatedAt: String? = null
 ) {
 }
