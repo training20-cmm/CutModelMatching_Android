@@ -6,6 +6,8 @@ import android.app.TimePickerDialog
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +17,10 @@ import androidx.core.view.marginBottom
 import com.google.android.flexbox.*
 import kotlinx.android.synthetic.main.fragment_hairdresser_menu_posting.*
 import kotlinx.android.synthetic.main.fragment_hairdresser_menu_posting.view.*
+import kotlinx.android.synthetic.main.fragment_tag_selection.*
+import kotlinx.android.synthetic.main.fragment_tag_selection.view.*
 import org.koin.android.ext.android.inject
+import training20.tcmobile.Tag
 import training20.tcmobile.auth.AuthManager
 import training20.tcmobile.databinding.FragmentHairdresserMenuPostingBinding
 import training20.tcmobile.mvvm.actions.HairdresserMenuPostingActions
@@ -57,6 +62,7 @@ class HairdresserMenuPostingFragment :
         selectdate(view)
         selecttime(view)
         addtexts(view)
+        setupTagSelectionFragment(view)
         return view
     }
 
@@ -109,6 +115,40 @@ class HairdresserMenuPostingFragment :
         view.startTime.setOnClickListener {
             timePicker.show(childFragmentManager, "timeTag")
         }
+    }
+
+    private fun setupTagSelectionFragment(view: View) {
+        //*******************************************************************
+        // TODO: ViewModelを経由してサーバからタグとタグのカテゴリを取得する
+        val genderTags = mutableListOf(TagSelectionFragment.Tag(1, "メンズ"), TagSelectionFragment.Tag(2, "レディース"))
+        val styleTags = mutableListOf(TagSelectionFragment.Tag(3, "セミロング"), TagSelectionFragment.Tag(4, "ミディアム"), TagSelectionFragment.Tag(5, "ロング"), TagSelectionFragment.Tag(6, "ショート"), TagSelectionFragment.Tag(7, "ベリーショート"), TagSelectionFragment.Tag(8, "マッシュ"))
+        val allTags = arrayListOf(genderTags, styleTags).flatten().toMutableList()
+        val tabs = arrayListOf(
+            TagSelectionFragment.Tab("全て", allTags),
+            TagSelectionFragment.Tab("性別", genderTags),
+            TagSelectionFragment.Tab("スタイル", styleTags)
+        )
+        //*******************************************************************
+        val tagListItemClickListener: (TagSelectionFragment.Tag) -> Unit = { tag ->
+            //*******************************************************************
+            // NOTE: このidをサーバに送る
+            println(tag.id)
+            //*******************************************************************
+        }
+        val adapter = TagSelectionFragment.Adapter(childFragmentManager, tabs, tagListItemClickListener)
+        val tabPager = view.tabPager
+        tabPager.adapter = adapter
+        view.tabLayout.setupWithViewPager(tabPager)
+
+        view.filterInput.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                adapter.filter(s.toString())
+            }
+            override fun afterTextChanged(s: Editable?) {
+            }
+        })
     }
 
     override fun onTimeSet(view: TimePicker?, hour: Int, minute: Int) {
