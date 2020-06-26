@@ -47,7 +47,7 @@ class HairdresserRepositoryHttp: HairdresserRepositoryContract {
             Pair("gender", gender),
             Pair("birthday", birthday)
         )
-        HttpClient(HairdresserRegistrationResponse::class.java, HttpMethod.POST, "hairdressers/register", null, *queries)
+        HttpClient(HairdresserRegistrationResponse::class.java, HttpMethod.POST, "hairdressers/register", null, null, *queries)
             .send(onSuccess, onError, onFailure, onComplete)
     }
 }

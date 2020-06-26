@@ -1,10 +1,14 @@
 package training20.tcmobile
 
 import android.app.Application
+import io.realm.Realm
+import io.realm.RealmConfiguration
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
+import training20.tcmobile.auth.AuthManager
+import training20.tcmobile.auth.AuthManagerRealm
 import training20.tcmobile.mvvm.actions.HairdresserChatHistoryActions
 import training20.tcmobile.mvvm.actions.HairdresserHomeActions
 import training20.tcmobile.mvvm.event.EventDispatcher
@@ -12,6 +16,10 @@ import training20.tcmobile.mvvm.repositories.*
 import training20.tcmobile.mvvm.viewmodels.*
 
 class ApplicationCMM: Application() {
+
+    companion object {
+        const val wsServerOrigin = "ws://192.168.8.98:8090"
+    }
 
     override fun onCreate() {
         super.onCreate()
@@ -66,8 +74,8 @@ class ApplicationCMM: Application() {
             modules(listOf(authManagerModule, eventDispatcherModule, repositoryModule, viewModelModule))
         }
         if (BuildConfig.DEBUG) {
-//            Debugger.debug(Role.HAIRDRESSER, "S4smF7tNDqKWMJVpeErxQil9hFV0IBRgj6OKUfKO9TMTttmbNTOwg27Q9N6x")
-            Debugger.debug(Role.MODEL, "d4207PQbW6VKYElqsE6yIUjNoY7TpvOIoFtixsZJHOttQyMh7eLeydky8AX7")
+            Debugger.debug(Role.HAIRDRESSER, "uxUcrOlXs1LWYgCYPWL2YQ2VxR7d1VfYbn7PmhGdWFIM286qlYA00hOiFRHj")
+//            Debugger.debug(Role.MODEL, "d4207PQbW6VKYElqsE6yIUjNoY7TpvOIoFtixsZJHOttQyMh7eLeydky8AX7")
         }
     }
 }
