@@ -49,7 +49,7 @@ class ModelRepositoryHttp: ModelRepositoryContract {
             Pair("gender", gender),
             Pair("birthday", birthday)
         )
-        HttpClient(ModelRegistrationResponse::class.java, HttpMethod.POST, "models/register", null, *queries)
+        HttpClient(ModelRegistrationResponse::class.java, HttpMethod.POST, "models/register", null, null, *queries)
             .send({ response ->
                 val model = applyNotNull(response.model?.identifier, response.model?.name, response.model?.createdAt, response.model?.updatedAt) { identifier, name, email, createdAt ->
                     Model(

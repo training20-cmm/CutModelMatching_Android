@@ -99,6 +99,7 @@
     <string name="pm_11">午後11時</string>
     <string name="pm_12">午後12時</string>
     <string name="transition_name_role_selection_fragment_header_image_view">headerImageView</string>
+    <string name="title_activity_maps">Map</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -111,5 +112,37 @@
     <string name="hairdresserSalonUnregistered_touroku">詳細登録しますか？</string>
     <string name="YES">はい</string>
     <string name="NO">いいえ</string>
+    <string name="fragment_hairdresser_salon_registration_photo">イメージ写真</string>
+    <string name="fragment_hairdresser_salon_registration_hint_enter_salonname">サロン名</string>
+    <string name="fragment_hairdresser_salon_registration_hint_enter_salonmemo">サロン紹介</string>
+    <string name="fragment_hairdresser_salon_registration_hint_enter_postalcode">郵便番号</string>
+    <string name="fragment_hairdresser_salon_registration_hint_enter_address">住所</string>
+    <string name="fragment_hairdresser_salon_registration_hint_enter_residence">建物名・部屋番号</string>
+    <string name="fragment_hairdresser_salon_registration_hint_enter_seatsnumber">席数</string>
+    <string name="fragment_hairdresser_salon_registration_payment">支払方法</string>
+    <string name="fragment_hairdresser_salon_registration_button_cash">現金</string>
+    <string name="fragment_hairdresser_salon_registration_button_creditcard">クレジットカード</string>
+    <string name="fragment_hairdresser_salon_registration_time">営業時間</string>
+    <string name="fragment_hairdresser_salon_registration_weekday">平日</string>
+    <string name="fragment_hairdresser_salon_registration_hint_enter_starttime">開店時間</string>
+    <string name="fragment_hairdresser_salon_registration_hint_enter_endtime">閉店時間</string>
+    <string name="fragment_hairdresser_salon_registration_holiday">土日祝</string>
+    <string name="fragment_hairdresser_salon_registration_hint_enter_starttime2">開店時間</string>
+    <string name="fragment_hairdresser_salon_registration_hint_enter_endtime2">閉店時間</string>
+    <string name="fragment_hairdresser_salon_registration_button_registration">登録</string>
+    <string name="fragment_hairdresser_salon_registration_button_photo">追加</string>
 
+    <string-array name="prefectures">
+        <item>都道府県</item><item>北海道</item><item>青森</item><item>岩手</item><item>宮城</item><item>秋田</item><item>山形</item>
+        <item>福島</item><item>茨城</item><item>栃木</item><item>群馬</item><item>埼玉</item><item>千葉</item><item>東京</item>
+        <item>神奈川</item><item>新潟</item><item>富山</item><item>石川</item><item>福井</item><item>山梨</item><item>長野</item>
+        <item>岐阜</item><item>静岡</item><item>愛知</item><item>三重</item><item>滋賀</item><item>京都</item><item>大阪</item>
+        <item>兵庫</item><item>奈良</item><item>和歌山</item><item>鳥取</item><item>島根</item><item>岡山</item><item>広島</item>
+        <item>山口</item><item>徳島</item><item>香川</item><item>愛媛</item><item>高知</item><item>福岡</item><item>佐賀</item>
+        <item>長崎</item><item>熊本</item><item>大分</item><item>宮崎</item><item>鹿児島</item><item>沖縄</item>
+    </string-array>
+
+    <string-array name="week">
+        <item>定休日</item><item>月曜日</item><item>火曜日</item><item>水曜日</item><item>木曜日</item><item>金曜日</item><item>土曜日</item><item>日曜日</item>
+    </string-array>
 </resources>

@@ -12,14 +12,13 @@ import training20.tcmobile.auth.AuthManagerRealm
 import training20.tcmobile.mvvm.actions.HairdresserChatHistoryActions
 import training20.tcmobile.mvvm.actions.HairdresserHomeActions
 import training20.tcmobile.mvvm.event.EventDispatcher
-import training20.tcmobile.mvvm.models.Hairdresser
 import training20.tcmobile.mvvm.repositories.*
 import training20.tcmobile.mvvm.viewmodels.*
 
 class ApplicationCMM: Application() {
 
     companion object {
-        const val wsServerOrigin = "ws://192.168.8.190:8090"
+        const val wsServerOrigin = "ws://192.168.8.98:8090"
     }
 
     override fun onCreate() {
@@ -68,14 +67,15 @@ class ApplicationCMM: Application() {
             viewModel { ModelMenuSearchViewModel(get()) }
             viewModel { ModelMenuViewModel(get()) }
             viewModel { ModelChatRoomViewModel(get(), get(), get()) }
+            viewModel { ModelReservationConfirmationViewModel(get())}
         }
         startKoin {
             androidContext(this@ApplicationCMM)
             modules(listOf(authManagerModule, eventDispatcherModule, repositoryModule, viewModelModule))
         }
         if (BuildConfig.DEBUG) {
-            Debugger.debug(Role.HAIRDRESSER, "cOWwWzNFX6iVSUYDfytndvOMJMu9qOFui1mVSwdExvUybckzYExMq9twmrOD")
-//            Debugger.debug(Role.MODEL, "bE9fcQZwxHr1aiZMfkeqkEWfeHRmHUOGytnqBGxNypM95OjLMbW7B44R4Xcz")
+            Debugger.debug(Role.HAIRDRESSER, "uxUcrOlXs1LWYgCYPWL2YQ2VxR7d1VfYbn7PmhGdWFIM286qlYA00hOiFRHj")
+//            Debugger.debug(Role.MODEL, "d4207PQbW6VKYElqsE6yIUjNoY7TpvOIoFtixsZJHOttQyMh7eLeydky8AX7")
         }
     }
 }

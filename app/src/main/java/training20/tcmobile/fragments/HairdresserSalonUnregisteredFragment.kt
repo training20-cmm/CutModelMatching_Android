@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_hairdresser_salon_unregistered.view.*
+import kotlinx.android.synthetic.main.view_toolbar.view.*
 import org.koin.android.ext.android.inject
 import training20.tcmobile.R
 import training20.tcmobile.activities.HairdresserMainActivity
@@ -30,23 +31,24 @@ class HairdresserSalonUnregisteredFragment :
     ): View? {
         // Inflate the layout for this fragment
         //xmlのレイアウトをここでViewとして作成する
-        val view = inflater.inflate(R.layout.fragment_hairdresser_salon_unregistered, container, false)
-        //view.findViewById<Button>(R.id.hairdresserSalonUnregistered_yes).setOnClickListener()
+        val view = super.onCreateView(inflater, container, savedInstanceState) ?: return null
 
         //はいを押してサロン登録画面へ遷移する
         view.hairdresserSalonUnregistered_yes.setOnClickListener {v ->
-            findNavController().navigate(R.id.action_hairdresserSalonUnregisteredFragment_to_hairdresserSalonRegistrationFragment)
+            //findNavController().navigate(R.id.action_hairdresserHomefragment)
         }
         //いいえを押してホームへ遷移する
         view.hairdresserSalonUnregistered_no.setOnClickListener {v ->
-            findNavController().navigate(R.id.hairdresserFoundationFragment)
+            //findNavController().navigate(R.id.hairdresserFoundationFragment)
         }
         //戻るボタンを押して遷移する
-        view.hairdresserSalonUnregistered_backBtn.setOnClickListener {v ->
-            back()
+        view.toolbarBackButton.setOnClickListener {v ->
+            viewModel.onBack()
         }
 
-        return inflater.inflate(R.layout.fragment_hairdresser_salon_unregistered, container, false)
+        view.toolbarTitleTextView.text = "サロンの詳細"
+
+        return view
     }
 
     override fun createDataBinding(

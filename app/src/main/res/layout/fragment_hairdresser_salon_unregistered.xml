@@ -15,6 +15,13 @@
         android:layout_height="match_parent"
         tools:context=".fragments.HairdresserSalonUnregisteredFragment">
 
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/view_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
         <TextView
             android:id="@+id/hairdresserSalonUnregistered"
             android:layout_width="0dp"
@@ -60,30 +67,5 @@
             android:text="@string/NO"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/hairdresserSalonUnregistered_touroku" />
-
-        <Button
-            android:id="@+id/hairdresserSalonUnregistered_backBtn"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:background="#FFFFFF"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            app:icon="@drawable/ic_baseline_arrow_white_24"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/hairdresserSalonUnregistered_headtext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="@string/hairdresserSalonUnregistered_text"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.534"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
