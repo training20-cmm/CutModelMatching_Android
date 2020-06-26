@@ -77,18 +77,18 @@ class HairdresserChatRoomFragment :
     private inner class SendButtonClickListener: View.OnClickListener {
 
         override fun onClick(v: View?) {
-//            ensureNotNull(authManager.currentHairdresser()?.userId, args.model.userId) { myUserId, partnerUserId ->
-//                val message = messageEditText.text.toString()
-//                viewModel.sendMessage(message, myUserId, partnerUserId)
-//                messageEditText.setText("")
-//            }
+            ensureNotNull(authManager.currentHairdresser()?.userId, args.model.userId) { myUserId, partnerUserId ->
+                val message = messageEditText.text.toString()
+                viewModel.sendMessage(message, myUserId, partnerUserId)
+                messageEditText.setText("")
+            }
         }
     }
 
     override val viewModel: HairdresserChatRoomViewModel by inject()
 
     private val authManager: AuthManager by inject()
-    //private val args: HairdresserChatRoomFragmentArgs by navArgs()
+    private val args: HairdresserChatRoomFragmentArgs by navArgs()
     private val recyclerViewAdapter = RecyclerViewAdapter(viewModel)
 
     override fun onCreateView(
@@ -109,9 +109,9 @@ class HairdresserChatRoomFragment :
 
     override fun setupViewModel(viewModel: HairdresserChatRoomViewModel) {
         viewModel.eventDispatcher.bind(viewLifecycleOwner, this)
-//        args.model.userId?.let { userId ->
-//            viewModel.start(args.chatRoomId, userId)
-//        }
+        args.model.userId?.let { userId ->
+            viewModel.start(args.chatRoomId, userId)
+        }
     }
 
     override fun setupDataBinding(
