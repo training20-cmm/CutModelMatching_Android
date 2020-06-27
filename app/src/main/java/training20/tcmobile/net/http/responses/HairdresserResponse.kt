@@ -1,5 +1,7 @@
 package training20.tcmobile.net.http.responses
 
+import training20.tcmobile.mvvm.models.Hairdresser
+
 class HairdresserResponse {
 
     var id: Int? = null
@@ -20,4 +22,12 @@ class HairdresserResponse {
     var deletedAt: String? = null
     var createdAt: String? = null
     var updatedAt: String? = null
+
+    var salon: SalonResponse? = null
+
+    fun model(): Hairdresser {
+        return Hairdresser(
+            id, identifier, password, email, name, ruby, bioText, speciality, profileImagePath, gender, birthday, years, salonId, userId, positionId, deletedAt, createdAt, updatedAt, salon?.model()
+        )
+    }
 }

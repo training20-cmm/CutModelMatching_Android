@@ -4,15 +4,14 @@ package training20.tcmobile.mvvm.models
 class Menu(
     var title: String? = null,
     var details: String? = null,
-    var timeDates: Array<String>? = null,
-    var timeStart: Array<String>? = null,
     var gender: Char? = null,
     var price: Int? = null,
     var minutes: Int? = null,
     var hairdresserId: Int? = null,
+    val hairdresser: Hairdresser? = null,
     var images: Array<MenuImage>? = null,
-    var Tag: Array<MenuTag>? = null,
-    var Time: Array<MenuTime>? = null,
+    var tags: Array<MenuTag>? = null,
+    var time: Array<MenuTime>? = null,
     var createdAt: String? = null,
     var updatedAt: String? = null
 ) {

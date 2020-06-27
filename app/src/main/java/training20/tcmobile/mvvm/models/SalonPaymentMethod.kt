@@ -1,10 +1,13 @@
 package training20.tcmobile.mvvm.models
 
-class MenuTag(
+import io.realm.RealmModel
+import io.realm.RealmObject
+import java.io.Serializable
+
+open class SalonPaymentMethod(
     var id: Int? = null,
     var name: String? = null,
-    var color: String? = null,
     var createdAt: String? = null,
     var updatedAt: String? = null
-) {
+): RealmObject(), Serializable {
 }
