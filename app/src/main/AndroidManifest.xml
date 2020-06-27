@@ -24,20 +24,13 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" /> <!-- <activity android:name=".activities.HairdresserMainActivity" /> -->
-        <!-- <activity android:name=".activities.HairdresserMainActivity" /> -->
+            android:value="@string/google_maps_key" />
         <activity android:name=".activities.HairdresserRegistrationFormActivity" />
-        <activity android:name=".activities.HairdresserSalonReservationCalendarDayActivity" /> <!-- <activity android:name=".activities.ModelMainActivity" /> -->
-        <activity android:name=".activities.ModelRegistrationFormActivity" /> <!-- <activity android:name=".activities.RoleSelectionActivity"> -->
+        <activity android:name=".activities.HairdresserSalonReservationCalendarDayActivity" />
+        <activity android:name=".activities.ModelRegistrationFormActivity" />
+        <activity android:name=".activities.HairdresserMainActivity" />
         <activity android:name=".activities.ModelMainActivity" />
         <activity android:name=".activities.PlaygroundActivity">
-            <!-- <activity android:name=".activities.HairdresserMainActivity" > -->
-        <activity android:name=".activities.HairdresserSalonReservationCalendarDayActivity" />
-<!--        <activity android:name=".activities.ModelMainActivity" />-->
-        <activity android:name=".activities.ModelRegistrationFormActivity" />
-<!--        <activity android:name=".activities.RoleSelectionActivity">-->
-<!--        <activity android:name=".activities.ModelMainActivity">-->
-        <activity android:name=".activities.HairdresserMainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
