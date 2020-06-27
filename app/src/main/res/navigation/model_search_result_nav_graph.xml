@@ -23,6 +23,9 @@
         android:id="@+id/modelMenuFragment"
         android:name="training20.tcmobile.fragments.ModelMenuFragment"
         android:label="ModelMenuFragment" >
+        <argument
+            android:name="menuId"
+            app:argType="integer" />
         <action
             android:id="@+id/action_modelMenuFragment_to_modelReservationConfirmationFragment"
             app:destination="@id/modelReservationConfirmationFragment" />

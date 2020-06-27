@@ -90,6 +90,7 @@
     <string name="fragment_model_menu_treatment">施術内容</string>
     <string name="fragment_model_menu_price">料金</string>
     <string name="fragment_model_menu_comment">コメント</string>
+    <string name="fragment_model_search_result_toolbar_title">メニュー検索結果</string>
     <string name="fragment_role_selection_hairdresser_card_content_1">CMMには多数のカットモデルが登録しています。希望する髪型や施術内容、性別などを指定してカットモデルを募集してみましょう。CMMがカットモデル探しをお手伝いします。</string>
     <string name="fragment_role_selection_hairdresser_card_image_content_description_header">美容師</string>
     <string name="fragment_role_selection_hairdresser_card_register_as_hairdresser">美容師として登録</string>
@@ -136,6 +137,13 @@
     <string name="hairdresserSalonUnregistered_touroku">詳細登録しますか？</string>
     <string name="YES">はい</string>
     <string name="NO">いいえ</string>
+
+    <string name="unit_minute">分</string>
+    <string name="unit_currency_sign">¥</string>
+    <string name="gender">性</string>
+    <string name="age">歳</string>
+    <string name="year">年</string>
+    <string name="history">歴</string>
 
     <string-array name="prefectures">
         <item>都道府県</item>
