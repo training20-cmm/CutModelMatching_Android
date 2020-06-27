@@ -10,9 +10,15 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import kotlinx.android.synthetic.main.fragment_tag_list.*
 import training20.tcmobile.R
-import training20.tcmobile.Tag
 
 class TagSelectionFragment : Fragment() {
+
+    class Tag(val id: Int, val name: String) {
+
+        override fun toString(): String {
+            return name
+        }
+    }
 
     class Tab(val title: String, val originalTags: MutableList<Tag>) {
         val tags = originalTags.map{it}.toMutableList()
@@ -25,7 +31,7 @@ class TagSelectionFragment : Fragment() {
 
     class Adapter(
         fragmentManager: FragmentManager,
-        private val tabs: ArrayList<Tab>,
+        private val tabs: MutableList<Tab>,
         private val listItemClickListener: (Tag) -> Unit
     ): FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
