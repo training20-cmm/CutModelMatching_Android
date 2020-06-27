@@ -25,49 +25,28 @@ class MenuRepositoryHttp: MenuRepositoryContract {
     ) {
         HttpClient(MenuResponse::class.java, HttpMethod.GET, "menus/${id}", requestOptions)
             .send({
-                val hairdresser = it.hairdresser?.model()
-                val menuImages = it.images?.map {
-                    MenuImage(
-                        it.id,
-                        it.path,
-                        it.menuId,
-                        it.createdAt,
-                        it.updatedAt
-                    )
-                }?.toTypedArray()
-                val menuTags = it.tags?.map {
-                    MenuTag(
-                        it.id,
-                        it.name,
-                        it.color,
-                        it.createdAt,
-                        it.updatedAt
-                    )
-                }?.toTypedArray()
-                val menuTime = it.time?.map {
-                    MenuTime(
-                        it.id,
-                        it.date,
-                        it.start,
-                        it.menuId,
-                        it.createdAt,
-                        it.updatedAt
-                    )
-                }?.toTypedArray()
-                val menu = Menu(
-                    it.title,
-                    it.details,
-                    it.gender,
-                    it.price,
-                    it.minutes,
-                    it.hairdresserId,
-                    hairdresser,
-                    menuImages,
-                    menuTags,
-                    menuTime,
-                    it.createdAt,
-                    it.updatedAt
-                )
+//                val hairdresser = it.hairdresser?.model()
+//                val menuImages = it.images?.map {it.model()}?.toTypedArray()
+//                val menuTags = it.tags?.map {it.model()}?.toTypedArray()
+//                val menuTime = it.time?.map {it.model()}?.toTypedArray()
+//                val menuTreatment = it.treatment?.map{it.model()}?.toTypedArray()
+//                val menu = Menu(
+//                    it.id,
+//                    it.title,
+//                    it.details,
+//                    it.gender,
+//                    it.price,
+//                    it.minutes,
+//                    it.hairdresserId,
+//                    hairdresser,
+//                    menuImages,
+//                    menuTags,
+//                    menuTime,
+//                    menuTreatment,
+//                    it.createdAt,
+//                    it.updatedAt
+//                )
+                val menu = it.model()
                 onSuccess?.invoke(menu)
             }, onError, onFailure, onComplete)
     }
@@ -112,19 +91,39 @@ class MenuRepositoryHttp: MenuRepositoryContract {
             }, onError, onFailure, onComplete)
     }
 
-//    override fun store(
-//        title: String,
-//        details: String,
-//        timeDates: Array<String>,
-//        gender: Char,
-//        price: Int,
-//        minutes: Int,
-//        hairdresser_id: Int,
-//        onSuccess: (() -> Unit)?,
-//        onError: ((String, Int, ErrorResponse) -> Unit)?,
-//        onFailure: ((IOException) -> Unit)?,
-//        onComplete: (() -> Unit)?
-//    ) {
-//        TODO("Not yet implemented")
-//    }
+    override fun search(
+        prefecture: String?,
+        treatmentIds: MutableList<Int>?,
+        minPrice: Int?,
+        maxPrice: Int?,
+        date: String?,
+        minStartTime: String?,
+        maxStartTime: String?,
+        gender: String?,
+        paymentMethodIds: MutableList<Int>?,
+        salonScale: String?,
+        parking: Boolean?,
+        onSuccess: ((Array<Menu>) -> Unit)?,
+        onError: ((String, Int, ErrorResponse) -> Unit)?,
+        onFailure: ((IOException) -> Unit)?,
+        onComplete: (() -> Unit)?
+    ) {
+        val queries: MutableList<Pair<String, String>> = mutableListOf()
+        prefecture?.let { queries.add(Pair("prefecture", it)) }
+        treatmentIds?.let { it.forEach { queries.add(Pair("treatmentIds[]", it.toString())) } }
+        minPrice?.let { queries.add(Pair("minPrice", it.toString())) }
+        maxPrice?.let { queries.add(Pair("maxPrice", it.toString())) }
+        date?.let { queries.add(Pair("date", it)) }
+        minStartTime?.let { queries.add(Pair("minStartTime", it)) }
+        maxStartTime?.let { queries.add(Pair("maxStartTime", it)) }
+        gender?.let { queries.add(Pair("gender", gender.toString())) }
+        paymentMethodIds?.let { paymentMethodIds.forEach { queries.add(Pair("paymentMethodIds[]", it.toString())) } }
+        salonScale?.let { queries.add(Pair("salonScale", it)) }
+        parking?.let { queries.add(Pair("parking", it.toString())) }
+        HttpClient(Array<MenuResponse>::class.java, HttpMethod.GET, "menus/search", queries =  *queries.toTypedArray())
+            .send({
+                val menus = it.map { it.model() }.toTypedArray()
+                onSuccess?.invoke(menus)
+            }, onError, onFailure, onComplete)
+    }
 }

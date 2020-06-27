@@ -34,4 +34,22 @@ interface MenuRepositoryContract {
         onFailure: ((IOException) -> Unit)? = null,
         onComplete: (() -> Unit)? = null
     )
+
+    fun search(
+        prefecture: String? = null,
+        treatmentIds: MutableList<Int>? = null,
+        minPrice: Int? = null,
+        maxPrice: Int? = null,
+        date: String? = null,
+        minStartTime: String? = null,
+        maxStartTime: String? = null,
+        gender: String? = null,
+        paymentMethodIds: MutableList<Int>? = null,
+        salonScale: String? = null,
+        parking: Boolean? = null,
+        onSuccess: ((Array<Menu>) -> Unit)? = null,
+        onError: ((String, Int, ErrorResponse) -> Unit)? = null,
+        onFailure: ((IOException) -> Unit)? = null,
+        onComplete: (() -> Unit)? = null
+    )
 }

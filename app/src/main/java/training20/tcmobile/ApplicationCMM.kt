@@ -71,14 +71,15 @@ class ApplicationCMM: Application() {
             viewModel { ModelMenuViewModel(get(), get(), get()) }
             viewModel { ModelChatRoomViewModel(get(), get(), get()) }
             viewModel { ModelReservationConfirmationViewModel(get())}
+            viewModel { ModelSearchResultViewModel(get(), get()) }
         }
         startKoin {
             androidContext(this@ApplicationCMM)
             modules(listOf(authManagerModule, eventDispatcherModule, repositoryModule, viewModelModule))
         }
         if (BuildConfig.DEBUG) {
-            Debugger.debug(Role.HAIRDRESSER, "9eQS4Udx5DH8sVRRLOysfqYwzFOSEZIszc9axGnxlDnFCSoWabsD3n61YE06")
-//            Debugger.debug(Role.MODEL, "1JXlK3tqGfyxu1wbfOhLGpLfJMCFI1NVzGrqg6RjoHhuvWQ8uImYkESgr6Uq")
+//            Debugger.debug(Role.HAIRDRESSER, "9eQS4Udx5DH8sVRRLOysfqYwzFOSEZIszc9axGnxlDnFCSoWabsD3n61YE06")
+            Debugger.debug(Role.MODEL, "A8mZbh4MIJoml7oGlbux0x8kyakWuontaBeyNl2fHcrU1F1n0NwJdSw6nlpP")
         }
     }
 }

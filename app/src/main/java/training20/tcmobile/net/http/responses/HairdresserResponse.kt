@@ -23,11 +23,18 @@ class HairdresserResponse {
     var createdAt: String? = null
     var updatedAt: String? = null
 
+    var age: Int? = null
+    var comprehensiveEvaluation: Float? = null
+
     var salon: SalonResponse? = null
+    var position: HairdresserPositionResponse? = null
 
     fun model(): Hairdresser {
         return Hairdresser(
-            id, identifier, password, email, name, ruby, bioText, speciality, profileImagePath, gender, birthday, years, salonId, userId, positionId, deletedAt, createdAt, updatedAt, salon?.model()
+            id, identifier, password, email, name, ruby, bioText, speciality,
+            profileImagePath, gender, birthday, years, salonId, userId, positionId,
+            deletedAt, createdAt, updatedAt, age, comprehensiveEvaluation,
+            salon?.model(), position?.model()
         )
     }
 }
