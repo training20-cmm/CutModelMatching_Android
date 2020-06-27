@@ -1,5 +1,6 @@
 package training20.tcmobile.mvvm.repositories
 
+import android.net.Uri
 import training20.tcmobile.mvvm.models.Menu
 import training20.tcmobile.net.http.RequestOptions
 import training20.tcmobile.net.http.responses.ErrorResponse
@@ -24,6 +25,8 @@ interface MenuRepositoryContract {
         gender: String,
         price: String,
         minutes: String,
+        imageUris: MutableList<Uri>,
+        tagIds: MutableList<Int>,
         treatmentIds: MutableList<Int>,
         hairdresser_id: Int,
         onSuccess: (() -> Unit)? = null,

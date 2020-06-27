@@ -1,5 +1,7 @@
 package training20.tcmobile.mvvm.repositories
 
+import android.net.Uri
+import training20.tcmobile.ApplicationContext
 import training20.tcmobile.mvvm.models.*
 import training20.tcmobile.net.http.HttpClient
 import training20.tcmobile.net.http.HttpMethod
@@ -7,6 +9,8 @@ import training20.tcmobile.net.http.RequestOptions
 import training20.tcmobile.net.http.responses.ErrorResponse
 import training20.tcmobile.net.http.responses.MenuResponse
 import training20.tcmobile.net.http.responses.ModelRegistrationResponse
+import training20.tcmobile.util.FileUtils
+import java.io.File
 import java.io.IOException
 
 class MenuRepositoryHttp: MenuRepositoryContract {
@@ -78,6 +82,8 @@ class MenuRepositoryHttp: MenuRepositoryContract {
         gender: String,
         price: String,
         minutes: String,
+        imageUris: MutableList<Uri>,
+        tagIds: MutableList<Int>,
         treatmentIds: MutableList<Int>,
         hairdresser_id: Int,
         onSuccess: (() -> Unit)?,
@@ -85,6 +91,9 @@ class MenuRepositoryHttp: MenuRepositoryContract {
         onFailure: ((IOException) -> Unit)?,
         onComplete: (() -> Unit)?
     ) {
+        val images = imageUris.map {
+            Pair("images[]", File(FileUtils.getPath(ApplicationContext.context, it)))
+        }.toTypedArray()
         val queries = mutableListOf(
             Pair("title", title),
             Pair("details", details),
@@ -93,10 +102,11 @@ class MenuRepositoryHttp: MenuRepositoryContract {
             Pair("minutes", minutes.toString()),
             Pair("hairdresser_id", hairdresser_id.toString())
         )
+        tagIds.forEach{ queries.add(Pair("tagIds[]", it.toString())) }
         treatmentIds.forEach { queries.add(Pair("treatmentIds[]", it.toString())) }
         timeDates.forEach { queries.add(Pair("timeDates[]", it)) }
         timeStart.forEach { queries.add(Pair("timeStart[]", it)) }
-        HttpClient(ModelRegistrationResponse::class.java, HttpMethod.POST, "menus", queries =  *queries.toTypedArray())
+        HttpClient(ModelRegistrationResponse::class.java, HttpMethod.POST, "menus", files = images, queries =  *queries.toTypedArray())
             .send({
                 onSuccess?.invoke()
             }, onError, onFailure, onComplete)

@@ -13,6 +13,7 @@
     <string name="activity_hairdresser_home_feature_discovery_description_toolbar_navigation_button">マイサロン画面や予約一覧画面などに移動できます。</string>
     <string name="activity_hairdresser_home_mini_fab_button_label_post_blog">ブログを投稿</string>
     <string name="activity_hairdresser_home_mini_fab_button_label_post_hair_catalog">ヘアカタログを投稿</string>
+    <string name="activity_hairdresser_home_mini_fab_button_label_post_menu">メニューを作成</string>
     <string name="activity_hairdresser_home_navigation_drawer_menu_logout">ログアウト</string>
     <string name="activity_hairdresser_home_navigation_drawer_menu_my_salon">マイサロン</string>
     <string name="activity_hairdresser_home_navigation_drawer_menu_reservations">予約一覧</string>
@@ -47,6 +48,12 @@
     <string name="activity_model_search_result_tab_item_title_menu">メニュー</string>
     <string name="activity_role_selection_tab_item_title_hairdresser">美容師の方</string>
     <string name="activity_role_selection_tab_item_title_model">カットモデルの方</string>
+    <string name="hairdresser_menu_gender_m">男性</string>
+    <string name="hairdresser_menu_gender_f">女性</string>
+    <string name="hairdresser_menu_posting_no_photo_selected">画像を選択する</string>
+    <string name="hairdresser_menu_posting_photo_selected_agein">画像を変更する</string>
+    <string name="fragment_hairdresser_menu_posting_posting_completed_toast_text">メニューを作成しました</string>
+    <string name="fragment_hairdresser_menu_posting_toolbar_title">メニュー作成</string>
     <string name="fragment_hairdresser_salon_title">サロンの詳細</string>
     <string name="fragment_hairdresser_salon_name">サロン名</string>
     <string name="fragment_hairdresser_salon_bio">サロン紹介</string>
@@ -55,6 +62,27 @@
     <string name="fragment_hairdresser_salon_payment">支払方法</string>
     <string name="fragment_hairdresser_salon_business_hours">営業時間</string>
     <string name="fragment_hairdresser_salon_map">地図</string>
+    <string name="fragment_hairdresser_salon_registration_photo">イメージ写真</string>
+    <string name="fragment_hairdresser_salon_toolbar_title">マイサロン</string>
+    <string name="fragment_hairdresser_salon_registration_hint_enter_salonname">サロン名</string>
+    <string name="fragment_hairdresser_salon_registration_hint_enter_salonmemo">サロン紹介</string>
+    <string name="fragment_hairdresser_salon_registration_hint_enter_postalcode">郵便番号</string>
+    <string name="fragment_hairdresser_salon_registration_hint_enter_address">住所</string>
+    <string name="fragment_hairdresser_salon_registration_hint_enter_residence">建物名・部屋番号</string>
+    <string name="fragment_hairdresser_salon_registration_hint_enter_seatsnumber">席数</string>
+    <string name="fragment_hairdresser_salon_registration_payment">支払方法</string>
+    <string name="fragment_hairdresser_salon_registration_button_cash">現金</string>
+    <string name="fragment_hairdresser_salon_registration_button_creditcard">クレジットカード</string>
+    <string name="fragment_hairdresser_salon_registration_time">営業時間</string>
+    <string name="fragment_hairdresser_salon_registration_weekday">平日</string>
+    <string name="fragment_hairdresser_salon_registration_hint_enter_starttime">開店時間</string>
+    <string name="fragment_hairdresser_salon_registration_hint_enter_endtime">閉店時間</string>
+    <string name="fragment_hairdresser_salon_registration_holiday">土日祝</string>
+    <string name="fragment_hairdresser_salon_registration_hint_enter_starttime2">開店時間</string>
+    <string name="fragment_hairdresser_salon_registration_hint_enter_endtime2">閉店時間</string>
+    <string name="fragment_hairdresser_salon_registration_button_registration">登録</string>
+    <string name="fragment_hairdresser_salon_registration_button_photo">追加</string>
+    <string name="fragment_hairdresser_salon_registration_toolbar_title">サロン登録</string>
     <string name="fragment_model_chat_room_send">送信</string>
     <string name="fragment_model_menu_reservation_button">予約</string>
     <string name="fragment_model_menu_reservation_title">予約確認</string>
@@ -103,34 +131,11 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="hairdresser_menu_gender_m">男性</string>
-    <string name="hairdresser_menu_gender_f">女性</string>
-    <string name="hairdresser_menu_posting_no_photo_selected">画像を選択する</string>
-    <string name="hairdresser_menu_posting_photo_selected_agein">画像を変更する</string>
     <string name="hairdresserSalonUnregistered_text">サロン詳細</string>
     <string name="hairdresserSalonUnregistered_maintext">このサロンは \nまだ詳細登録 \nされていません</string>
     <string name="hairdresserSalonUnregistered_touroku">詳細登録しますか？</string>
     <string name="YES">はい</string>
     <string name="NO">いいえ</string>
-    <string name="fragment_hairdresser_salon_registration_photo">イメージ写真</string>
-    <string name="fragment_hairdresser_salon_registration_hint_enter_salonname">サロン名</string>
-    <string name="fragment_hairdresser_salon_registration_hint_enter_salonmemo">サロン紹介</string>
-    <string name="fragment_hairdresser_salon_registration_hint_enter_postalcode">郵便番号</string>
-    <string name="fragment_hairdresser_salon_registration_hint_enter_address">住所</string>
-    <string name="fragment_hairdresser_salon_registration_hint_enter_residence">建物名・部屋番号</string>
-    <string name="fragment_hairdresser_salon_registration_hint_enter_seatsnumber">席数</string>
-    <string name="fragment_hairdresser_salon_registration_payment">支払方法</string>
-    <string name="fragment_hairdresser_salon_registration_button_cash">現金</string>
-    <string name="fragment_hairdresser_salon_registration_button_creditcard">クレジットカード</string>
-    <string name="fragment_hairdresser_salon_registration_time">営業時間</string>
-    <string name="fragment_hairdresser_salon_registration_weekday">平日</string>
-    <string name="fragment_hairdresser_salon_registration_hint_enter_starttime">開店時間</string>
-    <string name="fragment_hairdresser_salon_registration_hint_enter_endtime">閉店時間</string>
-    <string name="fragment_hairdresser_salon_registration_holiday">土日祝</string>
-    <string name="fragment_hairdresser_salon_registration_hint_enter_starttime2">開店時間</string>
-    <string name="fragment_hairdresser_salon_registration_hint_enter_endtime2">閉店時間</string>
-    <string name="fragment_hairdresser_salon_registration_button_registration">登録</string>
-    <string name="fragment_hairdresser_salon_registration_button_photo">追加</string>
 
     <string-array name="prefectures">
         <item>都道府県</item>

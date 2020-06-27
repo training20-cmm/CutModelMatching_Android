@@ -10,8 +10,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.ObservableInt
+import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_hairdresser_salon_registration.*
 import kotlinx.android.synthetic.main.fragment_hairdresser_salon_registration.view.*
+import kotlinx.android.synthetic.main.view_toolbar.view.*
 import org.koin.android.ext.android.inject
 import training20.tcmobile.R
 import training20.tcmobile.databinding.FragmentHairdresserSalonRegistrationBinding
@@ -39,6 +41,7 @@ class HairdresserSalonRegistrationFragment:
         val view = super.onCreateView(inflater, container, savedInstanceState) ?: return null
         setupRegistrationButton(view)
         selectPhoto(view)
+        setupToolbar(view)
         return view
     }
 
@@ -60,6 +63,10 @@ class HairdresserSalonRegistrationFragment:
         dataBinding.viewModel = viewModel
     }
 
+    override fun showSalon() {
+        findNavController().navigate(R.id.action_hairdresserSalonRegistrationFragment_to_hairdresserSalonFragment)
+    }
+
     private fun selectPhoto(view: View) {
         view.photoBtn.setOnClickListener {
             val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
@@ -68,6 +75,13 @@ class HairdresserSalonRegistrationFragment:
             }
             startActivityForResult(intent, READ_REQUEST_CODE);
         }
+    }
+
+    private fun setupToolbar(view: View) {
+        view.toolbarBackButton.setOnClickListener {
+            viewModel.onBack()
+        }
+        view.toolbarTitleTextView.text = getString(R.string.fragment_hairdresser_salon_registration_toolbar_title)
     }
 
     companion object {
@@ -106,7 +120,7 @@ class HairdresserSalonRegistrationFragment:
 
     private fun onRegistrationButtonClicked(v: View) {
         view?.registrationButton?.visibility = View.GONE
-        view?.registrationSpinner?.visibility = View.VISIBLE
+        view?.registrationProgressbar?.visibility = View.VISIBLE
         viewModel.registerHairdresser()
     }
 }

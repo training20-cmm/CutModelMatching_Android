@@ -14,20 +14,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <FrameLayout
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/view_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="51dp">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?attr/colorPrimary"
-                android:minHeight="?attr/actionBarSize"
-                android:theme="?attr/actionBarTheme"
-                app:navigationIcon="@drawable/ic_baseline_arrow_white_24" />
-
-        </FrameLayout>
+            android:layout_height="wrap_content"
+            />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -343,6 +335,18 @@
                                 app:layout_constraintHorizontal_bias="0.498"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/registrationSpinner" />
+                            <ProgressBar
+                                android:id="@+id/registrationProgressbar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:indeterminateTintMode="src_atop"
+                                android:layout_gravity="center"
+                                android:visibility="gone"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.498"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/registrationSpinner"/>
 
 
                         </androidx.constraintlayout.widget.ConstraintLayout>

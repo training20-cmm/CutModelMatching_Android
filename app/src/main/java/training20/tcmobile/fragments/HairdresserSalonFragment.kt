@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.core.graphics.toColor
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
@@ -65,7 +66,10 @@ class HairdresserSalonFragment :
         mapView?.onCreate(savedInstanceState)
         mapView?.getMapAsync(this)
 
-        view?.toolbarTitleTextView.text = "サロン詳細"
+        view.toolbarBackButton.setOnClickListener {
+            findNavController().navigate(R.id.action_hairdresserSalonFragment_to_hairdresserHomeFragment)
+        }
+        view.toolbarTitleTextView.text = getString(R.string.fragment_hairdresser_salon_toolbar_title)
 
         return view
     }
@@ -120,7 +124,8 @@ class HairdresserSalonFragment :
 
     override fun onSalonCompleted() {
 
-
+        view?.loadingSpinner?.visibility = View.GONE
+        view?.scrollView?.visibility = View.VISIBLE
 
         val imageRoot = view?.imageLinearLayout
 

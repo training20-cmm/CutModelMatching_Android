@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/hairdresser_home_nav_graph"
-    app:startDestination="@id/hairdresserSalonRegistrationFragment">
+    app:startDestination="@id/hairdresserHomeFragment">
     <fragment
         android:id="@+id/hairdresserHomeFragment"
         android:name="training20.tcmobile.fragments.HairdresserHomeFragment"
@@ -34,7 +34,11 @@
     <fragment
         android:id="@+id/hairdresserSalonFragment"
         android:name="training20.tcmobile.fragments.HairdresserSalonFragment"
-        android:label="HairdresserSalonFragment" />
+        android:label="HairdresserSalonFragment" >
+        <action
+            android:id="@+id/action_hairdresserSalonFragment_to_hairdresserHomeFragment"
+            app:popUpTo="@id/hairdresserHomeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/hairdresserSalonRegistrationFragment"
         android:name="training20.tcmobile.fragments.HairdresserSalonRegistrationFragment"
@@ -46,5 +50,10 @@
     <fragment
         android:id="@+id/hairdresserMenuPostingFragment"
         android:name="training20.tcmobile.fragments.HairdresserMenuPostingFragment"
-        android:label="HairdresserMenuPostingFragment" />
+        android:label="HairdresserMenuPostingFragment" >
+        <action
+            android:id="@+id/action_hairdresserMenuPostingFragment_to_hairdresserHomeFragment"
+            app:destination="@id/hairdresserHomeFragment"
+            app:popUpTo="@id/hairdresserHomeFragment" />
+    </fragment>
 </navigation>
