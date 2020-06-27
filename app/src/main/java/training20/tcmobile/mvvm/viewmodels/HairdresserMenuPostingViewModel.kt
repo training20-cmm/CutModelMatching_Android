@@ -11,7 +11,9 @@ import androidx.databinding.ObservableInt
 import androidx.fragment.app.DialogFragment
 import training20.tcmobile.mvvm.actions.HairdresserMenuPostingActions
 import training20.tcmobile.mvvm.event.EventDispatcher
+import training20.tcmobile.mvvm.models.MenuTagCategory
 import training20.tcmobile.mvvm.repositories.MenuRepositoryHttp
+import training20.tcmobile.mvvm.repositories.MenuTagCategoryRepositoryContract
 import java.util.*
 
 
@@ -29,7 +31,8 @@ class response_sample(
 // DBに内容を送信する処理
 
 class HairdresserMenuPostingViewModel(
-    eventDispatcher: EventDispatcher<HairdresserMenuPostingActions>
+    eventDispatcher: EventDispatcher<HairdresserMenuPostingActions>,
+    private val menuTagCategoryRepository: MenuTagCategoryRepositoryContract
 ): BackableViewModel<HairdresserMenuPostingActions>(eventDispatcher)
 {
 
@@ -56,6 +59,9 @@ class HairdresserMenuPostingViewModel(
     var treatment: MutableList<Int> = mutableListOf()
     var checked = false
 
+    var menuTagCategories: Array<MenuTagCategory>? = null
+        private set
+
     fun onclickPosting() {
         Log.d("CheckClick", "click!")
         gender = if (male) "男" else "女"
@@ -75,7 +81,9 @@ class HairdresserMenuPostingViewModel(
 
     fun start() {
         //　リポジトリからデータ撮ってくる処理、が今回は初期値で持っているので省略。
-       onHairdresserOrdersSuccess(response)
+        onHairdresserOrdersSuccess(response)
+
+        menuTagCategoryRepository.index(this::onMenuTagCategoryIndexSuccess)
     }
 
 
@@ -91,6 +99,11 @@ class HairdresserMenuPostingViewModel(
     fun itemcheck(id: Int) {
         Log.d("checkbox", "click")
         if (treatment.contains(id))  treatment.removeAt(treatment.indexOf(id)) else treatment.add(id)
+    }
+
+    private fun onMenuTagCategoryIndexSuccess(menuTagCategories: Array<MenuTagCategory>) {
+        this.menuTagCategories = menuTagCategories
+        eventDispatcher.dispatchEvent { onMenuTagCategoriesChanged() }
     }
 }
 

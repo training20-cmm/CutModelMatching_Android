@@ -48,6 +48,7 @@ class ApplicationCMM: Application() {
             factory { SalonRepositoryHttp() as SalonRepositoryContract }
             factory { MenuRepositoryHttp() as MenuRepositoryContract }
             factory { ReservationRepositoryHttp() as ReservationRepositoryContract }
+            factory { MenuTagCategoryRepositoryHttp() as MenuTagCategoryRepositoryContract }
         }
         val viewModelModule = module {
             viewModel { HairdresserRegistrationFormViewModel(get(), get()) }
@@ -56,7 +57,7 @@ class ApplicationCMM: Application() {
             viewModel { HairdresserChatHistoryViewModel(get(), get()) }
             viewModel { HairdresserHairstyleListViewModel(get()) }
             viewModel { HairdresserHairstylePostingViewModel(get()) }
-            viewModel { HairdresserMenuPostingViewModel(get()) }
+            viewModel { HairdresserMenuPostingViewModel(get(), get()) }
             viewModel { HairdresserSalonViewModel(get(), get()) }
             viewModel { HairdresserSalonUnregisteredViewModel(get()) }
             viewModel { HairdresserSalonRegistrationViewModel(get()) }
@@ -76,8 +77,8 @@ class ApplicationCMM: Application() {
             modules(listOf(authManagerModule, eventDispatcherModule, repositoryModule, viewModelModule))
         }
         if (BuildConfig.DEBUG) {
-//            Debugger.debug(Role.HAIRDRESSER, "9eQS4Udx5DH8sVRRLOysfqYwzFOSEZIszc9axGnxlDnFCSoWabsD3n61YE06")
-            Debugger.debug(Role.MODEL, "1JXlK3tqGfyxu1wbfOhLGpLfJMCFI1NVzGrqg6RjoHhuvWQ8uImYkESgr6Uq")
+            Debugger.debug(Role.HAIRDRESSER, "9eQS4Udx5DH8sVRRLOysfqYwzFOSEZIszc9axGnxlDnFCSoWabsD3n61YE06")
+//            Debugger.debug(Role.MODEL, "1JXlK3tqGfyxu1wbfOhLGpLfJMCFI1NVzGrqg6RjoHhuvWQ8uImYkESgr6Uq")
         }
     }
 }

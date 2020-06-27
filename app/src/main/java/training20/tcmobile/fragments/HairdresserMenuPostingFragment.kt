@@ -6,6 +6,8 @@ import android.app.TimePickerDialog
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +17,10 @@ import androidx.core.view.marginBottom
 import com.google.android.flexbox.*
 import kotlinx.android.synthetic.main.fragment_hairdresser_menu_posting.*
 import kotlinx.android.synthetic.main.fragment_hairdresser_menu_posting.view.*
+import kotlinx.android.synthetic.main.fragment_tag_selection.*
+import kotlinx.android.synthetic.main.fragment_tag_selection.view.*
 import org.koin.android.ext.android.inject
+import training20.tcmobile.Tag
 import training20.tcmobile.auth.AuthManager
 import training20.tcmobile.databinding.FragmentHairdresserMenuPostingBinding
 import training20.tcmobile.mvvm.actions.HairdresserMenuPostingActions
@@ -24,6 +29,7 @@ import training20.tcmobile.mvvm.viewmodels.DatePickerDialogFragment
 import training20.tcmobile.mvvm.viewmodels.HairdresserMenuPostingViewModel
 import training20.tcmobile.mvvm.viewmodels.TimePikerDialogFragment
 import training20.tcmobile.ui.recyclerview.adapters.HairdresserMenuPostingRecyclerViewAdpter
+import training20.tcmobile.util.applyNotNull
 
 
 //　viewを操作するところ
@@ -88,6 +94,10 @@ class HairdresserMenuPostingFragment :
         adapter.notifyDataSetChanged()
     }
 
+    override fun onMenuTagCategoriesChanged() {
+        setupTagSelectionFragment()
+    }
+
     // カレンダーで選択をするためのダイアログをだす処理
     private fun selectdate(view: View) {
         val datePicker = DatePickerDialogFragment.newInstance(this)
@@ -109,6 +119,39 @@ class HairdresserMenuPostingFragment :
         view.startTime.setOnClickListener {
             timePicker.show(childFragmentManager, "timeTag")
         }
+    }
+
+    private fun setupTagSelectionFragment() {
+        val tabs = viewModel.menuTagCategories?.mapNotNull { menuTagCategory ->
+            val tags = menuTagCategory.tags?.mapNotNull {
+                applyNotNull(it.id, it.name) { id, name ->
+                    TagSelectionFragment.Tag(id, name)
+                }
+            }?.toMutableList()
+            applyNotNull(menuTagCategory.name, tags) { name, tags ->
+                TagSelectionFragment.Tab(name, tags)
+            }
+        }?.toMutableList() ?: return
+        val tagListItemClickListener: (TagSelectionFragment.Tag) -> Unit = { tag ->
+            //*******************************************************************
+            // NOTE: このidをサーバに送る
+            println(tag.id)
+            //*******************************************************************
+        }
+        val adapter = TagSelectionFragment.Adapter(childFragmentManager, tabs, tagListItemClickListener)
+        val tabPager = view?.tabPager
+        tabPager?.adapter = adapter
+        view?.tabLayout?.setupWithViewPager(tabPager)
+
+        view?.filterInput?.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                adapter.filter(s.toString())
+            }
+            override fun afterTextChanged(s: Editable?) {
+            }
+        })
     }
 
     override fun onTimeSet(view: TimePicker?, hour: Int, minute: Int) {

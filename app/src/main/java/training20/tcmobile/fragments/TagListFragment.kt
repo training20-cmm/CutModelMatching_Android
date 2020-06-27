@@ -12,12 +12,11 @@ import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.fragment_tag_list.*
 import kotlinx.android.synthetic.main.fragment_tag_list.view.*
 import training20.tcmobile.R
-import training20.tcmobile.Tag
 
 class TagListFragment: Fragment() {
 
     companion object {
-        fun newInstance(tags: MutableList<Tag>, listItemClickListener: (Tag) -> Unit): TagListFragment {
+        fun newInstance(tags: MutableList<TagSelectionFragment.Tag>, listItemClickListener: (TagSelectionFragment.Tag) -> Unit): TagListFragment {
             val tagListFragment = TagListFragment()
             tagListFragment.tags = tags
             tagListFragment.listItemClickListener = listItemClickListener
@@ -25,9 +24,9 @@ class TagListFragment: Fragment() {
         }
     }
 
-    var listItemClickListener: ((Tag) -> Unit)? = null
+    var listItemClickListener: ((TagSelectionFragment.Tag) -> Unit)? = null
 
-    private var tags: MutableList<Tag>? = null
+    private var tags: MutableList<TagSelectionFragment.Tag>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
