@@ -21,7 +21,8 @@ open class Hairdresser(
     var positionId: Int? = null,
     var deletedAt: String? = null,
     var createdAt: String? = null,
-    var updatedAt: String? = null
+    var updatedAt: String? = null,
+    var salon: Salon? = null
 ): RealmObject(), Serializable
 {
     fun constructor(){}
