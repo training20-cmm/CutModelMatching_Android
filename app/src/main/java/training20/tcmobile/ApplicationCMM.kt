@@ -46,6 +46,8 @@ class ApplicationCMM: Application() {
             factory { ModelRepositoryHttp() as ModelRepositoryContract }
             factory { HairdresserHomeRepository() as HairdresserHomeRepositoryContract }
             factory { SalonRepositoryHttp() as SalonRepositoryContract }
+            factory { MenuRepositoryHttp() as MenuRepositoryContract }
+            factory { ReservationRepositoryHttp() as ReservationRepositoryContract }
         }
         val viewModelModule = module {
             viewModel { HairdresserRegistrationFormViewModel(get(), get()) }
@@ -65,7 +67,7 @@ class ApplicationCMM: Application() {
             viewModel { ModelChatHistoryViewModel(get(), get()) }
             viewModel { ModelNotificationsViewModel(get()) }
             viewModel { ModelMenuSearchViewModel(get()) }
-            viewModel { ModelMenuViewModel(get()) }
+            viewModel { ModelMenuViewModel(get(), get(), get()) }
             viewModel { ModelChatRoomViewModel(get(), get(), get()) }
             viewModel { ModelReservationConfirmationViewModel(get())}
         }
