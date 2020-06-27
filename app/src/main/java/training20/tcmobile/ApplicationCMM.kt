@@ -57,10 +57,10 @@ class ApplicationCMM: Application() {
             viewModel { HairdresserChatHistoryViewModel(get(), get()) }
             viewModel { HairdresserHairstyleListViewModel(get()) }
             viewModel { HairdresserHairstylePostingViewModel(get()) }
-            viewModel { HairdresserMenuPostingViewModel(get(), get()) }
+            viewModel { HairdresserMenuPostingViewModel(get(), get(), get()) }
             viewModel { HairdresserSalonViewModel(get(), get()) }
             viewModel { HairdresserSalonUnregisteredViewModel(get()) }
-            viewModel { HairdresserSalonRegistrationViewModel(get()) }
+            viewModel { HairdresserSalonRegistrationViewModel(get(), get()) }
             viewModel { HairdresserChatRoomViewModel(get(), get(), get()) }
             viewModel { ModelRegistrationFormViewModel(get(), get()) }
             viewModel { ModelFoundationViewModel(get()) }

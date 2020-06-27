@@ -6,6 +6,7 @@ import android.app.TimePickerDialog
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -13,18 +14,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.view.marginBottom
+import androidx.navigation.fragment.findNavController
 import com.google.android.flexbox.*
 import kotlinx.android.synthetic.main.fragment_hairdresser_menu_posting.*
 import kotlinx.android.synthetic.main.fragment_hairdresser_menu_posting.view.*
-import kotlinx.android.synthetic.main.fragment_tag_selection.*
 import kotlinx.android.synthetic.main.fragment_tag_selection.view.*
+import kotlinx.android.synthetic.main.view_toolbar.view.*
 import org.koin.android.ext.android.inject
-import training20.tcmobile.Tag
+import training20.tcmobile.R
 import training20.tcmobile.auth.AuthManager
 import training20.tcmobile.databinding.FragmentHairdresserMenuPostingBinding
 import training20.tcmobile.mvvm.actions.HairdresserMenuPostingActions
-import training20.tcmobile.mvvm.models.Hairdresser
 import training20.tcmobile.mvvm.viewmodels.DatePickerDialogFragment
 import training20.tcmobile.mvvm.viewmodels.HairdresserMenuPostingViewModel
 import training20.tcmobile.mvvm.viewmodels.TimePikerDialogFragment
@@ -55,6 +55,8 @@ class HairdresserMenuPostingFragment :
         val view = super.onCreateView(inflater, container, savedInstanceState) ?: return null
         layoutSetup(view)
         view.button.setOnClickListener {
+            view.button.visibility = View.GONE
+            view.postingProgressbar.visibility = View.VISIBLE
             val hairdresser = authManager.currentHairdresser()
             viewModel.hairdresser_id = hairdresser?.id ?: 0
             viewModel.onclickPosting()
@@ -63,6 +65,7 @@ class HairdresserMenuPostingFragment :
         selectdate(view)
         selecttime(view)
         addtexts(view)
+        setupToolbar(view)
         return view
     }
 
@@ -96,6 +99,15 @@ class HairdresserMenuPostingFragment :
 
     override fun onMenuTagCategoriesChanged() {
         setupTagSelectionFragment()
+    }
+
+    override fun onMenuStoreSuccess() {
+        view?.button?.visibility = View.VISIBLE
+        view?.postingProgressbar?.visibility = View.GONE
+        Toast.makeText(requireActivity(), getString(R.string.fragment_hairdresser_menu_posting_posting_completed_toast_text), Toast.LENGTH_LONG).show()
+        Handler().postDelayed({
+            findNavController().navigate(R.id.action_hairdresserMenuPostingFragment_to_hairdresserHomeFragment)
+        }, 1000)
     }
 
     // カレンダーで選択をするためのダイアログをだす処理
@@ -133,10 +145,7 @@ class HairdresserMenuPostingFragment :
             }
         }?.toMutableList() ?: return
         val tagListItemClickListener: (TagSelectionFragment.Tag) -> Unit = { tag ->
-            //*******************************************************************
-            // NOTE: このidをサーバに送る
-            println(tag.id)
-            //*******************************************************************
+            viewModel.selectedMenuTagIds.add(tag.id)
         }
         val adapter = TagSelectionFragment.Adapter(childFragmentManager, tabs, tagListItemClickListener)
         val tabPager = view?.tabPager
@@ -174,6 +183,13 @@ class HairdresserMenuPostingFragment :
             day_time.text = "希望日 : " + date + "\n希望時間 : " + starttime
             datetimeArea.addView(day_time)
             // マージン実装したいな……
+        }
+    }
+
+    private fun setupToolbar(view: View) {
+        view.toolbarTitleTextView.text = getString(R.string.fragment_hairdresser_menu_posting_toolbar_title)
+        view.toolbarBackButton.setOnClickListener {
+            viewModel.onBack()
         }
     }
 
@@ -218,6 +234,7 @@ class HairdresserMenuPostingFragment :
                         val image = BitmapFactory.decodeStream(inputStream)
                         image_view.setImageBitmap(image)
                         // ボタンのテキスト変更する処理追加
+                        viewModel.imageUris.add(uri)
                     }
                 } catch (e: Exception) {
                     Log.d("ClickEvent", "show_photo_error")

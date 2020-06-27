@@ -4,7 +4,8 @@ enum class ErrorCode(val value: Int) {
     INVALID_REFRESH_TOKEN(1),
     EXPIRED_REFRESH_TOKEN(2),
     INVALID_ACCESS_TOKEN(3),
-    EXPIRED_ACCESS_TOKEN(4);
+    EXPIRED_ACCESS_TOKEN(4),
+    RESOURCE_NOT_FOUND(5);
 
     companion object {
         fun create(value: Int): ErrorCode? {

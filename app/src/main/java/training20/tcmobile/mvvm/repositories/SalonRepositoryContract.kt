@@ -9,39 +9,32 @@ import java.io.IOException
 
 interface SalonRepositoryContract {
 
-//    "name",
-//    "postcode",
-//    "prefecture",
-//    "address",
-//    "building",
-//    "bio_text",
-//    "capacity",
-//    "parking",
-//    "open_hours_weekdays",
-//    "close_hours_weekdays",
-//    "open_hours_weekends",
-//    "close_hours_weekends",
-//    "regular_holiday",
-
-//    fun store(
-//        identifier: String,
-//        rawPassword: String,
-//        rawPasswordConfirmation: String,
-//        name: String,
-//        gender: String,
-//        birthday: String,
-//        onSuccess: ((ModelRegistrationResponse) -> Unit)?,
-//        onError: ((String, Int, ErrorResponse) -> Unit)?,
-//        onFailure: ((IOException) -> Unit)?,
-//        onComplete: (() -> Unit)?
-//    ) {
-//    }
-
     fun index(
         onSuccess: ((Salon) -> Unit)? = null,
         onError: ((String, Int, ErrorResponse) -> Unit)? = null,
         onFailure: ((IOException) -> Unit)? = null,
         onComplete: (() -> Unit)? = null,
         requestOptions: RequestOptions? = null
+    )
+
+    fun store(
+        salonname: String,
+        postalcode: String,
+        prefecture: String,
+        address: String,
+        residence: String,
+        salonmemo: String,
+        seatsnumber: String,
+        paymentMethods: MutableList<String>,
+        uri: String,
+        starttime: String,
+        endtime: String,
+        Starttime2: String,
+        endtime2: String,
+        regularHoliday: String,
+        onSuccess: ((Salon) -> Unit)? = null,
+        onError: ((String, Int, ErrorResponse) -> Unit)? = null,
+        onFailure: ((IOException) -> Unit)? = null,
+        onComplete: (() -> Unit)? = null
     )
 }

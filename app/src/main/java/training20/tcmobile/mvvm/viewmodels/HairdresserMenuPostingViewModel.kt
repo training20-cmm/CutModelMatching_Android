@@ -5,6 +5,7 @@ import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.app.Dialog
 import android.app.TimePickerDialog
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.databinding.ObservableInt
@@ -12,6 +13,7 @@ import androidx.fragment.app.DialogFragment
 import training20.tcmobile.mvvm.actions.HairdresserMenuPostingActions
 import training20.tcmobile.mvvm.event.EventDispatcher
 import training20.tcmobile.mvvm.models.MenuTagCategory
+import training20.tcmobile.mvvm.repositories.MenuRepositoryContract
 import training20.tcmobile.mvvm.repositories.MenuRepositoryHttp
 import training20.tcmobile.mvvm.repositories.MenuTagCategoryRepositoryContract
 import java.util.*
@@ -32,11 +34,10 @@ class response_sample(
 
 class HairdresserMenuPostingViewModel(
     eventDispatcher: EventDispatcher<HairdresserMenuPostingActions>,
+    private val menuRepository: MenuRepositoryContract,
     private val menuTagCategoryRepository: MenuTagCategoryRepositoryContract
 ): BackableViewModel<HairdresserMenuPostingActions>(eventDispatcher)
 {
-
-    val menuRepository = MenuRepositoryHttp()
 
     val response:Array<response_sample> = arrayOf(response_sample(1, "カット"),
         response_sample(2, "パーマ"), response_sample(3, "縮毛矯正"),
@@ -59,6 +60,9 @@ class HairdresserMenuPostingViewModel(
     var treatment: MutableList<Int> = mutableListOf()
     var checked = false
 
+    val selectedMenuTagIds: MutableList<Int> = mutableListOf()
+    var imageUris: MutableList<Uri> = mutableListOf()
+
     var menuTagCategories: Array<MenuTagCategory>? = null
         private set
 
@@ -73,6 +77,8 @@ class HairdresserMenuPostingViewModel(
             gender,
             price,
             minutes,
+            imageUris,
+            selectedMenuTagIds,
             treatment,
             hairdresser_id,
             onSuccess = this::onMenuStoreSuccess
@@ -93,7 +99,7 @@ class HairdresserMenuPostingViewModel(
     }
 
     private fun onMenuStoreSuccess() {
-        println("OK")
+        eventDispatcher.dispatchEvent { onMenuStoreSuccess() }
     }
 
     fun itemcheck(id: Int) {

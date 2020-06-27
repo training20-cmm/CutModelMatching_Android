@@ -12,6 +12,8 @@ import androidx.databinding.ObservableInt
 import training20.tcmobile.ApplicationContext
 import training20.tcmobile.mvvm.actions.HairdresserSalonRegistrationActions
 import training20.tcmobile.mvvm.event.EventDispatcher
+import training20.tcmobile.mvvm.models.Salon
+import training20.tcmobile.mvvm.repositories.SalonRepositoryContract
 import training20.tcmobile.net.http.HttpClient
 import training20.tcmobile.net.http.HttpMethod
 import training20.tcmobile.net.http.responses.ErrorResponse
@@ -90,56 +92,9 @@ import java.io.IOException
 //    return null
 //}
 
-class SalonRepositoryHttpMock {
-
-    fun store(
-        salonname: String,
-        postalcode: String,
-        prefecture: String,
-        address: String,
-        residence: String,
-        salonmemo: String,
-        seatsnumber: String,
-        paymentMethods: MutableList<String>,
-        uri: String,
-        starttime: String,
-        endtime: String,
-        Starttime2: String,
-        endtime2: String,
-        regularHoliday: String,
-        onSuccess: ((SalonMock) -> Unit)? = null,
-        onError: ((String, Int, ErrorResponse) -> Unit)? = null,
-        onFailure: ((IOException) -> Unit)? = null,
-        onComplete: (() -> Unit)? = null
-    ) {
-        val file = File(FileUtils.getPath(ApplicationContext.context, Uri.parse(uri)))
-        val files = arrayOf(Pair("images[]", file))
-        val queries = mutableListOf(
-            Pair("name", salonname),
-            Pair("postcode", postalcode),
-            Pair("prefecture", prefecture),
-            Pair("address", address),
-            Pair("building", residence),
-            Pair("bioText", salonmemo),
-            Pair("capacity", seatsnumber),
-            Pair("parking", "0"),
-            Pair("images", uri),
-            Pair("openHoursWeekdays", starttime),
-            Pair("closeHoursWeekdays", endtime),
-            Pair("openHoursWeekends", Starttime2),
-            Pair("closeHoursWeekends", endtime2),
-            Pair("regularHoliday", regularHoliday)
-        )
-        paymentMethods.forEach { queries.add(Pair("paymentMethodIds[]", it))}
-        HttpClient(SalonResponse::class.java, HttpMethod.POST, "salons", files =  files, queries = *queries.toTypedArray())
-            .send({
-                onSuccess?.invoke(SalonMock())
-            }, onError, onFailure, onComplete)
-    }
-}
-
 class HairdresserSalonRegistrationViewModel(
-    eventDispatcher: EventDispatcher<HairdresserSalonRegistrationActions>
+    eventDispatcher: EventDispatcher<HairdresserSalonRegistrationActions>,
+    private val salonRepository: SalonRepositoryContract
 ): BackableViewModel<HairdresserSalonRegistrationActions>(eventDispatcher) {
     var imageResource = ObservableInt()
     var salonname = "title01"
@@ -162,10 +117,6 @@ class HairdresserSalonRegistrationViewModel(
     var uri = ""
 
     val paymentMethods: MutableList<String> = mutableListOf()
-
-
-
-    private val salonRepository = SalonRepositoryHttpMock()
 
     // TODO: サーバから支払方法を取得
     fun registerHairdresser() {
@@ -195,8 +146,8 @@ class HairdresserSalonRegistrationViewModel(
             )
     }
 
-    fun onSalonStoreSuccess(salon: SalonMock) {
-        println(salon)
+    private fun onSalonStoreSuccess(salon: Salon) {
+        eventDispatcher.dispatchEvent { showSalon() }
     }
 
 

@@ -6,16 +6,25 @@ import com.google.android.material.internal.NavigationMenu
 import io.github.yavski.fabspeeddial.FabSpeedDial
 import training20.tcmobile.mvvm.actions.HairdresserHomeActions
 import training20.tcmobile.mvvm.event.EventDispatcher
+import training20.tcmobile.mvvm.models.Salon
 import training20.tcmobile.mvvm.repositories.HairdresserHomeRepositoryContract
 import training20.tcmobile.mvvm.repositories.SalonRepositoryContract
+import training20.tcmobile.net.http.responses.ErrorResponse
 
 class HairdresserHomeViewModel(
-    eventDispatcher: EventDispatcher<HairdresserHomeActions>,
-    salonRepository: SalonRepositoryContract,
-    private val repository: HairdresserHomeRepositoryContract
-): HairdresserNavigationDrawerViewModel<HairdresserHomeActions>(eventDispatcher, salonRepository) {
+    val eventDispatcher: EventDispatcher<HairdresserHomeActions>,
+    private val repository: HairdresserHomeRepositoryContract,
+    private val salonRepository: SalonRepositoryContract
+): ViewModel() {
 
-    override fun start() {
-        super.start()
+    var salon: Salon? = null
+
+    fun start() {
+        salonRepository.index(this::onSalonIndexSuccess)
     }
+
+    private fun onSalonIndexSuccess(salon: Salon) {
+        this.salon = salon
+    }
+
 }

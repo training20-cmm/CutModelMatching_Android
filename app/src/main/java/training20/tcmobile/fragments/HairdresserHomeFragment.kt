@@ -38,7 +38,10 @@ class HairdresserHomeFragment :
         }
 
         override fun onMenuItemSelected(menuItem: MenuItem?): Boolean {
-            showHairstylePosting()
+            when(menuItem?.itemId) {
+                R.id.action_post_menu -> showMenuPosting()
+                R.id.action_post_hair_catalog -> showHairstylePosting()
+            }
             return true
         }
 
@@ -80,6 +83,17 @@ class HairdresserHomeFragment :
         dataBinding.viewModel = viewModel
     }
 
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.navigationDrawerMenuMySalon -> onMySalonMenuItemSelected()
+        }
+        return true
+    }
+
+    override fun showMenuPosting() {
+        findNavController().navigate(R.id.action_hairdresserHomeFragment_to_hairdresserMenuPostingFragment)
+    }
+
     override fun showHairstylePosting() {
         findNavController().navigate(R.id.action_hairdresserHomeFragment_to_hairdresserHairstylePostingFragment)
     }
@@ -116,16 +130,10 @@ class HairdresserHomeFragment :
         }
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            R.id.navigationDrawerMenuMySalon -> onMySalonMenuItemSelected()
-        }
-        return true
-    }
-
     private fun onMySalonMenuItemSelected() {
-        //val actionId = if (viewModel.salon.value == null) R.id.action_hairdresserFoundationFragment_to_hairdresserSalonUnregisteredFragment else R.id.action_hairdresserFoundationFragment_to_hairdresserSalonFragment
-        findNavController().navigate(R.id.action_hairdresserHomeFragment_to_hairdresserSalonUnregisteredFragment)
+        val actionId = if (viewModel.salon == null)  R.id.action_hairdresserHomeFragment_to_hairdresserSalonUnregisteredFragment
+            else R.id.action_hairdresserHomeFragment_to_hairdresserSalonFragment
+        findNavController().navigate(actionId)
     }
 
 //    private fun startFeatureDiscovery() {
