@@ -10,9 +10,6 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,12 +18,9 @@ import com.google.android.material.navigation.NavigationView
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import io.realm.Realm
-import kotlinx.android.synthetic.main.fragment_model_search_result.*
 import kotlinx.android.synthetic.main.fragment_model_search_result.view.*
 import kotlinx.android.synthetic.main.fragment_model_search_result.view.recyclerView
 import kotlinx.android.synthetic.main.fragment_model_search_result.view.toolbar
-import kotlinx.android.synthetic.main.fragment_model_search_result_menu.view.*
-import kotlinx.android.synthetic.main.view_model_search_result_menu_card.*
 import kotlinx.android.synthetic.main.view_model_search_result_menu_card.view.*
 import kotlinx.android.synthetic.main.view_model_search_result_menu_card.view.menuTitleTextView
 import kotlinx.android.synthetic.main.view_toolbar.view.*
@@ -35,7 +29,6 @@ import training20.tcmobile.R
 import training20.tcmobile.SearchCondition
 import training20.tcmobile.Tag
 import training20.tcmobile.databinding.FragmentModelSearchResultBinding
-import training20.tcmobile.mvvm.MvvmFragment
 import training20.tcmobile.mvvm.actions.ModelSearchResultActions
 import training20.tcmobile.mvvm.viewmodels.ModelSearchResultViewModel
 import training20.tcmobile.mvvm.views.TagsView
@@ -194,7 +187,7 @@ class ModelSearchResultFragment:
 
     private fun setupToolbar(view: View) {
         view.toolbarBackButton.visibility = View.GONE
-        view.toolbarTitleTextView.text = getString(R.string.fragment_model_search_result_toolbar_title)
+        view.toolbarTitleTextView.text = getString(R.string.fragment_model_menu_search_result_toolbar_title)
     }
 
     private fun setupRecyclerView(view: View) {

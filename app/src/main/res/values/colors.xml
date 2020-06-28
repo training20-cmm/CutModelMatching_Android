@@ -27,4 +27,7 @@
     <color name="ratingStar">#FFD700</color>
 
     <color name="bottomNavigation">#FAFAFA</color>
+
+    <color name="saturday">#5ac7fa</color>
+    <color name="sunday">#ff2d54</color>
 </resources>
