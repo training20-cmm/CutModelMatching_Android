@@ -90,6 +90,7 @@
     <string name="fragment_model_menu_treatment">施術内容</string>
     <string name="fragment_model_menu_price">料金</string>
     <string name="fragment_model_menu_comment">コメント</string>
+    <string name="fragment_model_menu_reservation_checkbox">内容を確認しました</string>
     <string name="fragment_model_menu_search_toolbar_title">メニュー検索</string>
     <string name="fragment_model_menu_search_result_toolbar_title">メニュー検索結果</string>
     <string name="fragment_model_menu_search_area_text">エリア</string>

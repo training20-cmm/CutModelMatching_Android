@@ -36,6 +36,11 @@
         android:label="ModelReservationConfirmationFragment">
         <argument
             android:name="menuId"
-            app:argType="integer" />
+            app:argType="integer"
+            />
+        <argument
+            android:name="menuTimeId"
+            app:argType="integer"
+            />
     </fragment>
 </navigation>
