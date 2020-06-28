@@ -33,5 +33,9 @@
     <fragment
         android:id="@+id/modelReservationConfirmationFragment"
         android:name="training20.tcmobile.fragments.ModelReservationConfirmationFragment"
-        android:label="ModelReservationConfirmationFragment" />
+        android:label="ModelReservationConfirmationFragment">
+        <argument
+            android:name="menuId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

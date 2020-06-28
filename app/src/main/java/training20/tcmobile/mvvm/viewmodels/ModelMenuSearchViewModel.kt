@@ -49,19 +49,25 @@ class ModelMenuSearchViewModel(
     fun onSearchButtonClicked() {
         val searchCondition = SearchCondition()
         selectedPrefectureItemPosition.value?.let {
-            searchCondition.prefecture = prefectures.value?.get(it)
+            if (it != 0) {
+                searchCondition.prefecture = prefectures.value?.get(it)
+            }
         }
         searchCondition.minPrice = minPrice.value?.toIntOrNull()
         searchCondition.maxPrice = maxPrice.value?.toIntOrNull()
         searchCondition.date = date.value
         selectedMinTimeItemPosition.value?.let {
-            timeList.value?.get(it)?.toIntOrNull()?.let { hour ->
-                searchCondition.minStartTime = "$hour:00"
+            if (it != 0) {
+                timeList.value?.get(it)?.toIntOrNull()?.let { hour ->
+                    searchCondition.minStartTime = "$hour:00"
+                }
             }
         }
         selectedMaxTimeItemPosition.value?.let {
-            timeList.value?.get(it)?.toIntOrNull()?.let { hour ->
-                searchCondition.maxStartTime = "$hour:00"
+            if (it != 0) {
+                timeList.value?.get(it)?.toIntOrNull()?.let { hour ->
+                    searchCondition.maxStartTime = "$hour:00"
+                }
             }
         }
         searchCondition.gender = if (maleStaff.value != null && maleStaff.value!!) "男"
@@ -71,6 +77,7 @@ class ModelMenuSearchViewModel(
             else if (smallSalon.value != null && smallSalon.value!!) "small"
             else null
         searchCondition.parking = if (parking.value != null && parking.value!!) true else null
+        menuTreatmentIds.value?.let { searchCondition.treatmentIds = RealmList(*it.toTypedArray()) }
         val realm = Realm.getDefaultInstance()
         realm.executeTransaction {
             realm.delete(SearchCondition::class.java)
