@@ -147,9 +147,9 @@ class ModelSearchResultFragment:
     ): FragmentModelSearchResultBinding = FragmentModelSearchResultBinding.inflate(inflater, container, false)
 
     override fun setupViewModel(viewModel: ModelSearchResultViewModel) {
-        Realm.getDefaultInstance().executeTransaction {
-            Realm.getDefaultInstance().copyToRealm(SearchCondition(prefecture = "大分県"))
-        }
+//        Realm.getDefaultInstance().executeTransaction {
+//            Realm.getDefaultInstance().copyToRealm(SearchCondition(prefecture = "大分県"))
+//        }
         val searchCondition = Realm.getDefaultInstance().where(SearchCondition::class.java).findFirst()
         searchCondition?.let {
             viewModel.eventDispatcher.bind(viewLifecycleOwner, this)

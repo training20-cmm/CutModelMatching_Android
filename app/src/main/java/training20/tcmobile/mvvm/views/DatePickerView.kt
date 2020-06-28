@@ -48,8 +48,11 @@ class DatePickerView: LinearLayout {
             val cells = arrayOf(row.cell1, row.cell2, row.cell3, row.cell4, row.cell5, row.cell6, row.cell7)
             cells.forEachIndexed { index, cell ->
                 val dateText = cell.dateText
+                val year = localDate.year
+                val month = localDate.monthValue
+                val day = localDate.dayOfMonth
                 cell.setOnClickListener {
-                    onCellClickListener?.get()?.onCelClick(localDate.year, localDate.monthValue - 1, localDate.dayOfMonth)
+                    onCellClickListener?.get()?.onCelClick(year, month, day)
                     dateText.background = ContextCompat.getDrawable(ApplicationContext.context, R.drawable.date_picker_view_selected_text_view)
                     dateText.setTextColor(ContextCompat.getColor(ApplicationContext.context, R.color.colorOnPrimary))
                 }

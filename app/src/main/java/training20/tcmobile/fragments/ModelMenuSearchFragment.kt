@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.FlexboxLayoutManager
 import kotlinx.android.synthetic.main.fragment_model_menu_search.view.*
@@ -20,10 +21,12 @@ import training20.tcmobile.databinding.ViewMenuTreatmentCheckBoxBinding
 import training20.tcmobile.mvvm.actions.ModelMenuSearchActions
 import training20.tcmobile.mvvm.models.MenuTreatment
 import training20.tcmobile.mvvm.viewmodels.ModelMenuSearchViewModel
+import training20.tcmobile.mvvm.views.DatePickerView
 
 class ModelMenuSearchFragment :
     BackableFragment<ModelMenuSearchActions, FragmentModelMenuSearchBinding, ModelMenuSearchViewModel>(),
-    ModelMenuSearchActions
+    ModelMenuSearchActions,
+    DatePickerView.OnCellClickListener
 {
 
     private class MenuTreatmentRecyclerViewHolder(val itemViewBinding: ViewMenuTreatmentCheckBoxBinding):
@@ -65,6 +68,7 @@ class ModelMenuSearchFragment :
         val view = super.onCreateView(inflater, container, savedInstanceState) ?: return null
         setupToolbar(view)
         setupMenuTreatmentRecyclerView(view)
+        setupDatePickerView(view)
         return view
     }
 
@@ -75,6 +79,8 @@ class ModelMenuSearchFragment :
 
     override fun setupViewModel(viewModel: ModelMenuSearchViewModel) {
         viewModel.eventDispatcher.bind(viewLifecycleOwner, this)
+        viewModel.prefectures.value = resources.getStringArray(R.array.prefectures)
+        viewModel.timeList.value = resources.getStringArray(R.array.hours)
     }
 
     override fun setupDataBinding(
@@ -82,6 +88,14 @@ class ModelMenuSearchFragment :
         savedInstanceState: Bundle?
     ) {
         dataBinding.viewModel = viewModel
+    }
+
+    override fun onCelClick(year: Int, month: Int, day: Int) {
+        viewModel.addDate(year, month, day)
+    }
+
+    override fun onConditionSaved() {
+        viewModel.onBack()
     }
 
     private fun setupToolbar(view: View) {
@@ -94,5 +108,9 @@ class ModelMenuSearchFragment :
         val menuTreatmentRecyclerView = view.menuTreatmentRecyclerView
         menuTreatmentRecyclerView.adapter = MenuTreatmentRecyclerViewAdapter(MenuTreatmentList.all())
         menuTreatmentRecyclerView.layoutManager = layoutManager
+    }
+
+    private fun setupDatePickerView(view: View) {
+        view.datePickerView.setOnCellClickListener(this)
     }
 }

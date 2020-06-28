@@ -62,7 +62,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    android:entries="@array/prefectures"
+                    android:entries="@{viewModel.prefectures}"
+                    android:selectedItemPosition="@={viewModel.selectedPrefectureItemPosition}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/prefectureLabelTextView"
                     app:layout_constraintTop_toTopOf="@+id/prefectureLabelTextView" />
@@ -106,6 +107,7 @@
                     android:layout_marginTop="16dp"
                     android:ems="10"
                     android:inputType="numberDecimal"
+                    android:text="@={viewModel.minPrice}"
                     app:layout_constraintStart_toStartOf="@+id/priceTextView"
                     app:layout_constraintTop_toBottomOf="@+id/priceTextView" />
 
@@ -127,6 +129,7 @@
                     android:layout_marginStart="16dp"
                     android:ems="10"
                     android:inputType="numberDecimal"
+                    android:text="@={viewModel.maxPrice}"
                     app:layout_constraintStart_toEndOf="@+id/textView11"
                     app:layout_constraintTop_toTopOf="@+id/minPriceEditText" />
 
@@ -156,7 +159,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:entries="@array/hours"
+                    android:entries="@{viewModel.timeList}"
+                    android:selectedItemPosition="@={viewModel.selectedMinTimeItemPosition}"
                     app:layout_constraintStart_toStartOf="@id/datePickerView"
                     app:layout_constraintTop_toBottomOf="@id/datePickerView" />
 
@@ -174,7 +178,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:entries="@array/hours"
+                    android:entries="@{viewModel.timeList}"
+                    android:selectedItemPosition="@={viewModel.selectedMaxTimeItemPosition}"
                     app:layout_constraintStart_toEndOf="@id/timeSpinnerRangeTextView"
                     app:layout_constraintTop_toTopOf="@id/minTimeSpinner" />
 
@@ -207,7 +212,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
-                    android:checked="false"
+                    android:checked="@={viewModel.maleStaff}"
                     android:text="@string/fragment_model_menu_search_male_staff_text"
                     app:layout_constraintStart_toStartOf="@id/stylistLabelTextView"
                     app:layout_constraintTop_toBottomOf="@id/stylistLabelTextView"/>
@@ -216,7 +221,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:checked="false"
+                    android:checked="@={viewModel.femaleStaff}"
                     android:text="@string/fragment_model_menu_search_female_staff_text"
                     app:layout_constraintStart_toEndOf="@id/maleStaffCheckBox"
                     app:layout_constraintTop_toTopOf="@id/maleStaffCheckBox"/>
@@ -238,7 +243,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
-                    android:checked="false"
+                    android:checked="@={viewModel.creditCard}"
                     android:text="@string/fragment_model_menu_search_credit_card_text"
                     app:layout_constraintStart_toStartOf="@id/paymentMethodLabelTextView"
                     app:layout_constraintTop_toTopOf="@id/paymentMethodLabelTextView"/>
@@ -260,7 +265,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
-                    android:checked="false"
+                    android:checked="@={viewModel.smallSalon}"
                     android:text="@string/fragment_model_menu_search_small_salon_text"
                     app:layout_constraintStart_toStartOf="@id/salonScaleLabelTextView"
                     app:layout_constraintTop_toTopOf="@id/salonScaleLabelTextView"/>
@@ -269,7 +274,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:checked="false"
+                    android:checked="@={viewModel.largeSalon}"
                     android:text="@string/fragment_model_menu_search_large_salon_text"
                     app:layout_constraintStart_toEndOf="@id/smallSalonCheckBox"
                     app:layout_constraintTop_toTopOf="@id/smallSalonCheckBox"/>
@@ -291,7 +296,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
-                    android:checked="false"
+                    android:checked="@={viewModel.parking}"
                     android:text="@string/fragment_model_menu_search_parking_text"
                     app:layout_constraintStart_toStartOf="@id/parkingLabelTextView"
                     app:layout_constraintTop_toTopOf="@id/parkingLabelTextView"/>
@@ -303,6 +308,7 @@
                     android:layout_marginTop="8dp"
                     android:backgroundTint="@color/colorAccent"
                     android:text="@string/fragment_model_menu_search_search_button_text"
+                    android:onClick="@{() -> viewModel.onSearchButtonClicked()}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/parkingCheckBox" />

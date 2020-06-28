@@ -1,7 +1,11 @@
 package training20.tcmobile.mvvm.viewmodels
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import io.realm.Realm
+import io.realm.RealmList
+import training20.tcmobile.SearchCondition
 import training20.tcmobile.mvvm.actions.ModelMenuSearchActions
 import training20.tcmobile.mvvm.event.EventDispatcher
 
@@ -10,60 +14,68 @@ class ModelMenuSearchViewModel(
 ) : BackableViewModel<ModelMenuSearchActions>(eventDispatcher)
 {
 
-  val selectedPrefectureItemPosition: LiveData<Int>
-          get() = _selectedPrefectureItemPosition
+    val selectedPrefectureItemPosition = MutableLiveData(0)
+    val minPrice = MutableLiveData("")
+    val maxPrice = MutableLiveData("")
+    val selectedMinTimeItemPosition = MutableLiveData(0)
+    val selectedMaxTimeItemPosition = MutableLiveData(0)
+    val maleStaff = MutableLiveData(false)
+    val femaleStaff = MutableLiveData(false)
+    val creditCard = MutableLiveData(false)
+    val smallSalon = MutableLiveData(false)
+    val largeSalon = MutableLiveData(false)
+    val parking = MutableLiveData(false)
 
-  val menuTreatmentIds: LiveData<MutableList<Int>>
-          get() = _menuTreatmentIds
+    val prefectures = MutableLiveData<Array<String>>(arrayOf())
+    val timeList = MutableLiveData<Array<String>>(arrayOf())
 
-  val minPrice: LiveData<String>
-          get() = _minPrice
+    val date: LiveData<String>
+        get() = _date
 
-  val maxPrice: LiveData<String>
-          get() = _maxPrice
+    val menuTreatmentIds: LiveData<MutableList<Int>>
+        get() = _menuTreatmentIds
 
-  val date: LiveData<String>
-          get() = _date
+    private val _menuTreatmentIds = MutableLiveData<MutableList<Int>>(mutableListOf())
+    private val _date = MutableLiveData("")
 
-  val minTime: LiveData<String>
-          get() = _minTime
+    fun addDate(year: Int, month: Int, day: Int) {
+        _date.value = "${year}-${month}-${day}"
+    }
 
-  val maxTime: LiveData<String>
-          get() = _maxTime
+    fun onMenuTreatmentCheckBoxClick(menuTreatmentId: Int) {
+        _menuTreatmentIds.value?.add(menuTreatmentId)
+    }
 
-  val maleStaff: LiveData<String>
-          get() = _maleStaff
-
-  val femaleStaff: LiveData<String>
-          get() = _femaleStaff
-
-  val creditCard: LiveData<String>
-          get() = _creditCard
-
-  val smallSalon: LiveData<String>
-          get() = _smallSalon
-
-  val largeSalon: LiveData<String>
-          get() = _largeSalon
-
-  val parking: LiveData<String>
-          get() = _parking
-
-  private val _selectedPrefectureItemPosition = MutableLiveData<Int>()
-  private val _menuTreatmentIds = MutableLiveData<MutableList<Int>>()
-  private val _minPrice = MutableLiveData<String>()
-  private val _maxPrice = MutableLiveData<String>()
-  private val _date = MutableLiveData<String>()
-  private val _minTime = MutableLiveData<String>()
-  private val _maxTime = MutableLiveData<String>()
-  private val _maleStaff = MutableLiveData<String>()
-  private val _femaleStaff = MutableLiveData<String>()
-  private val _creditCard = MutableLiveData<String>()
-  private val _smallSalon = MutableLiveData<String>()
-  private val _largeSalon = MutableLiveData<String>()
-  private val _parking = MutableLiveData<String>()
-
-  fun onMenuTreatmentCheckBoxClick(menuTreatmentId: Int) {
-    _menuTreatmentIds.value?.add(menuTreatmentId)
-  }
+    fun onSearchButtonClicked() {
+        val searchCondition = SearchCondition()
+        selectedPrefectureItemPosition.value?.let {
+            searchCondition.prefecture = prefectures.value?.get(it)
+        }
+        searchCondition.minPrice = minPrice.value?.toIntOrNull()
+        searchCondition.maxPrice = maxPrice.value?.toIntOrNull()
+        searchCondition.date = date.value
+        selectedMinTimeItemPosition.value?.let {
+            timeList.value?.get(it)?.toIntOrNull()?.let { hour ->
+                searchCondition.minStartTime = "$hour:00"
+            }
+        }
+        selectedMaxTimeItemPosition.value?.let {
+            timeList.value?.get(it)?.toIntOrNull()?.let { hour ->
+                searchCondition.maxStartTime = "$hour:00"
+            }
+        }
+        searchCondition.gender = if (maleStaff.value != null && maleStaff.value!!) "男"
+            else if (femaleStaff.value != null && femaleStaff.value!!) "女"
+            else null
+        searchCondition.salonScale = if (largeSalon.value != null && largeSalon.value!!) "large"
+            else if (smallSalon.value != null && smallSalon.value!!) "small"
+            else null
+        searchCondition.parking = if (parking.value != null && parking.value!!) true else null
+        val realm = Realm.getDefaultInstance()
+        realm.executeTransaction {
+            realm.delete(SearchCondition::class.java)
+            realm.copyToRealm(searchCondition)
+        }
+        eventDispatcher.dispatchEvent { onConditionSaved() }
+    }
 }

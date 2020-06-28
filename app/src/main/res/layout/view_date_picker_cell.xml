@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="@dimen/ss_sp"
-        android:text="TEST"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
