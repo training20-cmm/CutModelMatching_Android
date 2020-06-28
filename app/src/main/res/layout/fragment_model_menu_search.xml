@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -8,16 +9,305 @@
             type="training20.tcmobile.mvvm.viewmodels.ModelMenuSearchViewModel" />
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".fragments.ModelMenuSearchFragment">
+        android:layout_height="match_parent">
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/view_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-    </FrameLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                tools:context=".activities.ModelHomeActivity">
+
+                <TextView
+                    android:id="@+id/areaTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/fragment_model_menu_search_area_text"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/prefectureLabelTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/fragment_model_menu_search_prefecture_label_text"
+                    app:layout_constraintStart_toStartOf="@+id/areaTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/areaTextView" />
+
+                <Spinner
+                    android:id="@+id/prefectureSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:entries="@array/prefectures"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/prefectureLabelTextView"
+                    app:layout_constraintTop_toTopOf="@+id/prefectureLabelTextView" />
+
+                <TextView
+                    android:id="@+id/menuTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/fragment_model_menu_search_menu"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="@+id/areaTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/prefectureLabelTextView" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/menuTreatmentRecyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/menuTextView" />
+
+                <TextView
+                    android:id="@+id/priceTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/fragment_model_menu_search_price"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/menuTreatmentRecyclerView" />
+
+                <EditText
+                    android:id="@+id/minPriceEditText"
+                    android:layout_width="108dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    app:layout_constraintStart_toStartOf="@+id/priceTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/priceTextView" />
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="〜"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/minPriceEditText"
+                    app:layout_constraintStart_toEndOf="@+id/minPriceEditText"
+                    app:layout_constraintTop_toTopOf="@+id/minPriceEditText" />
+
+                <EditText
+                    android:id="@+id/maxPriceEditText"
+                    android:layout_width="108dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    app:layout_constraintStart_toEndOf="@+id/textView11"
+                    app:layout_constraintTop_toTopOf="@+id/minPriceEditText" />
+
+                <TextView
+                    android:id="@+id/dateTimeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/fragment_model_menu_search_datetime"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/minPriceEditText" />
+
+                <training20.tcmobile.mvvm.views.DatePickerView
+                    android:id="@+id/datePickerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginHorizontal="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/dateTimeTextView" />
+
+                <Spinner
+                    android:id="@+id/minTimeSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:entries="@array/hours"
+                    app:layout_constraintStart_toStartOf="@id/datePickerView"
+                    app:layout_constraintTop_toBottomOf="@id/datePickerView" />
+
+                <TextView
+                    android:id="@+id/timeSpinnerRangeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="〜"
+                    app:layout_constraintStart_toEndOf="@id/minTimeSpinner"
+                    app:layout_constraintTop_toTopOf="@id/minTimeSpinner"/>
+
+                <Spinner
+                    android:id="@+id/maxTimeSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:entries="@array/hours"
+                    app:layout_constraintStart_toEndOf="@id/timeSpinnerRangeTextView"
+                    app:layout_constraintTop_toTopOf="@id/minTimeSpinner" />
+
+                <TextView
+                    android:id="@+id/detailedConditionsLabelTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:textSize="18sp"
+                    android:text="@string/fragment_model_menu_search_detailed_conditions_label_text"
+                    android:textColor="@color/colorPrimary"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/minTimeSpinner"/>
+
+                <TextView
+                    android:id="@+id/stylistLabelTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:textSize="16sp"
+                    android:text="@string/fragment_model_menu_search_stylist_label_text"
+                    app:layout_constraintStart_toStartOf="@id/detailedConditionsLabelTextView"
+                    app:layout_constraintTop_toBottomOf="@id/detailedConditionsLabelTextView"/>
+
+                <CheckBox
+                    android:id="@+id/maleStaffCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:checked="false"
+                    android:text="@string/fragment_model_menu_search_male_staff_text"
+                    app:layout_constraintStart_toStartOf="@id/stylistLabelTextView"
+                    app:layout_constraintTop_toBottomOf="@id/stylistLabelTextView"/>
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:checked="false"
+                    android:text="@string/fragment_model_menu_search_female_staff_text"
+                    app:layout_constraintStart_toEndOf="@id/maleStaffCheckBox"
+                    app:layout_constraintTop_toTopOf="@id/maleStaffCheckBox"/>
+
+                <TextView
+                    android:id="@+id/paymentMethodLabelTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:textSize="16sp"
+                    android:text="@string/fragment_model_menu_search_payment_method_label_text"
+                    app:layout_constraintStart_toStartOf="@id/detailedConditionsLabelTextView"
+                    app:layout_constraintTop_toBottomOf="@id/maleStaffCheckBox"/>
+
+                <CheckBox
+                    android:id="@+id/creditCardCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:checked="false"
+                    android:text="@string/fragment_model_menu_search_credit_card_text"
+                    app:layout_constraintStart_toStartOf="@id/paymentMethodLabelTextView"
+                    app:layout_constraintTop_toTopOf="@id/paymentMethodLabelTextView"/>
+
+                <TextView
+                    android:id="@+id/salonScaleLabelTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:textSize="16sp"
+                    android:text="@string/fragment_model_menu_search_salon_scale_text"
+                    app:layout_constraintStart_toStartOf="@id/detailedConditionsLabelTextView"
+                    app:layout_constraintTop_toBottomOf="@id/creditCardCheckBox"/>
+
+                <CheckBox
+                    android:id="@+id/smallSalonCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:checked="false"
+                    android:text="@string/fragment_model_menu_search_small_salon_text"
+                    app:layout_constraintStart_toStartOf="@id/salonScaleLabelTextView"
+                    app:layout_constraintTop_toTopOf="@id/salonScaleLabelTextView"/>
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:checked="false"
+                    android:text="@string/fragment_model_menu_search_large_salon_text"
+                    app:layout_constraintStart_toEndOf="@id/smallSalonCheckBox"
+                    app:layout_constraintTop_toTopOf="@id/smallSalonCheckBox"/>
+
+                <TextView
+                    android:id="@+id/parkingLabelTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:textSize="16sp"
+                    android:text="@string/fragment_model_menu_search_parking_label_text"
+                    app:layout_constraintStart_toStartOf="@id/detailedConditionsLabelTextView"
+                    app:layout_constraintTop_toBottomOf="@id/smallSalonCheckBox"/>
+
+                <CheckBox
+                    android:id="@+id/parkingCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:checked="false"
+                    android:text="@string/fragment_model_menu_search_parking_text"
+                    app:layout_constraintStart_toStartOf="@id/parkingLabelTextView"
+                    app:layout_constraintTop_toTopOf="@id/parkingLabelTextView"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/searchButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="@color/colorAccent"
+                    android:text="@string/fragment_model_menu_search_search_button_text"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/parkingCheckBox" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

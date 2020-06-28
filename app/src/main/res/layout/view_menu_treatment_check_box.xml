@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="menuTreatmentId"
+            type="Integer" />
+        <variable
+            name="viewModel"
+            type="training20.tcmobile.mvvm.viewmodels.ModelMenuSearchViewModel" />
+    </data>
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> viewModel.onMenuTreatmentCheckBoxClick(menuTreatmentId)}"/>
+</layout>
