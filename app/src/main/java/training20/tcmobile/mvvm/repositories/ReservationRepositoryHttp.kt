@@ -25,6 +25,20 @@ class ReservationRepositoryHttp: ReservationRepositoryContract {
             }, onError, onFailure, onComplete)
     }
 
+    override fun next(
+        onSuccess: ((Reservation) -> Unit)?,
+        onError: ((String, Int, ErrorResponse) -> Unit)?,
+        onFailure: ((IOException) -> Unit)?,
+        onComplete: (() -> Unit)?,
+        requestOptions: RequestOptions?
+    ) {
+        HttpClient(ReservationResponse::class.java, HttpMethod.GET, "reservation/next", requestOptions)
+            .send({
+                val reservation = it.model()
+                onSuccess?.invoke(reservation)
+            }, onError, onFailure, onComplete)
+    }
+
     override fun store(
         menuId: Int,
         menuTimeId: Int,

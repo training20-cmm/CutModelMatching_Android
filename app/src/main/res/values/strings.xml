@@ -84,6 +84,9 @@
     <string name="fragment_hairdresser_salon_registration_button_photo">追加</string>
     <string name="fragment_hairdresser_salon_registration_toolbar_title">サロン登録</string>
     <string name="fragment_model_chat_room_send">送信</string>
+    <string name="fragment_model_home_next_reservation_text">次の予約</string>
+    <string name="fragment_model_home_not_found_next_reservation_text">次の予約がありません</string>
+    <string name="fragment_model_home_cancel_button_text">キャンセル</string>
     <string name="fragment_model_menu_reservation_button">予約</string>
     <string name="fragment_model_menu_reservation_title">予約確認</string>
     <string name="fragment_model_menu_time">日時</string>

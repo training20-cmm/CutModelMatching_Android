@@ -11,7 +11,9 @@ class ReservationResponse {
     var createdAt: String? = null
     var updatedAt: String? = null
 
+    var menu: MenuResponse? = null
+
     fun model(): Reservation {
-        return Reservation(id, menuId, menuTimeId, modelId, createdAt, updatedAt)
+        return Reservation(id, menuId, menuTimeId, modelId, createdAt, updatedAt, menu?.model())
     }
 }
