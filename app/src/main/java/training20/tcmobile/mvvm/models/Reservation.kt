@@ -6,6 +6,7 @@ class Reservation(
     var menuTimeId: Int? = null,
     var modelId: Int? = null,
     var createdAt: String? = null,
-    var updatedAt: String? = null
+    var updatedAt: String? = null,
+    var menu: Menu? = null
 ) {
 }

@@ -16,6 +16,14 @@ interface ReservationRepositoryContract {
         requestOptions: RequestOptions? = null
     )
 
+    fun next(
+        onSuccess: ((Reservation) -> Unit)? = null,
+        onError: ((String, Int, ErrorResponse) -> Unit)? = null,
+        onFailure: ((IOException) -> Unit)? = null,
+        onComplete: (() -> Unit)? = null,
+        requestOptions: RequestOptions? = null
+    )
+
     fun store(
         menuId: Int,
         menuTimeId: Int,

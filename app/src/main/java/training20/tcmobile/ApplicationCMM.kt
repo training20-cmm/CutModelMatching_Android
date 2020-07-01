@@ -64,7 +64,7 @@ class ApplicationCMM: Application() {
             viewModel { HairdresserChatRoomViewModel(get(), get(), get()) }
             viewModel { ModelRegistrationFormViewModel(get(), get()) }
             viewModel { ModelFoundationViewModel(get()) }
-            viewModel { ModelHomeViewModel(get()) }
+            viewModel { ModelHomeViewModel(get(), get()) }
             viewModel { ModelChatHistoryViewModel(get(), get()) }
             viewModel { ModelNotificationsViewModel(get()) }
             viewModel { ModelMenuSearchViewModel(get()) }
@@ -79,7 +79,7 @@ class ApplicationCMM: Application() {
         }
         if (BuildConfig.DEBUG) {
 //            Debugger.debug(Role.HAIRDRESSER, "9eQS4Udx5DH8sVRRLOysfqYwzFOSEZIszc9axGnxlDnFCSoWabsD3n61YE06")
-            Debugger.debug(Role.MODEL, "A8mZbh4MIJoml7oGlbux0x8kyakWuontaBeyNl2fHcrU1F1n0NwJdSw6nlpP")
+            Debugger.debug(Role.MODEL, "e4h86Hck3vcDrh9abcLpjlvZfNj4tt4EfNxZkeaDf88lsCz4sssSU1tX9INq")
         }
     }
 }
