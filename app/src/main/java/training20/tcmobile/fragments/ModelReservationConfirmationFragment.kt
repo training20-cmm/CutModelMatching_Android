@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import kotlinx.android.synthetic.main.fragment_model_menu.view.*
@@ -40,10 +41,10 @@ class ModelReservationConfirmationFragment :
             findNavController().navigateUp()
         }
 
-        view?.reservationButton.setOnClickListener{
-            if(view?.ConfirmationcheckBox.isChecked())
-            viewModel.reservation(args.menuId,args.menuTimeId)
-            //findNavController().navigate()
+        view.reservationButton.setOnClickListener{
+            if(view.ConfirmationcheckBox.isChecked) {
+                viewModel.reservation(args.menuId,args.menuTimeId)
+            }
         }
         return view
     }
@@ -82,6 +83,13 @@ class ModelReservationConfirmationFragment :
                 view?.timeValue?.text = value.start.toString() + ":00"
             }
         }
+    }
+
+    override fun onReservationSuccess() {
+        Toast.makeText(requireActivity(), getString(
+            R.string.fragment_model_menu_reservation_confirmation_reservation_completed
+        ), Toast.LENGTH_LONG).show()
+        findNavController().navigate(R.id.action_modelReservationConfirmationFragment_to_modelSearchResultFragment)
     }
 
     fun setTreatment(){

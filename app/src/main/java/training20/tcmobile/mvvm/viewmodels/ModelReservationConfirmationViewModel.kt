@@ -42,6 +42,6 @@ class ModelReservationConfirmationViewModel(
     }
 
     private  fun reservationSuccess(reservation: Reservation){
-
+        eventDispatcher.dispatchEvent { onReservationSuccess() }
     }
 }

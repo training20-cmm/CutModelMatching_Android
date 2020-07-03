@@ -25,6 +25,7 @@ import training20.tcmobile.databinding.FragmentModelMenuBinding
 import training20.tcmobile.mvvm.actions.ModelMenuActions
 import training20.tcmobile.mvvm.viewmodels.ModelMenuViewModel
 import training20.tcmobile.net.http.HttpClient
+import training20.tcmobile.util.ensureNotNull
 import kotlin.text.Typography.times
 
 class ModelMenuFragment :
@@ -48,16 +49,21 @@ class ModelMenuFragment :
         // Inflate the layout for this fragment
         val view =  super.onCreateView(inflater, container, savedInstanceState)?: return null
 
-        view?.toolbarTitleTextView.text = "募集詳細"
+        view.toolbarBackButton.setOnClickListener { viewModel.onBack() }
+        view.toolbarTitleTextView.text = "募集詳細"
         val toolbarRightButton = view.toolbarRightButton
         toolbarRightButton.visibility = View.VISIBLE
         toolbarRightButton.text = "予約"
         toolbarRightButton.setBackgroundColor(ContextCompat.getColor(ApplicationContext.context, R.color.colorAccent))
         toolbarRightButton.setOnClickListener {
 
-            val action = ModelMenuFragmentDirections.actionModelMenuFragmentToModelReservationConfirmationFragment(2,selectedMenuTimeId!!)
-
-            findNavController().navigate(action)
+            ensureNotNull(viewModel.menu.value?.id, selectedMenuTimeId) { menuId, menuTimeId ->
+                val action = ModelMenuFragmentDirections.actionModelMenuFragmentToModelReservationConfirmationFragment(
+                    menuId,
+                    menuTimeId
+                )
+                findNavController().navigate(action)
+            }
         }
         return view
     }
