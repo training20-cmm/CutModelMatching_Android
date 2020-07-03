@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -13,11 +14,115 @@
         android:layout_height="match_parent"
         tools:context=".fragments.ModelReservationConfirmationFragment">
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/dateAndTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="64dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/fragment_model_menu_time"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+            <TextView
+                android:id="@+id/dateValue"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:text="TextView"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                app:layout_constraintStart_toStartOf="@+id/dateAndTime"
+                app:layout_constraintTop_toBottomOf="@+id/dateAndTime" />
+
+            <TextView
+                android:id="@+id/timeValue"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
+                android:text="TextView"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@+id/dateValue"
+                app:layout_constraintTop_toBottomOf="@+id/dateValue" />
+
+            <TextView
+                android:id="@+id/treatment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="112dp"
+                android:text="@string/fragment_model_menu_treatment"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@+id/dateAndTime"
+                app:layout_constraintTop_toBottomOf="@+id/dateAndTime" />
+
+            <TextView
+                android:id="@+id/priceValue2"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                app:layout_constraintStart_toEndOf="@+id/price"
+                app:layout_constraintTop_toTopOf="@+id/price" />
+
+            <LinearLayout
+                android:id="@+id/treatments"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="@+id/dateValue"
+                app:layout_constraintTop_toBottomOf="@+id/treatment"></LinearLayout>
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="240dp"
+                android:text="@string/fragment_model_menu_price"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@+id/treatment"
+                app:layout_constraintTop_toBottomOf="@+id/timeValue" />
+
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/view_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                />
+
+            <Button
+                android:id="@+id/reservationButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/fragment_model_menu_reservation_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ConfirmationcheckBox" />
+
+            <CheckBox
+                android:id="@+id/ConfirmationcheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="CheckBox"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.504"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/priceValue2" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>
 </layout>
