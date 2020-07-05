@@ -133,7 +133,7 @@ class HairdresserSalonFragment :
 
             val imagepath = HttpClient.serverOrigin + viewModel.salon.value?.images?.get(index)?.path
 
-            val imageView = activity?.layoutInflater?.inflate(R.layout.fragment_hairdreser_image_view, null) as ImageView?
+            val imageView = activity?.layoutInflater?.inflate(R.layout.fragment_hairdresser_image_view, null) as ImageView?
 
             val layoutParams = LinearLayout.LayoutParams(500,500)
             imageView!!.layoutParams = layoutParams
@@ -151,10 +151,13 @@ class HairdresserSalonFragment :
         val capacity : String = viewModel.salon.value?.capacity.toString()
         capacityText?.text = capacity
 
+        var text:String
+
         //
         val paymentText = view?.salonPaymentValue
         for (value in viewModel.salon.value?.paymentMethods!!) {
-            paymentText?.text = value.name
+            text = paymentText?.text.toString()
+            paymentText?.text = text + value.name
         }
 
         val weekdayText = view?.weekdayValue

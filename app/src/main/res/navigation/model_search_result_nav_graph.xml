@@ -42,5 +42,9 @@
             android:name="menuTimeId"
             app:argType="integer"
             />
+        <action
+            android:id="@+id/action_modelReservationConfirmationFragment_to_modelSearchResultFragment"
+            app:destination="@id/modelSearchResultFragment"
+            app:popUpTo="@id/modelSearchResultFragment" />
     </fragment>
 </navigation>

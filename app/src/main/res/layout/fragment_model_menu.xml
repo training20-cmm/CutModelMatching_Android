@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -13,11 +14,209 @@
         android:layout_height="match_parent"
         tools:context=".fragments.ModelMenuFragment">
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/view_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:layout_height="wrap_content"
+
+            />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <HorizontalScrollView
+                        android:id="@+id/horizontalScrollView"
+                        android:layout_width="416dp"
+                        android:layout_height="160dp"
+                        android:layout_marginTop="24dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tagLinear">
+
+                        <LinearLayout
+                            android:id="@+id/imageLinear"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal" />
+                    </HorizontalScrollView>
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.menu.title}"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textSize="30sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profileCircleImageView"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="32dp"
+                        app:civ_border_color="#fff"
+                        app:civ_border_width="2dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+                    <TextView
+                        android:id="@+id/stylistNameValue"
+                        android:layout_width="280dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:text="@{viewModel.menu.hairdresser.name}"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="24sp"
+                        app:layout_constraintStart_toEndOf="@+id/profileCircleImageView"
+                        app:layout_constraintTop_toTopOf="@+id/profileCircleImageView" />
+
+                    <TextView
+                        android:id="@+id/salonNameValue"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="@{viewModel.menu.hairdresser.salon.name}"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/stylistNameValue" />
+
+                    <TextView
+                        android:id="@+id/salonAddressValue"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="@{viewModel.menu.hairdresser.salon.address}"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/salonNameValue" />
+
+                    <LinearLayout
+                        android:id="@+id/tagLinear"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/salonAddressValue"
+                        tools:context=".MainActivity">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/tags"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/dateAndTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="24dp"
+                        android:text="@string/fragment_model_menu_time"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="24sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
+
+                    <LinearLayout
+                        android:id="@+id/times"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="64dp"
+                        android:layout_marginTop="16dp"
+                        android:orientation="vertical"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/dateAndTime">
+
+                        <RadioGroup
+                            android:id="@+id/radioGroup"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/treatment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/fragment_model_menu_treatment"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="24sp"
+                        app:layout_constraintStart_toStartOf="@+id/dateAndTime"
+                        app:layout_constraintTop_toBottomOf="@+id/times" />
+
+                    <LinearLayout
+                        android:id="@+id/treatments"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="vertical"
+                        app:layout_constraintStart_toStartOf="@+id/times"
+                        app:layout_constraintTop_toBottomOf="@+id/treatment" />
+
+                    <TextView
+                        android:id="@+id/price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/fragment_model_menu_price"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="24sp"
+                        app:layout_constraintStart_toStartOf="@+id/treatment"
+                        app:layout_constraintTop_toBottomOf="@+id/treatments" />
+
+                    <TextView
+                        android:id="@+id/comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="128dp"
+                        android:text="@string/fragment_model_menu_comment"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="24sp"
+                        app:layout_constraintStart_toStartOf="@+id/price"
+                        app:layout_constraintTop_toBottomOf="@+id/price" />
+
+                    <TextView
+                        android:id="@+id/commentValue"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@{viewModel.menu.details}"
+                        app:layout_constraintStart_toStartOf="@+id/priceValue"
+                        app:layout_constraintTop_toBottomOf="@+id/comment" />
+
+                    <TextView
+                        android:id="@+id/priceValue"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintStart_toStartOf="@+id/treatments"
+                        app:layout_constraintTop_toBottomOf="@+id/price" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+        </ScrollView>
 
     </FrameLayout>
 </layout>
